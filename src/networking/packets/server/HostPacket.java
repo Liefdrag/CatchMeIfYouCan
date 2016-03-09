@@ -1,5 +1,11 @@
 package networking.packets.server;
 
-public class HostPacket {
+import networking.packets.ServerPacket;
 
+public class HostPacket extends ServerPacket {
+
+	public HostPacket(){
+		putByte(HOST);
+	}
+	
 }

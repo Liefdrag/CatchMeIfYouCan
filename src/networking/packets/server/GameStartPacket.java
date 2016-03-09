@@ -1,5 +1,11 @@
 package networking.packets.server;
 
-public class GameStartPacket {
+import networking.packets.ServerPacket;
 
+public class GameStartPacket extends ServerPacket {
+
+	public GameStartPacket(){
+		putByte(GAME_START);
+	}
+	
 }

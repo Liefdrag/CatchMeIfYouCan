@@ -7,7 +7,7 @@ public abstract class Packet {//will need to test for construction of packets, w
 	
 	protected byte[] packet = new byte[0];
 	
-	public byte getByte(){
+	protected byte getByte(){
 		byte byte_ = packet[0];
 		packet = Arrays.copyOfRange(packet, 1, packet.length);
 		
@@ -16,14 +16,14 @@ public abstract class Packet {//will need to test for construction of packets, w
 		return byte_;
 	}
 	
-	public void putByte(byte byte_){
+	protected void putByte(byte byte_){
 		packet = Arrays.copyOf(packet, packet.length + 1);
 		packet[packet.length - 1] = byte_;
 		
 		//printPacket();
 	}
 	
-	public char getChar(){
+	protected char getChar(){
 		char character;
 		byte[] character_ = new byte[]{packet[0], packet[1]};
 		character = ByteBuffer.wrap(character_).getChar();
@@ -34,7 +34,7 @@ public abstract class Packet {//will need to test for construction of packets, w
 		return character;
 	}
 	
-	public void putChar(char character){
+	protected void putChar(char character){
 		byte[] character_ = new byte[2];
 		ByteBuffer.wrap(character_).putChar(character);
 		packet = Arrays.copyOf(packet, packet.length + 2);
@@ -44,7 +44,7 @@ public abstract class Packet {//will need to test for construction of packets, w
 		//printPacket();
 	}
 	
-	public double getDouble(){
+	protected double getDouble(){
 		double d_;
 		byte[] double_;
 		
@@ -57,7 +57,7 @@ public abstract class Packet {//will need to test for construction of packets, w
 		return d_;
 	}
 	
-	public void putDouble(double d_){
+	protected void putDouble(double d_){
 		byte[] double_ = new byte[8];
 		ByteBuffer.wrap(double_).putDouble(d_);
 		
@@ -70,61 +70,64 @@ public abstract class Packet {//will need to test for construction of packets, w
 		//printPacket();
 	}
 	
-	public void putString(String string, int length){//need to include padding in the event the string is not of a preset size.
-		char[] string_ = string.toCharArray();
-		for(int i = 0; i < string_.length; i++){
-			putChar(string_[i]);
+	protected int getInt(){
+		byte[] int_;
+		int integer;
+		int_ = Arrays.copyOf(packet, 4);
+		integer = ByteBuffer.wrap(int_).getInt();
+		packet = Arrays.copyOfRange(packet, 4, packet.length);
+		
+		//printPacket();
+		
+		return integer;
+	}
+	
+	protected void putInt(int integer){
+		byte[] int_ = new byte[4];
+		ByteBuffer.wrap(int_).putDouble(integer);
+		
+		packet = Arrays.copyOf(packet, packet.length + 4);
+		
+		for(int i = 0; i < 4; i ++){
+			packet[packet.length - (4-i)] = int_[i];
 		}
-		int l = length - string.length();
-		while(l > 0){
-			putByte((byte) 0x00);//2 bytes is a char 0x00, 0x7C is '|'
-			putByte((byte) 0x7C);
-			l--;
+		
+		//printPacket();
+	}
+	
+	protected void putString(String string){//need to include padding in the event the string is not of a preset size.
+		char[] string_ = string.toCharArray();
+		int length =  string.length();
+		putInt(length);//putting the length of the string first
+		for(int i = 0; i < length; i++){
+			putChar(string_[i]);
 		}
 	}
 	
-	public String getString(int length){
+	protected String getString(){
 		String string_ = "";
-		char temp;
+		int length = getInt();//getting the length of the string to know how much to read
 		for(int i = 0; i < length; i++){
-			temp = getChar();
-			if(temp != '|'){//removing padding
-				string_ += temp;
-			}
+			string_ += getChar();
 		}
 		
 		return string_;
 	}
 	
-	public void putRoomKey(String key){
-		putString(key, 5);
-	}
-	
-	public String getRoomKey(){
-		return getString(5);//5 Digit base 36 (alphabet and numbers) code?
-	}
-	
-	public void putName(String name){
-		putString(name, 15);
-	}
-	
-	public String getName(){
-		return getString(15);//character limit of 15?
-	}
-	
 	public byte[] getPacket(){//used to perform a checksum on a packet and return it.
-		byte[] newPacket = new byte[packet.length + 1];
-		byte checksum = 0x00;
-		
-		for(int i = 0; i < packet.length; i++){
-			checksum += packet[i];
-			newPacket[i] = packet[i];
-		}
-		newPacket[newPacket.length - 1] = checksum; //adding the checksum to the packet.
-		
-		System.out.println(toString() + checksum + " | ");
-		
-		return newPacket;
+//		byte[] newPacket = new byte[packet.length + 1];
+//		byte checksum = 0x00;
+//		
+//		for(int i = 0; i < packet.length; i++){
+//			checksum += packet[i];
+//			newPacket[i] = packet[i];
+//		}
+//		newPacket[newPacket.length - 1] = checksum; //adding the checksum to the packet.
+//		
+//		System.out.println(toString() + checksum + " | ");
+//		
+//		return newPacket;
+		return packet;
 	}
 	
 	@Override

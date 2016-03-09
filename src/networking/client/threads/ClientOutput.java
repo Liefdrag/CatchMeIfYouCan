@@ -6,11 +6,14 @@ import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
+import java.util.Queue;
 
 import networking.packets.ClientPacket;
+import networking.packets.Packet;
 
 /**
  * This class is just used for testing right now.
@@ -18,35 +21,29 @@ import networking.packets.ClientPacket;
  * sent from the command line.
  */
 public class ClientOutput implements Runnable {
-	
-	private LinkedList<ClientPacket> packetQueue;
-	private InetAddress serverAddress;
-	private int serverPort;
 
-	public ClientOutput(String serverAddress, int serverPort) throws UnknownHostException{
-		this.serverAddress = InetAddress.getByName(serverAddress);
-		this.serverPort = serverPort;
+	private Socket clientSocket;
+	private LinkedList<ClientPacket> packetQueue;
+
+	public ClientOutput(Socket clientSocket) throws UnknownHostException{
+		this.clientSocket = clientSocket;
 		this.packetQueue = new LinkedList<ClientPacket>();
 	}
 	
 	@Override
 	public void run() {
-		if (packetQueue.size() > 0)
-		{
-			for (ClientPacket clientPacket : packetQueue){
-				try {
-					@SuppressWarnings("resource")
-					DatagramSocket socket = new DatagramSocket();
-					DatagramPacket packet = new DatagramPacket(clientPacket.bytes, clientPacket.bytes.length, 
-					                                serverAddress, serverPort);
-					socket.send(packet);
-				} catch (IOException e) {
+		while (true) {
+			try {
+				int queueSize;
+				if ((queueSize = packetQueue.size()) > 0) {
+					for (int i = 0; i < queueSize; i++) {
+						clientSocket.getOutputStream().write(packetQueue.pop().bytes);
+					}
 				}
-			}
-		}
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
+				Thread.sleep(100);
+			} catch (IOException | InterruptedException e) {
+				break;
+			}	
 		}
 	}
 

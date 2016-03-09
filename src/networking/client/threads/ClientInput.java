@@ -1,9 +1,11 @@
 package networking.client.threads;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
+import java.net.Socket;
+import java.util.Arrays;
+
+import networking.packets.ServerPacket;
 
 /**
  * This class receives input from the server and processes it. Right now it uses
@@ -11,26 +13,24 @@ import java.net.DatagramSocket;
  */
 public class ClientInput implements Runnable {
 
-	private int serverPort;
+	private Socket clientSocket;
 
-	public ClientInput(int serverPort) {
-		this.serverPort = serverPort;
+	public ClientInput(Socket clientSocket) {
+		this.clientSocket = clientSocket;
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public void run() {
 		try {
-			DatagramSocket socket = new DatagramSocket(serverPort);
-			while (true) {
-				byte[] buf = new byte[10];
-				DatagramPacket packet = new DatagramPacket(buf, buf.length);
-				socket.receive(packet);
-				if(packet != null)
-					processPacket(packet);
+			int read = -1;
+			byte[] temp = new byte[512];
+			while ((read = clientSocket.getInputStream().read(temp, 0, temp.length)) > -1) {
+				byte[] bytes = Arrays.copyOfRange(temp, 0, read);
+				ServerPacket packet = ServerPacket.parse(bytes);
+				// Process packet
 			}
 		} catch (IOException e) {
-			System.out.print(e.toString());
+			System.err.print(e.toString());
 			return;
 		}
 	}

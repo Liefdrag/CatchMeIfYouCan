@@ -1,5 +1,11 @@
 package networking.packets.server;
 
-public class RoomClosePacket {
+import networking.packets.ServerPacket;
 
+public class RoomClosePacket extends ServerPacket {
+
+	public RoomClosePacket(){
+		putByte(ROOM_CLOSE);
+	}
+	
 }

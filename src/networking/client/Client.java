@@ -32,8 +32,9 @@ public class Client {
 	
 	public void connectToServer(String serverAddress, int serverPort) throws UnknownHostException, IOException{
 
+		Socket socket = new Socket(serverAddress, serverPort);
 		// Creating the client input thread and starting it
-		clientInput = new ClientInput(serverPort);
+		clientInput = new ClientInput(socket);
 		new Thread(clientInput).start();
 		
 		// Creating the client output thread and starting it

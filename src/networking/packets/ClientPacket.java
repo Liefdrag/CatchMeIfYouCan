@@ -1,6 +1,6 @@
 package networking.packets;
 
-public class ClientPacket {
+public class ClientPacket extends Packet {
 
 	// ID Bytes
 	public static final byte CLIENT_SENDER_ID = 0x02;
