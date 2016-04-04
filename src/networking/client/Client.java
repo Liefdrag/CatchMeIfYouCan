@@ -38,7 +38,7 @@ public class Client {
 		new Thread(clientInput).start();
 		
 		// Creating the client output thread and starting it
-		clientOutput = new ClientOutput(serverAddress, serverPort);
+		clientOutput = new ClientOutput(socket);
 		new Thread(clientOutput).start();
 	}
 	

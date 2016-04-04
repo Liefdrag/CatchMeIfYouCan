@@ -5,7 +5,7 @@ import java.net.DatagramPacket;
 import java.net.Socket;
 import java.util.Arrays;
 
-import networking.packets.ServerPacket;
+import networking.packets.Packet;
 
 /**
  * This class receives input from the server and processes it. Right now it uses
@@ -26,7 +26,6 @@ public class ClientInput implements Runnable {
 			byte[] temp = new byte[512];
 			while ((read = clientSocket.getInputStream().read(temp, 0, temp.length)) > -1) {
 				byte[] bytes = Arrays.copyOfRange(temp, 0, read);
-				ServerPacket packet = ServerPacket.parse(bytes);
 				// Process packet
 			}
 		} catch (IOException e) {

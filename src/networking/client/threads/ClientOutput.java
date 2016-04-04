@@ -12,7 +12,6 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import networking.packets.ClientPacket;
 import networking.packets.Packet;
 
 /**
@@ -23,11 +22,11 @@ import networking.packets.Packet;
 public class ClientOutput implements Runnable {
 
 	private Socket clientSocket;
-	private LinkedList<ClientPacket> packetQueue;
+	private LinkedList<Packet> packetQueue;
 
 	public ClientOutput(Socket clientSocket) throws UnknownHostException{
 		this.clientSocket = clientSocket;
-		this.packetQueue = new LinkedList<ClientPacket>();
+		this.packetQueue = new LinkedList<Packet>();
 	}
 	
 	@Override
@@ -37,7 +36,7 @@ public class ClientOutput implements Runnable {
 				int queueSize;
 				if ((queueSize = packetQueue.size()) > 0) {
 					for (int i = 0; i < queueSize; i++) {
-						clientSocket.getOutputStream().write(packetQueue.pop().bytes);
+						clientSocket.getOutputStream().write(packetQueue.pop().getPacket());
 					}
 				}
 				Thread.sleep(100);
