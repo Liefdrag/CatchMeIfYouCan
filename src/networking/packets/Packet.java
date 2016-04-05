@@ -143,12 +143,21 @@ public abstract class Packet {//will need to test for construction of packets, w
 		System.out.println(toString());
 	}
 	
-	//Data IDs
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	* PACKET DATA IDs
+	*/
+	
 	//Ability IDs
-	public static final byte ABILITY_HIDE = 0X01;//hide the player location from their pursuer
-	public static final byte ABILITY_PING = 0X02;//produce beep on target device, i.e. if nearby you can hear the beep and find the target
-	public static final byte ABILITY_DECOY = 0X03;//send a fake location to the pursuer for x amount of time or until pursuer enters within y meters of decoy
-	public static final byte ABILITY_SNEAK = 0X04;//target not alerted when pursuer is within x meters of target
+	
+	//Hides the player location from their pursuer
+	public static final byte ABILITY_HIDE = 0X01;
+	//Produces beeps on target's device, i.e. if nearby you can hear the beep and find the target
+	public static final byte ABILITY_PING = 0X02;
+	//Sends a fake location to the pursuer for x amount of time or until pursuer enters within y meters of decoy
+	public static final byte ABILITY_DECOY = 0X03;
+	//Target not alerted when pursuer is within x meters of target
+	public static final byte ABILITY_SNEAK = 0X04;
 	
 	//Gametype IDs
 	public static final byte GAMETYPE_DEFAULT = 0X01;
@@ -194,18 +203,18 @@ public abstract class Packet {//will need to test for construction of packets, w
 	public static final byte PLAYER_READY = 0x0D;
 	
 	//Client Host Action IDs
-		public static final byte HOST_ACTION_START_ROUND = 0x01;
-		public static final byte HOST_ACTION_END_ROUND = 0x02;
-		public static final byte HOST_ACTION_KICK_PLAYER = 0x03;
-		public static final byte HOST_ACTION_CREATE_ROOM = 0x04;
-		public static final byte HOST_ACTION_CLOSE_ROOM = 0x05;
-		public static final byte HOST_ACTION_TIME_LIMIT = 0x06;
-		public static final byte HOST_ACTION_SCORE_LIMIT = 0x07;
-		public static final byte HOST_ACTION_CHANGE_GAMETYPE = 0x08;
-		public static final byte HOST_ACTION_SET_BOUNDARIES = 0x09;
-		public static final byte HOST_ACTION_BOUNDARY_UPDATES = 0x0A;
-		public static final byte HOST_ACTION_CHANGE_HOST = 0x0B;
-		public static final byte HOST_ACTION_ALLOW_VOTING = 0x0C;
+	public static final byte HOST_ACTION_START_ROUND = 0x01;
+	public static final byte HOST_ACTION_END_ROUND = 0x02;
+	public static final byte HOST_ACTION_KICK_PLAYER = 0x03;
+	public static final byte HOST_ACTION_CREATE_ROOM = 0x04;
+	public static final byte HOST_ACTION_CLOSE_ROOM = 0x05;
+	public static final byte HOST_ACTION_TIME_LIMIT = 0x06;
+	public static final byte HOST_ACTION_SCORE_LIMIT = 0x07;
+	public static final byte HOST_ACTION_CHANGE_GAMETYPE = 0x08;
+	public static final byte HOST_ACTION_SET_BOUNDARIES = 0x09;
+	public static final byte HOST_ACTION_BOUNDARY_UPDATES = 0x0A;
+	public static final byte HOST_ACTION_CHANGE_HOST = 0x0B;
+	public static final byte HOST_ACTION_ALLOW_VOTING = 0x0C;
 	
 	/*----------------------------------------------------------*/
 	
@@ -223,24 +232,25 @@ public abstract class Packet {//will need to test for construction of packets, w
 	public static final byte KICK = 0x0C;
 	public static final byte NAK = 0x0D;
 	public static final byte HOST = 0x0E;
-		
-		//Broadcast IDs
-		public static final byte BROADCAST_TIME_REMAINING = 0x01;
-		public static final byte BROADCAST_LEADERBOARD = 0x02;
-		public static final byte BROADCAST_CAPTURE = 0x03;
-		public static final byte BROADCAST_VOTES = 0x04;
-		public static final byte BROADCAST_QUIT = 0x05;
-		public static final byte BROADCAST_BOUNDARY_UPDATE = 0x06;
-		public static final byte BROADCAST_NEW_HOST = 0x07;
-		public static final byte BROADCAST_NEW_PLAYER = 0x08;
-		public static final byte BROADCAST_PLAYER_READY = 0x09;
-		
-		//Lobby Information IDs
-		public static final byte LOBBYINFO_GAMETYPE = 0x01;
-		public static final byte LOBBYINFO_TIME_LIMIT = 0x02;
-		public static final byte LOBBYINFO_SCORE_LIMIT = 0x03;
-		public static final byte LOBBYINFO_BOUNDARIES = 0x04;
-		public static final byte LOBBYINFO_LEADERBOARD = 0x05;
-		public static final byte LOBBYINFO_ROOM_NAME = 0x06;
-		public static final byte LOBBYINFO_VOTES = 0x07;
+	public static final byte CAUGHT = 0x0F;
+	
+	//Broadcast IDs
+	public static final byte BROADCAST_TIME_REMAINING = 0x01;
+	public static final byte BROADCAST_LEADERBOARD = 0x02;
+	public static final byte BROADCAST_CAPTURE = 0x03;
+	public static final byte BROADCAST_VOTES = 0x04;
+	public static final byte BROADCAST_QUIT = 0x05;
+	public static final byte BROADCAST_BOUNDARY_UPDATE = 0x06;
+	public static final byte BROADCAST_NEW_HOST = 0x07;
+	public static final byte BROADCAST_NEW_PLAYER = 0x08;
+	public static final byte BROADCAST_PLAYER_READY = 0x09;
+	
+	//Lobby Information IDs
+	public static final byte LOBBYINFO_GAMETYPE = 0x01;
+	public static final byte LOBBYINFO_TIME_LIMIT = 0x02;
+	public static final byte LOBBYINFO_SCORE_LIMIT = 0x03;
+	public static final byte LOBBYINFO_BOUNDARIES = 0x04;
+	public static final byte LOBBYINFO_LEADERBOARD = 0x05;
+	public static final byte LOBBYINFO_ROOM_NAME = 0x06;
+	public static final byte LOBBYINFO_VOTES = 0x07;
 }
