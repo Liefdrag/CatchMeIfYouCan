@@ -155,7 +155,7 @@ public abstract class Packet {// will need to test for construction of packets,
 
 	// IDs are the same for some packets. These need to be changed.
 	public static Packet parse(byte[] bytes) {
-		switch (bytes[1]) {
+		switch (bytes[0]) {
 			case LOCATION:
 				return new LocationPacket(); // return packet
 			case PING:
@@ -192,7 +192,7 @@ public abstract class Packet {// will need to test for construction of packets,
 	// Some LobbyInfo & Broadcast packets are the same, this is a problem
 	// Some packets with IDs don't exist.
 	private static Packet parseBroadcast(byte[] bytes) {
-		switch (bytes[1]) {
+		switch (bytes[0]) {
 			case BROADCAST_TIME_REMAINING:
 				return new TimeRemainingPacket();
 			case BROADCAST_LEADERBOARD:
@@ -217,7 +217,7 @@ public abstract class Packet {// will need to test for construction of packets,
 	}
 
 	private static Packet parseLobbyInfo(byte[] bytes) {
-		switch (bytes[1]) {
+		switch (bytes[0]) {
 			case LOBBYINFO_GAMETYPE:
 				return new GametypePacket();
 			case LOBBYINFO_TIME_LIMIT:
