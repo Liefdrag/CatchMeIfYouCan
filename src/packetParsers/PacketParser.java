@@ -3,6 +3,7 @@ package packetParsers;
 import java.util.Arrays;
 
 import networking.packets.*;
+import networking.packets.serverPackets.*;
 
 public class PacketParser {
 	
@@ -29,9 +30,13 @@ public class PacketParser {
 		//Location of the Client
 		case Packet.LOCATION :
 			LocationPacket locationPacket = new LocationPacket(packet);
+			//Gets the Location as Coordinates and the Client ID (If its single player then the ID would correspond to target ID
+			//If its a team mode, then the client would be able to choose which ID is his target
 			break;
 		
 		case Packet.PING :
+			PingPacket pp = new PingPacket();
+			//Sends the packet back to the Server
 			break;
 		
 		case Packet.BROADCAST :
@@ -39,6 +44,7 @@ public class PacketParser {
 			break;
 		
 		case Packet.TARGET :
+			//Sets what the ID of the target is (All players locations are broadcast to everyone and so this ID chooses the ID
 			break;
 		
 		//May not be needed anymore
@@ -46,18 +52,24 @@ public class PacketParser {
 			break;
 				
 		case Packet.ABILITY_ACTION :
+			AbilityUsagePacket abilityUsage = new AbilityUsagePacket(packet);
+			//Get what the ability is
 			break;
 				
 		case Packet.GAME_START :
+			//Game is started and needs to go to in game page
 			break;
 			
 		case Packet.GAME_END :
+			//Game ends, result of game needs to be displayed
 			break;
 			
 		case Packet.ROOM_CLOSE :
+			//Player needs to be diverted back to start screen
 			break;
 		
 		case Packet.ROOM_KEY :
+			//Sets the room key
 			break;
 		
 		case Packet.LOBBYINFO :
@@ -65,15 +77,20 @@ public class PacketParser {
 			break;
 			
 		case Packet.KICK :
+			KickPacket kp = new KickPacket(packet);
+			kp.getKickReason(); //Do something with this reason
 			break;
 				
 		case Packet.NAK :
+			//Needs to resend the last packet sent
 			break;
 			
 		case Packet.HOST :
+			//Player becomes the host and has host access
 			break;
 			
 		case Packet.CAUGHT :
+			//Activate the Caught button on the Player GUI
 			break;
 			
 		default : 

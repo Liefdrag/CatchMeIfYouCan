@@ -45,6 +45,10 @@ public class ClientOutput implements Runnable {
 			}	
 		}
 	}
+	
+	public void addPacketToQueue(Packet serverPacket){
+		packetQueue.add(serverPacket);
+	}
 
 	/**
 	 * Sends a message to the server. This is currently just

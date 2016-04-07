@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.Arrays;
 
 import networking.packets.Packet;
+import packetParsers.PacketParser;
 
 /**
  * This class receives input from the server and processes it. Right now it uses
@@ -14,9 +15,11 @@ import networking.packets.Packet;
 public class ClientInput implements Runnable {
 
 	private Socket clientSocket;
+	private PacketParser packetParser;
 
 	public ClientInput(Socket clientSocket) {
 		this.clientSocket = clientSocket;
+		this.packetParser = new PacketParser();
 	}
 
 	@Override
@@ -26,7 +29,7 @@ public class ClientInput implements Runnable {
 			byte[] temp = new byte[512];
 			while ((read = clientSocket.getInputStream().read(temp, 0, temp.length)) > -1) {
 				byte[] bytes = Arrays.copyOfRange(temp, 0, read);
-				// Process packet
+				packetParser.processPacket(bytes);
 			}
 		} catch (IOException e) {
 			System.err.print(e.toString());

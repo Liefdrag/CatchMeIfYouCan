@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 
 import networking.client.threads.ClientInput;
 import networking.client.threads.ClientOutput;
+import networking.packets.Packet;
 
 /**
  * Client class. On creation of a Client() object, the program
@@ -28,6 +29,10 @@ public class Client {
 		} catch (IOException e) {
 			System.out.println("Could not connect to server " + serverAddress + " on port " + serverPort + "."); // Would send a message to the user indicating that there's a problem with the server
 		}
+	}
+	
+	public synchronized void sendPacket(Packet clientPacket) {
+		clientOutput.addPacketToQueue(clientPacket);
 	}
 	
 	public void connectToServer(String serverAddress, int serverPort) throws UnknownHostException, IOException{
