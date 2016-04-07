@@ -1,89 +1,88 @@
-package game;
+package game.room;
 
-import game.room.Room;
+import java.util.List;
 
-public class Game {
+public class Room {
 
-	public enum GameState {
-		LOBBY, GAME, END;
-	}
-	
-	private final Integer playerID;
-	private Integer targetID;
-	private Room room;
-	private GameState gameState;
+	private final Lobby lobby;
+	private final String roomKey;
+	private List<Integer> players;
+	private boolean host;
 
-	public Game(Integer playerID) {
-		this.playerID = playerID;
+	public Room(String roomKey, boolean host) {
+		this.lobby = new Lobby();
+		this.roomKey = roomKey;
+		this.setHost(host);
 	}
 
-	public void joinRoom(String roomKey) {
-		room = new Room(roomKey, false);
-		gameState = GameState.LOBBY;
+	public void addPlayer(Integer playerID) {
+		players.add(playerID);
 	}
 
-	public void createRoom() {
-		String roomKey = null; // Get from Server
-		room = new Room(roomKey, true);
-		gameState = GameState.LOBBY;
+	public void removePlayer(Integer playerID) {
+		players.remove(playerID);
 	}
 
-	public void addPlayer(Integer playerID) throws Exception {
-		room.addPlayer(playerID);
+	public String getRoomKey() {
+		return roomKey;
 	}
 
-	public void removePlayer(Integer playerID) throws Exception {
-		if (!room.getPlayers().contains(playerID)) {
-			throw new Exception("Player does not exist.");
+	public List<Integer> getPlayers() {
+		return players;
+	}
+
+	public boolean isHost() {
+		return host;
+	}
+
+	public void setHost(boolean host) {
+		this.host = host;
+	}
+
+	public Lobby getLobby() {
+		return lobby;
+	}
+
+	public final class Lobby {
+
+		private String gametype;
+		private String RoomName;
+		private int scoreLimit;
+		private int timeLimit;
+
+		private Lobby() {
 		}
-		room.removePlayer(playerID);
-	}
 
-	public void setHost() {
-		room.setHost(true);
-	}
-
-	public void playerCaught(Integer playerID) {
-		if (this.playerID == playerID) {
-			// Alert the client they've been caught
+		public String getGametype() {
+			return gametype;
 		}
-		// Alert the client player has been caught
-	}
-	
-	public void setTarget(Integer targetID){
-		this.targetID = targetID;
-	}
 
-	public void setRoomName(String roomName) {
-		room.getLobby().setRoomName(roomName);
-	}
+		public void setGametype(String gametype) {
+			this.gametype = gametype;
+		}
 
-	public void setGametype(String gametype) {
-		room.getLobby().setGametype(gametype);
-	}
+		public String getRoomName() {
+			return RoomName;
+		}
 
-	public void setScoreLimit(int scoreLimit) {
-		room.getLobby().setScoreLimit(scoreLimit);
-	}
+		public void setRoomName(String roomName) {
+			RoomName = roomName;
+		}
 
-	public void setTimeLimit(int timeLimit) {
-		room.getLobby().setTimeLimit(timeLimit);
-	}
-	
-	public void startGame(){
-		gameState = GameState.GAME;
-	}
-	
-	public void endGame(){
-		gameState = GameState.END;
-		closeRoom();
-	}
-	
-	public void closeRoom(){
-		room = null;
-	}
-	
-	public GameState getGameState(){
-		return gameState;
+		public int getScoreLimit() {
+			return scoreLimit;
+		}
+
+		public void setScoreLimit(int scoreLimit) {
+			this.scoreLimit = scoreLimit;
+		}
+
+		public int getTimeLimit() {
+			return timeLimit;
+		}
+
+		public void setTimeLimit(int timeLimit) {
+			this.timeLimit = timeLimit;
+		}
 	}
 }
