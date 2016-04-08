@@ -1,5 +1,6 @@
 package game;
 
+import game.room.Leaderboard;
 import game.room.Room;
 
 public class Game {
@@ -12,9 +13,16 @@ public class Game {
 	private Integer targetID;
 	private Room room;
 	private GameState gameState;
+	private Leaderboard leaderboard;
 
 	public Game(Integer playerID) {
 		this.playerID = playerID;
+		leaderboard = new Leaderboard();
+	}
+	
+	public void updateLeaderboard(Leaderboard newLeaderboard) {
+		leaderboard.updateLeaderboard(newLeaderboard);
+		//Refresh GUI Leaderboard
 	}
 
 	public void joinRoom(String roomKey) {

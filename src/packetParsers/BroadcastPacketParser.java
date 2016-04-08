@@ -3,6 +3,7 @@ package packetParsers;
 import java.util.Arrays;
 
 import networking.packets.Packet;
+import networking.packets.serverPackets.broadcastPackets.*;
 
 public class BroadcastPacketParser {
 
@@ -16,6 +17,9 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_LEADERBOARD :
+			LeaderboardPacket lp = new LeaderboardPacket();
+			lp.getLeaderboard();
+			
 			break;
 			
 		case Packet.BROADCAST_CAPTURE :

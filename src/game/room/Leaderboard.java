@@ -72,6 +72,16 @@ public class Leaderboard {
 		return leaderboard.size();
 	}
 	
+	public void updateLeaderboard(Leaderboard newLeaderboard) {
+		//Leaderboard needs to figure out if a player has been kicked/added to display as a notification on the players screen
+	}
+	
+	public String findWinner() {
+		sortLeaderboard();
+		String winner = leaderboard.get(0).getPlayerName();
+		return winner;
+	}
+	
 	//bubble sort.
 	private void sortLeaderboard(){
 		LeaderboardPlayer tempPlayer;
