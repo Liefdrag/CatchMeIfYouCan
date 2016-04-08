@@ -2,6 +2,7 @@ package packetParsers;
 
 import java.util.Arrays;
 
+import main.CatchMeIfYouCanMain;
 import networking.packets.*;
 import networking.packets.serverPackets.*;
 
@@ -36,6 +37,7 @@ public class PacketParser {
 		
 		case Packet.PING :
 			PingPacket pp = new PingPacket();
+			CatchMeIfYouCanMain.sendPacket(pp);
 			//Sends the packet back to the Server
 			break;
 		
