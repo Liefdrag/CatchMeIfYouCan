@@ -166,7 +166,7 @@ public abstract class Packet {// will need to test for construction of packets,
 				return new TargetPacket();
 			case SPAWN_REGION:
 				return new SpawnRegionPacket();
-			case ABILITY_USAGE:
+			case ABILITY_ACTION:
 				return new AbilityUsagePacket();
 			case GAME_START:
 				return new GameStartPacket();
@@ -196,21 +196,21 @@ public abstract class Packet {// will need to test for construction of packets,
 			case BROADCAST_TIME_REMAINING:
 				return new TimeRemainingPacket();
 			case BROADCAST_LEADERBOARD:
-				return new LeaderboardPacket();
+				return new networking.packets.serverPackets.broadcastPackets.LeaderboardPacket();
 			case BROADCAST_CAPTURE:
 				return new CapturePacket();
 			case BROADCAST_VOTES:
-				return new VotesPacket();
+				return new networking.packets.serverPackets.broadcastPackets.VotesPacket();
 			case BROADCAST_QUIT:
-				return new QuitPacket();
+				return new DisconnectionPacket();
 			case BROADCAST_BOUNDARY_UPDATE:
 				return new BoundaryUpdatePacket();
 			case BROADCAST_NEW_HOST:
 				return new NewHostPacket();
 			case BROADCAST_NEW_PLAYER:
 				return new NewPlayerPacket();
-			case BROADCAST_PLAYER_READY:
-				return new PlayerReadyPacket();
+//			case BROADCAST_PLAYER_READY:
+//				return new PlayerReadyPacket();
 			default:
 				return null;
 		}
@@ -227,11 +227,11 @@ public abstract class Packet {// will need to test for construction of packets,
 			case LOBBYINFO_BOUNDARIES:
 				return new BoundariesPacket();
 			case LOBBYINFO_LEADERBOARD:
-				return new LeaderboardPacket();
+				return new networking.packets.serverPackets.lobbyInfoPackets.LeaderboardPacket();
 			case LOBBYINFO_ROOM_NAME:
 				return new RoomNamePacket();
 			case LOBBYINFO_VOTES:
-				return new VotesPacket();
+				return new networking.packets.serverPackets.lobbyInfoPackets.VotesPacket();
 			default:
 				return null;
 		}
