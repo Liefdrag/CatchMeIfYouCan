@@ -7,9 +7,9 @@ import networking.packets.serverPackets.broadcastPackets.*;
 
 public class BroadcastPacketParser {
 
-	public void processBroadcast(int dataID, byte[] data) {
+	public void processBroadcast(byte[] data) {
 		byte broadcastID = data[0];
-		data = Arrays.copyOf(data, 1);
+		data = Arrays.copyOfRange(data, 1, data.length);
 		
 		switch (broadcastID) {
 		
@@ -17,9 +17,9 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_LEADERBOARD :
-			LeaderboardPacket lp = new LeaderboardPacket();
+			System.out.println("Leaderboard Recieved: "+data.length);
+			LeaderboardPacket lp = new LeaderboardPacket(data);
 			lp.getLeaderboard();
-			
 			break;
 			
 		case Packet.BROADCAST_CAPTURE :
@@ -38,6 +38,7 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_NEW_PLAYER :
+			System.out.println("New player broadcast recieved");
 			break;
 			
 		case Packet.BROADCAST_PLAYER_READY :

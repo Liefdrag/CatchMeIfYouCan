@@ -80,6 +80,7 @@ public abstract class Packet {// will need to test for construction of packets,
 	protected int getInt() {
 		byte[] int_;
 		int integer;
+		System.out.println(toString());
 		int_ = Arrays.copyOf(packet, 4);
 		integer = ByteBuffer.wrap(int_).getInt();
 		packet = Arrays.copyOfRange(packet, 4, packet.length);
@@ -90,16 +91,16 @@ public abstract class Packet {// will need to test for construction of packets,
 	}
 
 	protected void putInt(int integer) {
-		byte[] int_ = new byte[4];
-		ByteBuffer.wrap(int_).putDouble(integer);
-
+		//Int Data Type occupies four bytes of space
+		byte[] int_ = ByteBuffer.allocate(4).putInt(integer).array();
+		
 		packet = Arrays.copyOf(packet, packet.length + 4);
-
-		for (int i = 0; i < 4; i++) {
+		
+		for(int i = 0; i < 4; i ++){
 			packet[packet.length - (4 - i)] = int_[i];
 		}
-
-		// printPacket();
+		
+		//printPacket();
 	}
 
 	protected void putString(String string) {// need to include padding in the

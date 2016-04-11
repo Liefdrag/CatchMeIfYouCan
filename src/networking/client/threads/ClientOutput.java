@@ -39,7 +39,7 @@ public class ClientOutput implements Runnable {
 						clientSocket.getOutputStream().write(packetQueue.pop().getPacket());
 					}
 				}
-				Thread.sleep(100);
+				Thread.sleep(10);
 			} catch (IOException | InterruptedException e) {
 				break;
 			}	
@@ -48,12 +48,5 @@ public class ClientOutput implements Runnable {
 	
 	public void addPacketToQueue(Packet serverPacket){
 		packetQueue.add(serverPacket);
-	}
-
-	/**
-	 * Sends a message to the server. This is currently just
-	 * for testing, will be changed to send packets.
-	 */
-	public void SendMessage(String userInput) {
 	}
 }

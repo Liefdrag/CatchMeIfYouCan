@@ -53,14 +53,4 @@ public class ClientInput implements Runnable {
 		}
 	}
 
-	/**
-	 * Processes a received message from the server. All it does right now is
-	 * print the message for testing, but will be changed to interpret packets
-	 * from the server, probably passing the message to a state machine.
-	 */
-	private void processPacket(DatagramPacket packet) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

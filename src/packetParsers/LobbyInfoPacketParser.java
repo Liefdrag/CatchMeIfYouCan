@@ -9,7 +9,7 @@ public class LobbyInfoPacketParser {
 	
 	public void processLobbyInfo(int dataID, byte[] data) {
 		byte lobbyInfoID = data[0];
-		data = Arrays.copyOf(data, 1);
+		data = Arrays.copyOfRange(data, 1, data.length);
 		
 		switch (lobbyInfoID) {
 		

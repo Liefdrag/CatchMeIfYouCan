@@ -23,8 +23,7 @@ public class PacketParser {
 	 */
 	public void processPacket(byte[] packet) {
 		byte dataID = packet[0]; //First byte is the host packet ID
-		packet = Arrays.copyOf(packet, 1); //Removes the ID from the packet so only data is left
-		
+		packet = Arrays.copyOfRange(packet, 1, packet.length); //Removes the ID from the packet so only data is left
 		//Each Case is a Protocol
 		switch (dataID) {
 		
@@ -42,7 +41,7 @@ public class PacketParser {
 			break;
 		
 		case Packet.BROADCAST :
-			broadcastParser.processBroadcast(dataID, packet);
+			broadcastParser.processBroadcast(packet);
 			break;
 		
 		case Packet.TARGET :
