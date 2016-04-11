@@ -6,7 +6,7 @@ public class Room {
 
 	private final Lobby lobby;
 	private final String roomKey;
-	private List<Integer> players;
+	private List<String> players;
 	private boolean host;
 
 	public Room(String roomKey, boolean host) {
@@ -15,19 +15,19 @@ public class Room {
 		this.setHost(host);
 	}
 
-	public void addPlayer(Integer playerID) {
-		players.add(playerID);
+	public void addPlayer(String playerName) {
+		players.add(playerName);
 	}
 
-	public void removePlayer(Integer playerID) {
-		players.remove(playerID);
+	public void removePlayer(String playerName) {
+		players.remove(playerName);
 	}
 
 	public String getRoomKey() {
 		return roomKey;
 	}
 
-	public List<Integer> getPlayers() {
+	public List<String> getPlayers() {
 		return players;
 	}
 

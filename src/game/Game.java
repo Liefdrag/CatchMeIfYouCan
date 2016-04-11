@@ -1,59 +1,59 @@
 package game;
 
+import game.room.Leaderboard;
 import game.room.Room;
 
+/**
+ * This class contains methods that are called when packets are received.
+ *
+ */
 public class Game {
 
 	public enum GameState {
 		LOBBY, GAME, END;
 	}
 
-	private final Integer playerID;
-	private Integer targetID;
+	private final String playerName;
+	private String targetName;
 	private Room room;
 	private GameState gameState;
+	private Leaderboard leaderboard;
 
-	public Game(Integer playerID) {
-		this.playerID = playerID;
+	public Game(String playerName, String roomKey, boolean host) {
+		this.playerName = playerName;
+		room = new Room(roomKey, host);
+		leaderboard = new Leaderboard();
+	}
+	
+	public void updateLeaderboard(Leaderboard newLeaderboard) {
+		leaderboard.updateLeaderboard(newLeaderboard);
+		//Refresh GUI Leaderboard
 	}
 
-	public void joinRoom(String roomKey) {
-		room = new Room(roomKey, false);
-		gameState = GameState.LOBBY;
-		// Send JoinPacket
+	public void addPlayer(String playerName) throws Exception {
+		room.addPlayer(playerName);
 	}
 
-	public void createRoom() {
-		String roomKey = null; // Get from Server
-		room = new Room(roomKey, true);
-		gameState = GameState.LOBBY;
-		// Send CreateRoomPacket
-	}
-
-	public void addPlayer(Integer playerID) throws Exception {
-		room.addPlayer(playerID);
-	}
-
-	public void removePlayer(Integer playerID) throws Exception {
-		if (!room.getPlayers().contains(playerID)) {
+	public void removePlayer(String playerName) throws Exception {
+		if (!room.getPlayers().contains(playerName)) {
 			throw new Exception("Player does not exist.");
 		}
-		room.removePlayer(playerID);
+		room.removePlayer(playerName);
 	}
 
 	public void setHost() {
 		room.setHost(true);
 	}
 
-	public void playerCaught(Integer playerID) {
-		if (this.playerID == playerID) {
+	public void playerCaught(String playerName) {
+		if (this.playerName == playerName) {
 			// Alert the client they've been caught
 		}
 		// Alert the client player has been caught
 	}
 
-	public void setTarget(Integer targetID) {
-		this.targetID = targetID;
+	public void setTarget(String targetName) {
+		this.targetName = targetName;
 	}
 
 	public void updateLobbyInfo(String toUpdate, Object data) {
@@ -73,26 +73,6 @@ public class Game {
 			default:
 				break;
 		}
-	}
-
-	public void setRoomName(String roomName) {
-		room.getLobby().setRoomName(roomName);
-		// Send roomname packet?
-	}
-
-	public void setGametype(String gametype) {
-		room.getLobby().setGametype(gametype);
-		// Send gametype Packet
-	}
-
-	public void setScoreLimit(int scoreLimit) {
-		room.getLobby().setScoreLimit(scoreLimit);
-		// Send scorelimit packet
-	}
-
-	public void setTimeLimit(int timeLimit) {
-		room.getLobby().setTimeLimit(timeLimit);
-		// Send timelimit packet
 	}
 
 	public void startGame() {
