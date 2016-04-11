@@ -12,6 +12,8 @@ public abstract class Packet {// will need to test for construction of packets,
 
 	protected byte[] packet = new byte[0];
 
+	
+	
 	protected byte getByte() {
 		byte byte_ = packet[0];
 		packet = Arrays.copyOfRange(packet, 1, packet.length);

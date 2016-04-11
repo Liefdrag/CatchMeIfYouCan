@@ -1,10 +1,13 @@
 package networking.client.threads;
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.Socket;
 import java.util.Arrays;
 
+import networking.TestingInterface;
+import networking.packets.GenericPacket;
 import networking.packets.Packet;
 import packetParsers.PacketParser;
 
@@ -18,6 +21,16 @@ public class ClientInput implements Runnable {
 	private PacketParser packetParser;
 
 	public ClientInput(Socket clientSocket) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TestingInterface window = new TestingInterface();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		this.clientSocket = clientSocket;
 		this.packetParser = new PacketParser();
 	}
@@ -29,7 +42,10 @@ public class ClientInput implements Runnable {
 			byte[] temp = new byte[512];
 			while ((read = clientSocket.getInputStream().read(temp, 0, temp.length)) > -1) {
 				byte[] bytes = Arrays.copyOfRange(temp, 0, read);
+				Packet packet = new GenericPacket(bytes);
+				TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
 				packetParser.processPacket(bytes);
+				temp = new byte[512];
 			}
 		} catch (IOException e) {
 			System.err.print(e.toString());

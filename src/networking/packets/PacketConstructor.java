@@ -1,4 +1,4 @@
-package game;
+package networking.packets;
 
 import networking.packets.Packet;
 import networking.packets.clientPackets.hostPackets.*;
