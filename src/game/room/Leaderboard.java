@@ -18,18 +18,20 @@ public class Leaderboard {
 	public void addPlayer(int playerID, String playerName){
 		leaderboard.add(new LeaderboardPlayer(playerID, playerName, 0, 0));
 		playerIDMap.put(playerID, leaderboard.size() - 1);
+		System.out.println("Adding a player to the leaderboard");
 		if(playerID > maxPlayerID){ maxPlayerID = playerID; }
 	}
 	
 	//re-adding a player who has rejoined the game or reconstructing leaderboard from packet received.
-	public void addExistingPlayer(int playerID, String playerName, int score, int team, boolean sort){
+	public void addExistingPlayer(int playerID, String playerName, int score, int team){
 		leaderboard.add(new LeaderboardPlayer(playerID, playerName, score, team));
 		playerIDMap.put(playerID, leaderboard.size() - 1);
 		if(playerID > maxPlayerID){ maxPlayerID = playerID; }
-		if(sort){sortLeaderboard();}
+		sortLeaderboard();
 	}
 	
 	public void removePlayer(int playerID){
+		System.out.println("removing player (leaderboard)");
 		leaderboard.remove(playerIDMap.get(playerID));
 		int tempMaxPlayerID = 0;
 		for(int i = playerIDMap.get(playerID); i <= maxPlayerID; i++){
@@ -42,13 +44,19 @@ public class Leaderboard {
 		maxPlayerID = tempMaxPlayerID;
 	}
 	
+	public void refresh(){
+		for (int i = 0; i < leaderboard.size(); i++) {
+			leaderboard.get(i).setScore(0);
+		}
+	}
+	
 	public void updatePlayerScore(int playerID, int points){
 		leaderboard.get(playerIDMap.get(playerID)).updateScore(points);
 		sortLeaderboard();
 	}
 	
 	public void updateTeam(int playerID, int team){
-		leaderboard.get(playerIDMap.get(playerID)).updateScore(team);
+		leaderboard.get(playerIDMap.get(playerID)).updateTeam(team);
 	}
 	
 	public int getPlayerID(int playerID){
@@ -72,14 +80,24 @@ public class Leaderboard {
 		return leaderboard.size();
 	}
 	
-	public void updateLeaderboard(Leaderboard newLeaderboard) {
-		//Leaderboard needs to figure out if a player has been kicked/added to display as a notification on the players screen
-	}
-	
-	public String findWinner() {
-		sortLeaderboard();
-		String winner = leaderboard.get(0).getPlayerName();
-		return winner;
+	/**
+	 * Method that checks whether a Player has reached the score limit
+	 * Loops the whole leaderboard and checks every player
+	 * @param scoreLimit - Integer number scorelimit
+	 * @return - Boolean that tells whether the limit has been reached or not
+	 */
+	public boolean checkScoreLimitReached(int scoreLimit) {
+		//If no score limit has been set
+		if (scoreLimit < 1) {
+			return false;
+		}
+		//Loops every player in the leaderboard
+		for (int i = 0; i < leaderboard.size(); i++) {
+			if (leaderboard.get(i).getPlayerScore() >= scoreLimit) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//bubble sort.

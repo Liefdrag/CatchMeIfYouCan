@@ -1,11 +1,7 @@
 package networking.client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -37,7 +33,7 @@ public class Client {
 	
 	public void connectToServer(String serverAddress, int serverPort) throws UnknownHostException, IOException{
 
-		Socket socket = new Socket(serverAddress, serverPort);
+		Socket socket = new Socket(InetAddress.getByAddress(new byte[]{(byte)192,(byte)168,(byte)0,(byte)12}), serverPort);
 		// Creating the client input thread and starting it
 		clientInput = new ClientInput(socket);
 		new Thread(clientInput).start();

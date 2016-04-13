@@ -38,6 +38,7 @@ public class LobbyInfoPacketParser {
 		case Packet.LOBBYINFO_LEADERBOARD :
 			LeaderboardPacket lp = new LeaderboardPacket();
 			lp.getLeaderboard(); //Sets the lobby leaderboard
+			
 			break;
 			
 		case Packet.LOBBYINFO_ROOM_NAME :

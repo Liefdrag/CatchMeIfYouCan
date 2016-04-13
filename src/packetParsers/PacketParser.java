@@ -83,7 +83,7 @@ public class PacketParser {
 			break;
 				
 		case Packet.NAK :
-			//Needs to resend the last packet sent
+			//determine what the NAK is, i.e. wrong key, not enough players, game full/in progress.
 			break;
 			
 		case Packet.HOST :
@@ -92,6 +92,10 @@ public class PacketParser {
 			
 		case Packet.CAUGHT :
 			//Activate the Caught button on the Player GUI
+			break;
+		
+		case Packet.JOIN_SUCCESS :
+			//load lobby view, have successfully joined 
 			break;
 			
 		default : 

@@ -1,5 +1,4 @@
-/networking/
-/TestingInterface.class
 /game/
-/packetParsers/
 /main/
+/networking/
+/packetParsers/
