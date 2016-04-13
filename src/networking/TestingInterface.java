@@ -45,7 +45,7 @@ public class TestingInterface implements ActionListener {
 	 */
 	public TestingInterface() {
 		frame = new JFrame("Testing Interface");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 750, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
