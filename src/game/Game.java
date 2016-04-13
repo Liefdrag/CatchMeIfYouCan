@@ -26,7 +26,7 @@ public class Game {
 	}
 	
 	public void updateLeaderboard(Leaderboard newLeaderboard) {
-		leaderboard.updateLeaderboard(newLeaderboard);
+		leaderboard = newLeaderboard;
 		//Refresh GUI Leaderboard
 	}
 
