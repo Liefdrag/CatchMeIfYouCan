@@ -80,7 +80,6 @@ public abstract class Packet {// will need to test for construction of packets,
 	protected int getInt() {
 		byte[] int_;
 		int integer;
-		System.out.println(toString());
 		int_ = Arrays.copyOf(packet, 4);
 		integer = ByteBuffer.wrap(int_).getInt();
 		packet = Arrays.copyOfRange(packet, 4, packet.length);
