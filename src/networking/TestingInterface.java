@@ -18,7 +18,6 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import networking.client.Client;
 import networking.packets.*;
 import networking.packets.clientPackets.*;
 import networking.packets.clientPackets.hostPackets.*;
@@ -132,7 +131,7 @@ public class TestingInterface implements ActionListener {
 			CatchMeIfYouCanMain.sendPacket(qp);
 		} else if(e.getSource() == clientPackets[7]){
 			JoinPacket jp = new JoinPacket();
-			jp.putRoomKey("TEST");
+			jp.putRoomKey("x381f");//g04tt
 			jp.putMACAddress(new double[]{12,12,12,12,12,12});
 			jp.putPlayerName("Alan");
 			CatchMeIfYouCanMain.sendPacket(jp);

@@ -1,7 +1,10 @@
 package networking.packets.serverPackets.broadcastPackets;
 
+import java.util.Map.Entry;
+
 import networking.packets.Packet;
 import game.room.Leaderboard;
+import game.room.LeaderboardPlayer;
 
 public class LeaderboardPacket extends Packet {
 
@@ -17,11 +20,11 @@ public class LeaderboardPacket extends Packet {
 	public void putLeaderboard(Leaderboard board){ //will require a Leaderboard class.
 		int size = board.getSize();
 		putInt(size);//number of players in the board
-		for(int i = 0; i < size; i++){
-			putInt(board.getPlayerID(i));
-			putString(board.getPlayerName(i));
-			putInt(board.getPlayerScore(i));
-			putInt(board.getPlayerTeam(i));
+		for(Entry<Integer, LeaderboardPlayer> player : board.getEntrySet()){
+			putInt(player.getValue().getPlayerID());
+			putString(player.getValue().getPlayerName());
+			putInt(player.getValue().getPlayerScore());
+			putInt(player.getValue().getPlayerTeam());
 		}
 	}
 	
@@ -31,7 +34,6 @@ public class LeaderboardPacket extends Packet {
 		for(int i = 0; i < size; i++){
 			board.addExistingPlayer(getInt(), getString(), getInt(), getInt());
 		}
-		System.out.println(board.toString());
 		return board;
 	}
 	

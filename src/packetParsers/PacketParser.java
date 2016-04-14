@@ -70,6 +70,7 @@ public class PacketParser {
 			break;
 		
 		case Packet.ROOM_KEY :
+			RoomKeyPacket rkp = new RoomKeyPacket(packet);
 			//Sets the room key
 			break;
 		
