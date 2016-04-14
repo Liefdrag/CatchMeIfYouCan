@@ -34,7 +34,7 @@ public class Game {
 		room.addPlayer(playerName);
 	}
 
-	public void removePlayer(String playerName) throws Exception {
+	public void removePlayer(String playerName, byte kickReason) throws Exception {
 		if (!room.getPlayers().contains(playerName)) {
 			throw new Exception("Player does not exist.");
 		}
@@ -90,5 +90,9 @@ public class Game {
 
 	public GameState getGameState() {
 		return gameState;
+	}
+
+	public String getPlayerName() {
+		return playerName;
 	}
 }

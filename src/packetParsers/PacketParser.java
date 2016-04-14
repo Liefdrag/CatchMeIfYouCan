@@ -2,6 +2,7 @@ package packetParsers;
 
 import java.util.Arrays;
 
+import game.Game;
 import main.CatchMeIfYouCanMain;
 import networking.packets.*;
 import networking.packets.serverPackets.*;
@@ -11,6 +12,7 @@ public class PacketParser {
 	private String roomKey; //Used to determine which room to perform changes to
 	private final BroadcastPacketParser broadcastParser;
 	private final LobbyInfoPacketParser lobbyInfoParser;
+	private Game game; // will be retrieved from Player/HostPlayer instance from the client
 
 	public PacketParser() {
 		broadcastParser = new BroadcastPacketParser();
@@ -45,6 +47,8 @@ public class PacketParser {
 			break;
 		
 		case Packet.TARGET :
+			TargetPacket p = new TargetPacket(packet);
+			game.setTarget(p.getTargetID());
 			//Sets what the ID of the target is (All players locations are broadcast to everyone and so this ID chooses the ID
 			break;
 		
@@ -58,15 +62,15 @@ public class PacketParser {
 			break;
 				
 		case Packet.GAME_START :
-			//Game is started and needs to go to in game page
+			game.startGame();
 			break;
 			
 		case Packet.GAME_END :
-			//Game ends, result of game needs to be displayed
+			game.endGame();
 			break;
 			
 		case Packet.ROOM_CLOSE :
-			//Player needs to be diverted back to start screen
+			game.closeRoom();
 			break;
 		
 		case Packet.ROOM_KEY :
@@ -78,8 +82,9 @@ public class PacketParser {
 			break;
 			
 		case Packet.KICK :
-			KickPacket kp = new KickPacket(packet);
-			kp.getKickReason(); //Do something with this reason
+			KickPacket kickPacket = new KickPacket(packet);
+			kickPacket.getKickReason(); //Do something with this reason
+			game.removePlayer(game.getPlayerName());
 			break;
 				
 		case Packet.NAK :
@@ -87,15 +92,15 @@ public class PacketParser {
 			break;
 			
 		case Packet.HOST :
-			//Player becomes the host and has host access
+			game.setHost();
 			break;
 			
 		case Packet.CAUGHT :
-			//Activate the Caught button on the Player GUI
+			game.playerCaught(game.getPlayerName());
 			break;
 		
 		case Packet.JOIN_SUCCESS :
-			//load lobby view, have successfully joined 
+			JoinSuccessPacket joinPacket = new JoinSuccessPacket();
 			break;
 			
 		default : 
