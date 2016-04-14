@@ -84,7 +84,7 @@ public class PacketParser {
 		case Packet.KICK :
 			KickPacket kickPacket = new KickPacket(packet);
 			kickPacket.getKickReason(); //Do something with this reason
-			game.removePlayer(game.getPlayerName());
+			game.removePlayer(game.getPlayerName(), kickPacket.getKickReason());
 			break;
 				
 		case Packet.NAK :
