@@ -2,7 +2,6 @@ package networking.client.threads;
 
 import java.awt.EventQueue;
 import java.io.IOException;
-import java.net.DatagramPacket;
 import java.net.Socket;
 import java.util.Arrays;
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Home">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher"
+            android:background="#F3F3F3"
+            android:padding="10dp" />
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="#6AA850">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="MAIN MENU"
+                android:id="@+id/textView"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:textSize="34dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="25dp" />
+
+            <Button
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
+                android:text="CREATE GAME"
+                android:id="@+id/createGameButton"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:nestedScrollingEnabled="true"
+                android:clickable="false"
+                android:singleLine="false"
+                android:background="@drawable/button_border"
+                android:textSize="20sp"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
+                android:text="JOIN GAME"
+                android:id="@+id/joinGameButton"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:nestedScrollingEnabled="true"
+                android:clickable="false"
+                android:singleLine="false"
+                android:background="@drawable/button_border"
+                android:textSize="20dp"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
+                android:text="HOW TO PLAY"
+                android:id="@+id/howToPlayButton"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:nestedScrollingEnabled="true"
+                android:clickable="false"
+                android:singleLine="false"
+                android:background="@drawable/button_border"
+                android:textSize="20dp"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
+                android:text="PLAYER DETAILS"
+                android:id="@+id/playerDetailsButton"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:nestedScrollingEnabled="true"
+                android:clickable="false"
+                android:singleLine="false"
+                android:background="@drawable/button_border"
+                android:textSize="20dp"
+                android:layout_margin="10dp" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>
