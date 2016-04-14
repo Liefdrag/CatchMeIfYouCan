@@ -18,7 +18,6 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import networking.client.Client;
 import networking.packets.*;
 import networking.packets.clientPackets.*;
 import networking.packets.clientPackets.hostPackets.*;
