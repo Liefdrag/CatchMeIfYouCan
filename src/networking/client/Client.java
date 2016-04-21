@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import networking.client.threads.ClientInput;
 import networking.client.threads.ClientOutput;
 import networking.packets.Packet;
+import packetParsers.PacketParser;
 
 /**
  * Client class. On creation of a Client() object, the program
@@ -18,8 +19,10 @@ public class Client {
 
 	private ClientInput clientInput;
 	private ClientOutput clientOutput;
+	private PacketParser packetParser;
 	
-	public Client(String serverAddress, int serverPort) {
+	public Client(String serverAddress, int serverPort, PacketParser packetParser) {
+		this.packetParser = packetParser;
 		try {
 			connectToServer(serverAddress, serverPort);
 		} catch (IOException e) {
@@ -35,7 +38,7 @@ public class Client {
 
 		Socket socket = new Socket(InetAddress.getByAddress(new byte[]{(byte)138,(byte)38,(byte)241,(byte)195}), serverPort);
 		// Creating the client input thread and starting it
-		clientInput = new ClientInput(socket);
+		clientInput = new ClientInput(socket, packetParser);
 		new Thread(clientInput).start();
 		
 		// Creating the client output thread and starting it

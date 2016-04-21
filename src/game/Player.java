@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 
 import networking.client.Client;
 import networking.packets.clientPackets.*;
+import packetParsers.PacketParser;
 
 /**
  * Client -> Server methods
@@ -16,7 +17,8 @@ public class Player {
 	protected String playerName;
 	
 	public Player(String playerName) throws UnknownHostException{
-		client = new Client(InetAddress.getLocalHost().toString(), 0);
+		//change to address
+		client = new Client(InetAddress.getLocalHost().toString(), 0, new PacketParser(this));
 		game = null;
 		this.playerName = playerName;
 	}	

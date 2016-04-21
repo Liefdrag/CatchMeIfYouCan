@@ -16,10 +16,10 @@ public class PacketParser {
 	private Game game; // will be retrieved from Player/HostPlayer instance from the client
 	private Player player;
 
-	public PacketParser(Player player, Game game) {
+	public PacketParser(Player player) {
 		roomKey = "";
 		this.player = player;
-		this.game = game;
+		this.game = null;
 		broadcastParser = new BroadcastPacketParser(game);
 		lobbyInfoParser = new LobbyInfoPacketParser(game);
 	}

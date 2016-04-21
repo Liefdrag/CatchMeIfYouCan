@@ -19,7 +19,7 @@ public class ClientInput implements Runnable {
 	private Socket clientSocket;
 	private PacketParser packetParser;
 
-	public ClientInput(Socket clientSocket) {
+	public ClientInput(Socket clientSocket, PacketParser packetParser) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -31,7 +31,7 @@ public class ClientInput implements Runnable {
 			}
 		});
 		this.clientSocket = clientSocket;
-		this.packetParser = new PacketParser();
+		this.packetParser = packetParser;
 	}
 
 	@Override
