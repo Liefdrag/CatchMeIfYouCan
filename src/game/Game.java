@@ -14,7 +14,7 @@ public class Game {
 	}
 
 	private final String playerName;
-	private String targetName;
+	private int targetID;
 	private Room room;
 	private GameState gameState;
 	private Leaderboard leaderboard;
@@ -52,8 +52,8 @@ public class Game {
 		// Alert the client player has been caught
 	}
 
-	public void setTarget(String targetName) {
-		this.targetName = targetName;
+	public void setTarget(int[] targetID) {
+		this.targetID = targetID;
 	}
 
 	public void updateLobbyInfo(String toUpdate, Object data) {
