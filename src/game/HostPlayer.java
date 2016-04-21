@@ -1,19 +1,22 @@
 package game;
 
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import networking.client.Client;
 import networking.packets.clientPackets.hostPackets.*;
 
 public class HostPlayer extends Player {
 
-	public HostPlayer() throws UnknownHostException {
+	public HostPlayer(String playerName) throws UnknownHostException {
+		super(playerName);
 	}
 
 	@Override
-	public void create(String roomName, String hostName, double[] address) {
+	public void create(String roomName, double[] address) {
 		CreateRoomPacket packet = new CreateRoomPacket();
 		packet.putRoomName(roomName);
-		packet.putHostName(hostName);
+		packet.putHostName(playerName);
 		packet.putMACAddress(address);
 		client.sendPacket(packet);
 	}

@@ -53,7 +53,7 @@ public class Game {
 	}
 
 	public void setTarget(int[] targetID) {
-		this.targetID = targetID;
+		this.targetID = targetID[0];
 	}
 
 	public void updateLobbyInfo(String toUpdate, Object data) {

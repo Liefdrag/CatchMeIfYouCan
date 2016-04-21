@@ -2,11 +2,18 @@ package packetParsers;
 
 import java.util.Arrays;
 
+import game.Game;
 import networking.packets.*;
 import networking.packets.serverPackets.lobbyInfoPackets.*;
 
 public class LobbyInfoPacketParser {
 	
+	private Game game;
+
+	public LobbyInfoPacketParser(Game game) {
+		this.game = game;
+	}
+
 	public void processLobbyInfo(int dataID, byte[] data) {
 		byte lobbyInfoID = data[0];
 		data = Arrays.copyOfRange(data, 1, data.length);

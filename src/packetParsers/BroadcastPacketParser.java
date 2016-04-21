@@ -2,10 +2,17 @@ package packetParsers;
 
 import java.util.Arrays;
 
+import game.Game;
 import networking.packets.Packet;
 import networking.packets.serverPackets.broadcastPackets.*;
 
 public class BroadcastPacketParser {
+
+	private Game game;
+
+	public BroadcastPacketParser(Game game) {
+		this.game = game;
+	}
 
 	public void processBroadcast(byte[] data) {
 		byte broadcastID = data[0];
@@ -38,6 +45,13 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_NEW_PLAYER :
+			NewPlayerPacket packet = new NewPlayerPacket();
+			try {
+				game.addPlayer(packet.getPlayerName());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("New player broadcast recieved");
 			break;
 			

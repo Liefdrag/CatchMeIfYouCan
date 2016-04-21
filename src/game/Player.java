@@ -13,13 +13,15 @@ public class Player {
 	
 	protected Client client;
 	protected Game game;
+	protected String playerName;
 	
-	public Player() throws UnknownHostException{
+	public Player(String playerName) throws UnknownHostException{
 		client = new Client(InetAddress.getLocalHost().toString(), 0);
 		game = null;
+		this.playerName = playerName;
 	}	
 	
-	public void create(String roomKey, String playerName, double[] address){
+	public void create(String roomKey, double[] address){
 		JoinPacket packet = new JoinPacket();
 		packet.putRoomKey(roomKey);
 		packet.putPlayerName(playerName);
@@ -67,5 +69,9 @@ public class Player {
 	
 	public void setGame(Game game){
 		this.game = game;
+	}
+	
+	public String getPlayerName(){
+		return playerName;
 	}
 }

@@ -3,6 +3,7 @@ package packetParsers;
 import java.util.Arrays;
 
 import game.Game;
+import game.Player;
 import main.CatchMeIfYouCanMain;
 import networking.packets.*;
 import networking.packets.serverPackets.*;
@@ -13,10 +14,14 @@ public class PacketParser {
 	private final BroadcastPacketParser broadcastParser;
 	private final LobbyInfoPacketParser lobbyInfoParser;
 	private Game game; // will be retrieved from Player/HostPlayer instance from the client
+	private Player player;
 
-	public PacketParser() {
-		broadcastParser = new BroadcastPacketParser();
-		lobbyInfoParser = new LobbyInfoPacketParser();
+	public PacketParser(Player player, Game game) {
+		roomKey = "";
+		this.player = player;
+		this.game = game;
+		broadcastParser = new BroadcastPacketParser(game);
+		lobbyInfoParser = new LobbyInfoPacketParser(game);
 	}
 	
 	/**
@@ -58,7 +63,8 @@ public class PacketParser {
 				
 		case Packet.ABILITY_ACTION :
 			AbilityUsagePacket abilityUsage = new AbilityUsagePacket(packet);
-			//Get what the ability is
+			abilityUsage.getAbility();
+			// do something with ability
 			break;
 				
 		case Packet.GAME_START :
@@ -75,7 +81,11 @@ public class PacketParser {
 		
 		case Packet.ROOM_KEY :
 			RoomKeyPacket rkp = new RoomKeyPacket(packet);
-			//Sets the room key
+			String roomKey = rkp.getRoomKey();
+			this.setRoomKey(roomKey);
+			String playerName = player.getPlayerName();
+			game = new Game(roomKey, playerName, true);
+			player.setGame(game);
 			break;
 		
 		case Packet.LOBBYINFO :
@@ -105,6 +115,8 @@ public class PacketParser {
 		
 		case Packet.JOIN_SUCCESS :
 			JoinSuccessPacket joinPacket = new JoinSuccessPacket();
+			String name = player.getPlayerName();
+			game = new Game(this.roomKey, name, false);
 			break;
 			
 		default : 
@@ -113,7 +125,7 @@ public class PacketParser {
 				bytes += packet[i] + " | ";
 			}
 			System.err.println("Unrecognised packet: \"" + bytes +
-					" in room: " + roomKey);
+					" in room: " + this.roomKey);
 			break;
 		}
 	}
