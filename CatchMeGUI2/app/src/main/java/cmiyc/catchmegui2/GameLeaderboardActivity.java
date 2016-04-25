@@ -25,4 +25,5 @@ public class GameLeaderboardActivity extends AppCompatActivity {
 
         });
     }
+
 }

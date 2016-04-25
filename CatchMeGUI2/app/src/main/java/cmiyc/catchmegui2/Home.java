@@ -21,6 +21,7 @@ public class Home extends AppCompatActivity {
         Button Button1=(Button)findViewById(R.id.createGameButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //GET A ROOM KEY FROM THE SERVER
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);
 

@@ -17,8 +17,7 @@ public class HowToPlayActivity extends AppCompatActivity {
         Button backHowToPlayButton =(Button)findViewById(R.id.backHowToPlayButton);
         backHowToPlayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(HowToPlayActivity.this, Home.class);
-                startActivity(i);
+                finish();
             }
         });
     }

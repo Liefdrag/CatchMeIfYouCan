@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cmiyc.catchmegui2">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,124 +27,139 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.CaughtActivity"
-            android:parentActivityName="cmiyc.catchmegui2.Home" >
+            android:name=".CaughtActivity"
+            android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.CreateGameActivity"
-            android:parentActivityName="cmiyc.catchmegui2.Home" >
+            android:name=".CreateGameActivity"
+            android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.CustomiseGameActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".CustomiseGameActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.CreateGameActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.GameOverActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".GameOverActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.GameOverActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.CatchSuccessActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".CatchSuccessActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.CatchSuccessActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.InvitePlayerActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".InvitePlayerActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.InvitePlayerActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.JoinGameActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".JoinGameActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.InGameActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".InGameActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.PlayerDetailsActivity"
-            android:parentActivityName="cmiyc.catchmegui2.PlayerDetailsActivity" >
+            android:name=".PlayerDetailsActivity"
+            android:parentActivityName=".PlayerDetailsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.LobbyActivity"
-            android:parentActivityName="cmiyc.catchmegui2.VotingActivity" >
+            android:name=".LobbyActivity"
+            android:parentActivityName=".VotingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.VotingActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.LobbyLeaderboardActivity"
-            android:parentActivityName="cmiyc.catchmegui2.LobbyActivity" >
+            android:name=".LobbyLeaderboardActivity"
+            android:parentActivityName=".LobbyActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.LobbyLeaderboardActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.HowToPlayActivity"
-            android:parentActivityName="cmiyc.catchmegui2.Home" >
+            android:name=".HowToPlayActivity"
+            android:parentActivityName=".Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.LobbyHostActivity"
-            android:parentActivityName="cmiyc.catchmegui2.CreateGameActivity" >
+            android:name=".LobbyHostActivity"
+            android:parentActivityName=".CreateGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.CreateGameActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.GameLeaderboardActivity"
-            android:parentActivityName="cmiyc.catchmegui2.InGameActivity" >
+            android:name=".GameLeaderboardActivity"
+            android:parentActivityName=".InGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.InGameActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.MapActivity"
-            android:parentActivityName="cmiyc.catchmegui2.InGameActivity" >
+            android:name=".MapActivity"
+            android:parentActivityName=".InGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.InGameActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.InGameOptionsActivity"
-            android:parentActivityName="cmiyc.catchmegui2.InGameActivity" >
+            android:name=".InGameOptionsActivity"
+            android:parentActivityName=".InGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.InGameActivity" />
         </activity>
         <activity
-            android:name="cmiyc.catchmegui2.VotingActivity"
-            android:parentActivityName="cmiyc.catchmegui2.JoinGameActivity" >
+            android:name=".VotingActivity"
+            android:parentActivityName=".JoinGameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.JoinGameActivity" />
         </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>
