@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 /**
  * Created by Liefdrag on 13/04/2016.
@@ -27,7 +29,7 @@ public class VotingActivity extends AppCompatActivity {
         Button skipButton=(Button)findViewById(R.id.skipVoteButton);
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                playerVote(0);
+                playerVoteNull();
                 Intent i = new Intent(VotingActivity.this, LobbyActivity.class);
                 startActivity(i);
             }
@@ -42,12 +44,14 @@ public class VotingActivity extends AppCompatActivity {
     }
 
     public void countVote() {
-        //Functionality to count the vote
+        RadioGroup radioGroupVote = (RadioGroup) findViewById(R.id.radioGroupVote);
+        int voteId = radioGroupVote.getCheckedRadioButtonId();
+        RadioButton votedRButton = (RadioButton) findViewById(voteId);
+        votedRButton.getText(); //This is the game mode picked that needs to be sent to the Server
     }
 
-    public void playerVote(int vote) {
-        //For when player votes
-        //Currently when argument is 0 then player skipped the vote.
+    public void playerVoteNull() {
+        //When Player skips vote
     }
 
     public void playerLeft() {
