@@ -23,10 +23,11 @@ public class Player {
 	private Client client;
 	protected Game game;
 	protected String playerName;
+	private String roomKey;
 	
 	public Player(String playerName) throws UnknownHostException{
 		//change to address
-		client = new Client(InetAddress.getLocalHost().toString(), 0, new PacketParser(this));
+		client = new Client(InetAddress.getLocalHost().toString(), 0, new PacketParser(/*this*/));
 		game = null;
 		this.playerName = playerName;
 	}	
@@ -90,6 +91,10 @@ public class Player {
 	public String getPlayerName(){
 		return playerName;
 	}
+
+	public void setRoomKey(String key) { roomKey = key; }
+
+	public String getRoomKey() { return roomKey; }
 
 	public Client getClient() {
 		return client;

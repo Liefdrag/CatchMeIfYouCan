@@ -2,4 +2,6 @@
     <string name="app_name">Catch Me If You Can</string>
     <string name="action_settings">Game Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string name="player_name">CatchMeGUI2.app.PLAYER_DETAILS</string>
+    <string name="saved_name">NAME</string>
 </resources>

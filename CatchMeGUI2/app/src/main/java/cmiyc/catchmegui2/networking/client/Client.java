@@ -37,7 +37,7 @@ public class Client {
 	
 	public void connectToServer(String serverAddress, int serverPort) throws UnknownHostException, IOException{
 
-		Socket socket = new Socket(InetAddress.getByAddress(new byte[]{(byte)138,(byte)38,(byte)241,(byte)195}), serverPort);
+		Socket socket = new Socket(InetAddress.getByName(serverAddress), serverPort);
 		// Creating the client input thread and starting it
 		clientInput = new ClientInput(socket, packetParser);
 		new Thread(clientInput).start();

@@ -2,7 +2,9 @@ package cmiyc.catchmegui2.packetParsers;
 
 import java.util.Arrays;
 
+import cmiyc.catchmegui2.Home;
 import cmiyc.catchmegui2.game.Game;
+import cmiyc.catchmegui2.game.HostPlayer;
 import cmiyc.catchmegui2.game.Player;
 import cmiyc.catchmegui2.networking.packets.*;
 import cmiyc.catchmegui2.networking.packets.serverPackets.*;
@@ -13,11 +15,11 @@ public class PacketParser {
 	private final BroadcastPacketParser broadcastParser;
 	private final LobbyInfoPacketParser lobbyInfoParser;
 	private Game game; // will be retrieved from Player/HostPlayer instance from the client
-	private Player player;
+	//private Player player;
 
-	public PacketParser(Player player) {
+	public PacketParser(/*Player player*/) {
 		roomKey = "";
-		this.player = player;
+		//this.player = player;
 		this.game = null;
 		broadcastParser = new BroadcastPacketParser(game);
 		lobbyInfoParser = new LobbyInfoPacketParser(game);
@@ -42,7 +44,8 @@ public class PacketParser {
 		
 		case Packet.PING :
 			PingPacket pp = new PingPacket();
-			player.getClient().sendPacket(pp);
+			//player.getClient().sendPacket(pp);
+			Home.player.getClient().sendPacket(pp);
 			//Sends the packet back to the Server
 			break;
 		
@@ -82,9 +85,10 @@ public class PacketParser {
 			RoomKeyPacket rkp = new RoomKeyPacket(packet);
 			String roomKey = rkp.getRoomKey();
 			this.setRoomKey(roomKey);
-			String playerName = player.getPlayerName();
+			String playerName = Home.player.getPlayerName();
 			game = new Game(roomKey, playerName, true);
-			player.setGame(game);
+			Home.player.setGame(game);
+
 			break;
 		
 		case Packet.LOBBYINFO :
@@ -106,7 +110,8 @@ public class PacketParser {
 			
 		case Packet.HOST :
 			game.setHost();
-			// need to change player -> hostplayer
+            Home.player = new HostPlayer(Home.player.getPlayerName(), Home.player.getClient(), game);
+			// will this work?
 			break;
 			
 		case Packet.CAUGHT :
@@ -114,7 +119,7 @@ public class PacketParser {
 			break;
 		
 		case Packet.JOIN_SUCCESS :
-			String name = player.getPlayerName();
+			String name = Home.player.getPlayerName();
 			game = new Game(this.roomKey, name, false);
 			break;
 			

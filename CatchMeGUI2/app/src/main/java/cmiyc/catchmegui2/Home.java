@@ -1,6 +1,8 @@
 package cmiyc.catchmegui2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,8 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import cmiyc.catchmegui2.game.Game;
+import cmiyc.catchmegui2.game.HostPlayer;
+import cmiyc.catchmegui2.game.Player;
+import cmiyc.catchmegui2.networking.client.Client;
+import cmiyc.catchmegui2.packetParsers.PacketParser;
+
 public class Home extends AppCompatActivity {
 
+    public static Player player;
+    private PacketParser pcktparser = new PacketParser();
+    private Context context = new PlayerDetailsActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +32,12 @@ public class Home extends AppCompatActivity {
         Button Button1=(Button)findViewById(R.id.createGameButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //GET A ROOM KEY FROM THE SERVER
+
+                /*SharedPreferences sharedPref = context.getSharedPreferences(
+                        getString(R.string.player_name), Context.MODE_PRIVATE);
+                String defaultName = "Player";
+                String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
+                player = new HostPlayer("Bonnie", new Client("192.168.0.12", 10401, pcktparser), null);
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);
 
@@ -30,6 +46,11 @@ public class Home extends AppCompatActivity {
         Button Button2=(Button)findViewById(R.id.joinGameButton);
         Button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                /*SharedPreferences sharedPref = context.getSharedPreferences(
+                        getString(R.string.player_name), Context.MODE_PRIVATE);
+                String defaultName = "Player";
+                String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
+                player = new Player("Clyde", new Client("192.168.0.12", 10401, pcktparser), null);
                 Intent i = new Intent(Home.this, JoinGameActivity.class);
                 startActivity(i);
             }

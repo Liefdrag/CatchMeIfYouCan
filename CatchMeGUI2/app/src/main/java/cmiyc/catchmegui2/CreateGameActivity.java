@@ -16,7 +16,7 @@ public class CreateGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_game);
         TextView roomKey =(TextView)findViewById(R.id.roomKey);
-        roomKey.setText("RHEYWJ27"); //Insert Room Key for Room Here
+        roomKey.setText(Home.player.getRoomKey());
 
         Button customiseButton =(Button)findViewById(R.id.customiseGameButton);
         customiseButton.setOnClickListener(new View.OnClickListener() {
