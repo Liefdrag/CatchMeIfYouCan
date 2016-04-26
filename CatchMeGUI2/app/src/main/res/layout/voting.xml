@@ -40,12 +40,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="@android:color/white"
-                android:layout_marginBottom="50dp"/>
+                android:layout_marginBottom="20dp"/>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             android:id="@+id/linearLayout10">
 
             <RadioGroup
@@ -81,17 +81,17 @@
                     android:textColor="#fff"/>
             </RadioGroup>
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@+id/linearLayout10">
+            android:layout_height="90dp"
+            android:gravity="center_horizontal"
+            android:id="@+id/linearLayout11">
             <Button
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="LEAVE GAME"
-                android:id="@+id/leaveVoteButton"
+                android:text="SUBMIT"
+                android:id="@+id/submitVoteButton"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:nestedScrollingEnabled="true"
@@ -99,8 +99,7 @@
                 android:singleLine="false"
                 android:background="@drawable/button_border"
                 android:textSize="20sp"
-                android:layout_marginRight="20dp"/>
-
+                android:layout_marginRight="40dp"/>
             <Button
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
@@ -113,9 +112,25 @@
                 android:singleLine="false"
                 android:background="@drawable/button_border"
                 android:textSize="20sp"
-                android:layout_marginLeft="30dp"/>
+                android:layout_marginLeft="40dp"/>
         </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="LEAVE GAME"
+            android:id="@+id/leaveVoteButton"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:nestedScrollingEnabled="true"
+            android:clickable="false"
+            android:singleLine="false"
+            android:background="@drawable/button_border"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 </LinearLayout>

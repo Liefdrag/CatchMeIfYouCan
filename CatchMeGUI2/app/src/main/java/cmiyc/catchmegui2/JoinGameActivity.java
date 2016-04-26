@@ -17,10 +17,25 @@ public class JoinGameActivity extends AppCompatActivity {
         Button Button1 = (Button)findViewById(R.id.joinGameLobbyButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(JoinGameActivity.this, VotingActivity.class);
-                startActivity(i);
+                enterRoom();
 
             }
         });
+        Button Button2 = (Button)findViewById(R.id.backjoinGameButton);
+        Button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(JoinGameActivity.this, Home.class);
+                finish();
+            }
+        });
+    }
+
+    public void enterRoom() {
+        //Retrieves the inserted key from editText
+        //Sends the room key to the server
+        //If room key is wrong then needs to be an error screen
+        // else if correct
+        Intent i = new Intent(JoinGameActivity.this, VotingActivity.class);
+        startActivity(i);
     }
 }

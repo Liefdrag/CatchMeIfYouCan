@@ -42,50 +42,15 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="25dp" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="SEE INVITES"
-                android:id="@+id/invitesButton"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:nestedScrollingEnabled="true"
-                android:clickable="false"
-                android:singleLine="false"
-                android:background="@drawable/button_border"
-                android:textSize="20sp"
-                android:layout_margin="10dp" />
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="ACTIVE GAMES"
-                android:id="@+id/activeGamesButton"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:nestedScrollingEnabled="true"
-                android:clickable="false"
-                android:singleLine="false"
-                android:background="@drawable/button_border"
-                android:textSize="20sp"
-                android:layout_margin="10dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_margin="10dp"
-                android:background="@android:color/white"/>
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="170dp"
                 android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ENTER ROOM KEY"
+                    android:text="ENTER ROOM KEY:"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:textSize="20dp"
@@ -116,7 +81,21 @@
                 android:layout_margin="10dp" />
 
         </LinearLayout>
-
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="BACK"
+            android:id="@+id/backjoinGameButton"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:nestedScrollingEnabled="true"
+            android:clickable="false"
+            android:singleLine="false"
+            android:background="@drawable/button_border"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
