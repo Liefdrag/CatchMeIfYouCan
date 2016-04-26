@@ -21,6 +21,8 @@ public class BroadcastPacketParser {
 		switch (broadcastID) {
 		
 		case Packet.BROADCAST_TIME_REMAINING :
+			TimeRemainingPacket timeRemainingPacket = new TimeRemainingPacket(data);
+			//alert player of time left
 			break;
 			
 		case Packet.BROADCAST_LEADERBOARD :
@@ -30,18 +32,31 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_CAPTURE :
+			CapturePacket capturePacket = new CapturePacket(data);
+			game.playerCaught(capturePacket.getCapture()); //need to convert id to name, or change method
 			break;
 			
 		case Packet.BROADCAST_VOTES :
+			VotesPacket votesPacket = new VotesPacket(data);
+			votesPacket.getVotes();
+			// do something
 			break;
 			
 		case Packet.BROADCAST_QUIT :
+			DisconnectionPacket disconnectionPacket = new DisconnectionPacket(data);
+			game.removePlayer(disconnectionPacket.getPlayerID(), disconnectionPacket.getDisconnectReason());
+			// also need to convert id to name
 			break;
 			
 		case Packet.BROADCAST_BOUNDARY_UPDATE :
+			BoundaryUpdatePacket boundaryUpdatePacket = new BoundaryUpdatePacket(data);
+			// do something
 			break;
 			
 		case Packet.BROADCAST_NEW_HOST :
+			NewHostPacket newHostPacket = new NewHostPacket(data);
+			if(game.getPlayerName() == newHostPacket.getPlayerID()) // change to ids or names
+				game.setHost();
 			break;
 			
 		case Packet.BROADCAST_NEW_PLAYER :

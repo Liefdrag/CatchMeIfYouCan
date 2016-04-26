@@ -22,18 +22,18 @@ public class LobbyInfoPacketParser {
 		
 		case Packet.LOBBYINFO_GAMETYPE :
 			GametypePacket gtp = new GametypePacket();
-			gtp.getGametype(); //Sets this byte value as the game type
+			game.updateLobbyInfo("GAME_TYPE", gtp.getGametype());
 			//Sets the ID of the Game Mode
 			break;
 			
 		case Packet.LOBBYINFO_TIME_LIMIT :
 			TimeLimitPacket tlp = new TimeLimitPacket();
-			tlp.getTimeLimit(); //Sets the time limit of the game
+			game.updateLobbyInfo("TIME_LIMIT", tlp.getTimeLimit());
 			break;
 			
 		case Packet.LOBBYINFO_SCORE_LIMIT :
 			ScoreLimitPacket slp = new ScoreLimitPacket();
-			slp.getScoreLimit(); //Sets the score limit of the game
+			game.updateLobbyInfo("SCORE_LIMIT", slp.getScoreLimit());
 			break;
 			
 		case Packet.LOBBYINFO_BOUNDARIES :

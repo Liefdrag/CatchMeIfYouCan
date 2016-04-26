@@ -43,7 +43,7 @@ public class PacketParser {
 		
 		case Packet.PING :
 			PingPacket pp = new PingPacket();
-			CatchMeIfYouCanMain.sendPacket(pp);
+			player.getClient().sendPacket(pp);
 			//Sends the packet back to the Server
 			break;
 		
@@ -107,6 +107,7 @@ public class PacketParser {
 			
 		case Packet.HOST :
 			game.setHost();
+			// need to change player -> hostplayer
 			break;
 			
 		case Packet.CAUGHT :
@@ -114,7 +115,6 @@ public class PacketParser {
 			break;
 		
 		case Packet.JOIN_SUCCESS :
-			JoinSuccessPacket joinPacket = new JoinSuccessPacket();
 			String name = player.getPlayerName();
 			game = new Game(this.roomKey, name, false);
 			break;

@@ -12,7 +12,7 @@ import packetParsers.PacketParser;
  */
 public class Player {
 	
-	protected Client client;
+	private Client client;
 	protected Game game;
 	protected String playerName;
 	
@@ -22,6 +22,12 @@ public class Player {
 		game = null;
 		this.playerName = playerName;
 	}	
+	
+	public Player(String playerName, Client client, Game game){
+		this.client = client;
+		this.game = game;
+		this.playerName = playerName;
+	}
 	
 	public void create(String roomKey, double[] address){
 		JoinPacket packet = new JoinPacket();
@@ -75,5 +81,9 @@ public class Player {
 	
 	public String getPlayerName(){
 		return playerName;
+	}
+
+	public Client getClient() {
+		return client;
 	}
 }
