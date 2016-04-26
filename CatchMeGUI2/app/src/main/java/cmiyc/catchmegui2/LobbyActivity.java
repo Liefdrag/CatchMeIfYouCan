@@ -28,9 +28,10 @@ public class LobbyActivity extends AppCompatActivity {
         Button leaveGameButton=(Button)findViewById(R.id.quitButton);
         leaveGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                playerLeave();
                 Intent i = new Intent(LobbyActivity.this, Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
-
             }
         });
 
@@ -55,6 +56,10 @@ public class LobbyActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void playerLeave() {
+        //Functionality to get rid of player from game
     }
 
 
