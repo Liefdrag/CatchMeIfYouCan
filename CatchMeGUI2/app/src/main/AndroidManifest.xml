@@ -160,6 +160,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.JoinGameActivity" />
         </activity>
+        <activity
+            android:name=".GameEndActivity"
+            android:parentActivityName=".LobbyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmiyc.catchmegui2.LobbyActivity" />
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
