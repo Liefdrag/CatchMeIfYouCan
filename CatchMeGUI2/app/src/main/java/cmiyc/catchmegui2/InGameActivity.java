@@ -1,6 +1,7 @@
 package cmiyc.catchmegui2;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -8,6 +9,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,9 +22,32 @@ import com.google.android.gms.location.LocationServices;
  */
 public class InGameActivity extends AppCompatActivity {
 
+    AlertDialog caughtDialog;
+    AlertDialog catchDialog;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
+
+        AlertDialog.Builder catchBuilder = new AlertDialog.Builder(this);
+        catchBuilder.setMessage("Catch Success")
+                .setCancelable(false)
+                .setPositiveButton("OK :D", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Do Nothing
+                    }
+                });
+        catchDialog = catchBuilder.create();
+
+        AlertDialog.Builder caughtBuilder = new AlertDialog.Builder(this);
+        caughtBuilder.setMessage("You have been unfortunately caught")
+                .setCancelable(false)
+                .setPositiveButton("OK :(", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Do Nothing
+                    }
+                });
+        caughtDialog = caughtBuilder.create();
 
         Button gameOptionsButton = (Button)findViewById(R.id.gameOptionsButton);
         gameOptionsButton.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +65,7 @@ public class InGameActivity extends AppCompatActivity {
         });
 
         Button beencaughtButton = (Button)findViewById(R.id.beenCaughtButton);
-        beencaughtButton.setEnabled(false);
+        //beencaughtButton.setEnabled(false);
         beencaughtButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 beenCaughtButtonClicked();
@@ -80,10 +105,12 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void caughtButtonClicked() {
+        catchDialog.show();
         //Sends Packet To Server
     }
 
     public void beenCaughtButtonClicked() {
+        caughtDialog.show();
         //Sends Packet To Server
     }
 
@@ -117,3 +144,4 @@ public class InGameActivity extends AppCompatActivity {
         return null;
     }
 }
+
