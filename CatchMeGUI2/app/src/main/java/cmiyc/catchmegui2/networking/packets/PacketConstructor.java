@@ -28,7 +28,7 @@ public class PacketConstructor {
 	}
 
 	public Packet constructCreateRoomPacket(String roomName, String hostName,
-			double[] address) {
+			String address) {
 		CreateRoomPacket packet = new CreateRoomPacket();
 		packet.putRoomName(roomName);
 		packet.putHostName(hostName);

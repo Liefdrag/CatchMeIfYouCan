@@ -60,14 +60,12 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_NEW_PLAYER :
-			NewPlayerPacket packet = new NewPlayerPacket();
+			NewPlayerPacket packet = new NewPlayerPacket(data);
 			try {
 				game.addPlayer(packet.getPlayerName());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("New player broadcast recieved");
 			break;
 			
 		case Packet.BROADCAST_PLAYER_READY :

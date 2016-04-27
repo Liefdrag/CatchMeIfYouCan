@@ -44,11 +44,11 @@ public class PlayerDetailsActivity extends AppCompatActivity {
         String playerName = userName.getText().toString();
 
         //Saving the name to a file stored on the activity, I think...
-        Context context = this;
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                getString(R.string.player_name), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.saved_name), playerName);
-        editor.commit();
+        //Context context = this;
+        //SharedPreferences sharedPref = context.getSharedPreferences(
+           //     getString(R.string.player_name), Context.MODE_PRIVATE);
+       // SharedPreferences.Editor editor = sharedPref.edit();
+        //editor.putString(getString(R.string.saved_name), playerName);
+        //editor.commit();
     }
 }

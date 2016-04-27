@@ -78,6 +78,7 @@ public abstract class Packet {// will need to test for construction of packets,
 	}
 
 	protected int getInt() {
+		System.out.println(packet.length);
 		byte[] int_;
 		int integer;
 		int_ = Arrays.copyOf(packet, 4);

@@ -85,6 +85,7 @@ public class PacketParser {
 			RoomKeyPacket rkp = new RoomKeyPacket(packet);
 			String roomKey = rkp.getRoomKey();
 			this.setRoomKey(roomKey);
+            Home.player.setRoomKey(roomKey);
 			String playerName = Home.player.getPlayerName();
 			game = new Game(roomKey, playerName, true);
 			Home.player.setGame(game);

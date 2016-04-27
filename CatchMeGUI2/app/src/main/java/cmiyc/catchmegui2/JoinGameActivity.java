@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by Liefdrag on 12/04/2016.
  */
+//implement interface to go to next room and notify when wrong key used
 public class JoinGameActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,11 @@ public class JoinGameActivity extends AppCompatActivity {
         //Sends the room key to the server
         //If room key is wrong then needs to be an error screen
         // else if correct
+        EditText roomKey = (EditText)findViewById(R.id.enterKey);
+        String key = roomKey.getText().toString();
+        Home.player.create(key, "192.168.0.12");
+
+        //place code below in interface method for join success
         Intent i = new Intent(JoinGameActivity.this, VotingActivity.class);
         startActivity(i);
     }
