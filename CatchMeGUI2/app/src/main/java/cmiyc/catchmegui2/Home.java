@@ -66,7 +66,6 @@ public class Home extends AppCompatActivity {
                 String defaultName = "Player";
                 String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
                 player = new Player("Caboose", new Client("192.168.0.12", 10401, pcktparser), null);
-                player.setGame(new Game("Caboose", null, false));
                 Intent i = new Intent(Home.this, JoinGameActivity.class);
                 startActivity(i);
             }

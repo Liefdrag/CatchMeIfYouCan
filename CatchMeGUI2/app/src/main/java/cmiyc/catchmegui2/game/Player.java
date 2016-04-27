@@ -23,13 +23,14 @@ import cmiyc.catchmegui2.packetParsers.PacketParser;
 /**
  * Client -> Server methods
  */
-public class Player implements Runnable {
+public class Player {
 	
 	private Client client;
 	protected Game game;
 	protected String playerName;
 	private String roomKey;
     private UpdateRoomKey urk;
+    private JoinSuccessInterface jsi;
 	
 	public Player(String playerName) throws UnknownHostException {
 		//change to address
@@ -112,9 +113,38 @@ public class Player implements Runnable {
                 }
             }
         }
-
-
     }
+
+    public void joinRoom(){
+        for(int i = 0; i < 10; i++){
+            if (jsi != null){
+               jsi.joinSuccess();
+                break;
+            } else {
+                try {
+                    Thread.currentThread().sleep(70);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void joinRoomFail(String reason){
+        for(int i = 0; i < 10; i++){
+            if (jsi != null){
+                jsi.joinFailure(reason);
+                break;
+            } else {
+                try {
+                    Thread.currentThread().sleep(70);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 	public String getRoomKey() { return roomKey; }
 
@@ -126,8 +156,8 @@ public class Player implements Runnable {
 		return client;
 	}
 
-    @Override
-    public void run() {
-
+    public void setJSInterface(JoinSuccessInterface jsi){
+        this.jsi = jsi;
     }
+
 }

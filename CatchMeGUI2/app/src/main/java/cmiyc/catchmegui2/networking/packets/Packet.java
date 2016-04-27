@@ -12,8 +12,8 @@ public abstract class Packet {// will need to test for construction of packets,
 
 	protected byte[] packet = new byte[0];
 
-	
-	
+
+
 	protected byte getByte() {
 		byte byte_ = packet[0];
 		packet = Arrays.copyOfRange(packet, 1, packet.length);
@@ -93,13 +93,13 @@ public abstract class Packet {// will need to test for construction of packets,
 	protected void putInt(int integer) {
 		//Int Data Type occupies four bytes of space
 		byte[] int_ = ByteBuffer.allocate(4).putInt(integer).array();
-		
+
 		packet = Arrays.copyOf(packet, packet.length + 4);
-		
+
 		for(int i = 0; i < 4; i ++){
 			packet[packet.length - (4 - i)] = int_[i];
 		}
-		
+
 		//printPacket();
 	}
 
@@ -207,7 +207,7 @@ public abstract class Packet {// will need to test for construction of packets,
 			case BROADCAST_QUIT:
 				return new DisconnectionPacket();
 			case BROADCAST_BOUNDARY_UPDATE:
-				return new BoundaryUpdatePacket();
+				return new cmiyc.catchmegui2.networking.packets.serverPackets.broadcastPackets.BoundaryUpdatePacket();
 			case BROADCAST_NEW_HOST:
 				return new NewHostPacket();
 			case BROADCAST_NEW_PLAYER:
@@ -235,6 +235,8 @@ public abstract class Packet {// will need to test for construction of packets,
 				return new RoomNamePacket();
 			case LOBBYINFO_VOTES:
 				return new cmiyc.catchmegui2.networking.packets.serverPackets.lobbyInfoPackets.VotesPacket();
+            case LOBBYINFO_BOUNDARY_UPDATES:
+                return new cmiyc.catchmegui2.networking.packets.serverPackets.lobbyInfoPackets.BoundaryUpdatePacket();
 			default:
 				return null;
 		}
@@ -268,6 +270,7 @@ public abstract class Packet {// will need to test for construction of packets,
 	public static final byte NAK_NOT_ENOUGH_PLAYERS = 0x02;
 	public static final byte NAK_ROOM_FULL = 0x03;
 	public static final byte NAK_NO_VALID_TARGETS = 0x04;
+    public static final byte NAK_ROOM_IN_GAME = 0x05;
 
 	// Disconnect IDs
 	public static final byte DISCONNECT_QUIT = 0X01;
@@ -353,4 +356,5 @@ public abstract class Packet {// will need to test for construction of packets,
 	public static final byte LOBBYINFO_LEADERBOARD = 0x05;
 	public static final byte LOBBYINFO_ROOM_NAME = 0x06;
 	public static final byte LOBBYINFO_VOTES = 0x07;
+    public static final byte LOBBYINFO_BOUNDARY_UPDATES = 0x08;
 }
