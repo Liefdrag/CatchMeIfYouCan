@@ -9,6 +9,9 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -64,13 +67,6 @@
                 android:value="cmiyc.catchmegui2.CatchSuccessActivity" />
         </activity>
         <activity
-            android:name=".InvitePlayerActivity"
-            android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.InvitePlayerActivity" />
-        </activity>
-        <activity
             android:name=".JoinGameActivity"
             android:parentActivityName=".CreateGameActivity">
             <meta-data
@@ -80,13 +76,6 @@
         <activity
             android:name=".InGameActivity"
             android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.Home" />
-        </activity>
-        <activity
-            android:name=".PlayerDetailsActivity"
-            android:parentActivityName=".PlayerDetailsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
@@ -104,6 +93,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.LobbyLeaderboardActivity" />
+        </activity>
+        <activity
+            android:name=".PlayerDetailsActivity"
+            android:parentActivityName=".PlayerDetailsActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="cmiyc.catchmegui2.Home" />
+        </activity>
+        <activity
+            android:name=".InvitePlayerActivity"
+            android:parentActivityName=".CreateGameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmiyc.catchmegui2.InvitePlayerActivity" />
         </activity>
         <activity
             android:name=".HowToPlayActivity"
