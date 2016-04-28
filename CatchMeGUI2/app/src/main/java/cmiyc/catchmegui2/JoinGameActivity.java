@@ -36,9 +36,11 @@ public class JoinGameActivity extends AppCompatActivity implements JoinSuccessIn
     }
 
     public void enterRoom() {
+        Button Button1 = (Button)findViewById(R.id.joinGameLobbyButton);
         EditText roomKey = (EditText)findViewById(R.id.enterKey);
         String key = roomKey.getText().toString();
         Home.player.create(key, "192.168.0.12");
+        Button1.setEnabled(false);
     }
 
     @Override
@@ -70,6 +72,8 @@ public class JoinGameActivity extends AppCompatActivity implements JoinSuccessIn
                   default:
                       break;
               }
+              Button Button1 = (Button)findViewById(R.id.joinGameLobbyButton);
+              Button1.setEnabled(true);
           }
       });
 

@@ -145,6 +145,7 @@ public class PacketParser {
 		case Packet.JOIN_SUCCESS :
 			String name = Home.player.getPlayerName();
 			game = new Game(this.roomKey, name, false);
+            Home.player.joinRoom();
 			break;
 			
 		default : 
