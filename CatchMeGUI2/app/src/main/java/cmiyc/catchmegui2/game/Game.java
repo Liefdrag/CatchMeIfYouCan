@@ -14,6 +14,8 @@ public class Game {
 		LOBBY, GAME, END;
 	}
 
+	public int playerID;
+
 	private final String playerName;
 	private int targetID;
 	private Room room;
@@ -26,7 +28,7 @@ public class Game {
 		room = new Room(roomKey, host);
 		leaderboard = new Leaderboard();
 	}
-	
+
 	public void updateLeaderboard(Leaderboard newLeaderboard) {
 		leaderboard = newLeaderboard;
 		//Refresh GUI Leaderboard
@@ -136,13 +138,8 @@ public class Game {
 	public String getPlayerName() {
 		return playerName;
 	}
-	
-	public int getPlayerID(String playerName) {
-		// this needs to get from lb
-		return 0;
-	}
 
-    public void setUIInterface(UpdateLobbyInterface uli){
-        this.uli = uli;
-    }
+	public void setUIInterface(UpdateLobbyInterface uli){
+    this.uli = uli;
+  }
 }

@@ -17,50 +17,50 @@ public class BroadcastPacketParser {
 	public void processBroadcast(byte[] data) {
 		byte broadcastID = data[0];
 		data = Arrays.copyOfRange(data, 1, data.length);
-		
+
 		switch (broadcastID) {
-		
+
 		case Packet.BROADCAST_TIME_REMAINING :
 			TimeRemainingPacket timeRemainingPacket = new TimeRemainingPacket(data);
 			//alert player of time left
 			break;
-			
+
 		case Packet.BROADCAST_LEADERBOARD :
 			System.out.println("Leaderboard Recieved: "+data.length);
 			LeaderboardPacket lp = new LeaderboardPacket(data);
 			lp.getLeaderboard();
 			break;
-			
+
 		case Packet.BROADCAST_CAPTURE :
 			CapturePacket capturePacket = new CapturePacket(data);
 			//game.playerCaught(capturePacket.getCapture()); //need to convert id to name, or change method
 			break;
-			
+
 		case Packet.BROADCAST_VOTES :
 			VotesPacket votesPacket = new VotesPacket(data);
 			votesPacket.getVotes();
 			// do something
 			break;
-			
+
 		case Packet.BROADCAST_QUIT :
 			DisconnectionPacket disconnectionPacket = new DisconnectionPacket(data);
 			//game.removePlayer(disconnectionPacket.getPlayerID(), disconnectionPacket.getDisconnectReason());
 			// also need to convert id to name
 			break;
-			
+
 		case Packet.BROADCAST_BOUNDARY_UPDATE :
 			BoundaryUpdatePacket boundaryUpdatePacket = new BoundaryUpdatePacket(data);
-			// do something
+			double[] centre = boundaryUpdatePacket.getBoundariesCentre();
+			double radius = boundaryUpdatePacket.getBoundariesRadius();
 			break;
-			
+
 		case Packet.BROADCAST_NEW_HOST :
 			NewHostPacket newHostPacket = new NewHostPacket(data);
-			int playerID = game.getPlayerID(game.getPlayerName());
-			if(playerID == newHostPacket.getPlayerID()) // change to ids or names
+			if(game.playerID == newHostPacket.getPlayerID()) // change to ids or names
 				game.setHost();
 			//else alert of new host?
 			break;
-			
+
 		case Packet.BROADCAST_NEW_PLAYER :
 			NewPlayerPacket packet = new NewPlayerPacket(data);
 			try {
@@ -69,14 +69,14 @@ public class BroadcastPacketParser {
 				e.printStackTrace();
 			}
 			break;
-			
+
 		case Packet.BROADCAST_PLAYER_READY :
 			// alerts something in the gui?
 			break;
-			
+
 		default :
 			break;
 		}
 	}
-	
+
 }

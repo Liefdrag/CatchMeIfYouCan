@@ -50,7 +50,7 @@ public class Leaderboard {
 	public String getPlayerName(int playerID){
 		return lb.get(playerID).getPlayerName();
 	}
-	
+
 	public int getPlayerScore(int playerID){
 		return lb.get(playerID).getPlayerScore();
 		
