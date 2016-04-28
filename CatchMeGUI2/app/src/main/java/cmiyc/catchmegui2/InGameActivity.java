@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -26,6 +28,16 @@ public class InGameActivity extends AppCompatActivity {
 
     AlertDialog caughtDialog;
     AlertDialog catchDialog;
+    private final Button[] compassPoints = {
+            (Button)findViewById(R.id.topMiddle),
+            (Button)findViewById(R.id.topRight),
+            (Button)findViewById( R.id.middleRight),
+            (Button)findViewById(R.id.bottomRight),
+            (Button)findViewById(R.id.bottomMiddle),
+            (Button)findViewById(R.id.bottomLeft),
+            (Button)findViewById(R.id.middleLeft),
+            (Button)findViewById(R.id.topLeft),
+    };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +137,48 @@ public class InGameActivity extends AppCompatActivity {
     public void beenCaughtButtonClicked() {
         caughtDialog.show();
         //Sends Packet To Server
+    }
+
+    /**
+     * Method that changes the compass buttons
+     * @param direction - integer that corresponds to direction, 1 for north, 2 for north-east, 3 for east
+     */
+    public void changeCompass(int direction) {
+        for (int i = 0; i < 8; i++) {
+            if (i == direction) {
+                compassPoints[i].getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            }
+            else {
+                compassPoints[i].getBackground().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY);
+            }
+        }/*
+        //Switch statement that changes the direction on the compass
+        switch (direction) {
+            case 1:
+                Button topMiddle = (Button)findViewById(R.id.topMiddle);
+                topMiddle.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 2:
+                Button topRight = (Button)findViewById(R.id.topRight);
+                topRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 3:
+                Button middleRight = (Button)findViewById(R.id.middleRight);
+                middleRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 4:
+                Button bottomRight = (Button)findViewById(R.id.bottomRight);
+                bottomRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 5:
+                Button bottomMiddle = (Button)findViewById(R.id.bottomMiddle);
+                bottomMiddle.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 6:
+                Button bottomLeft = (Button)findViewById(R.id.bottomLeft);
+                bottomLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 7:
+                Button middleLeft = (Button)findViewById(R.id.middleLeft);
+                middleLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            case 8:
+                Button topLeft = (Button)findViewById(R.id.topLeft);
+                topLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        }*/
     }
 
     public void setTimer(int time) {
