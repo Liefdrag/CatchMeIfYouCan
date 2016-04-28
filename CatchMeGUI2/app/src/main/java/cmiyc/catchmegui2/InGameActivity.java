@@ -49,17 +49,6 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
         TextView userName = (TextView)findViewById(R.id.playerName);
         userName.setText(Home.player.getPlayerName());
 
-        if(PlayerDetailsActivity.avatarPhoto != null) {
-            ImageView avatar = (ImageView)findViewById(R.id.imageView1);
-            avatar.setImageURI(null);
-            avatar.setImageURI(PlayerDetailsActivity.avatarPhoto);
-        }
-        else {
-            ImageView avatar = (ImageView)findViewById(R.id.imageView1);
-            Drawable iconDrawable = getResources().getDrawable(R.drawable.ic_launcher);
-            avatar.setImageDrawable(iconDrawable);
-        }
-
         AlertDialog.Builder catchBuilder = new AlertDialog.Builder(this);
         catchBuilder.setMessage("Catch Success")
                 .setCancelable(false)

@@ -78,45 +78,40 @@
                 android:layout_weight="0.19" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical" >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="TARGET:"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:textAlignment="center"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="0.19" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="JOE"
-                android:id="@+id/playerName"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:textAlignment="center"
-                android:textSize="28dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="0.19" />
             <View
-                android:layout_width="5dp"
-                android:layout_height="40dp"
-                android:background="@android:color/white"/>
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@android:color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical" >
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TARGET:"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="0.19" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="JOE"
+                    android:id="@+id/playerName"
+                    android:textStyle="bold"
+                    android:textColor="#ffff00"
+                    android:textAlignment="center"
+                    android:textSize="35dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="0.19" />
 
 
         </LinearLayout>
