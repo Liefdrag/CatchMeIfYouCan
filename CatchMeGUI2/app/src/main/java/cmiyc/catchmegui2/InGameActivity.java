@@ -22,10 +22,12 @@ import android.widget.TextView;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
+import cmiyc.catchmegui2.game.InGameInterface;
+
 /**
  * Created by Liefdrag on 12/04/2016.
  */
-public class InGameActivity extends AppCompatActivity {
+public class InGameActivity extends AppCompatActivity implements InGameInterface{
 
     AlertDialog caughtDialog;
     AlertDialog catchDialog;
@@ -43,6 +45,9 @@ public class InGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
+
+        TextView userName = (TextView)findViewById(R.id.playerName);
+        userName.setText(Home.player.getPlayerName());
 
         if(PlayerDetailsActivity.avatarPhoto != null) {
             ImageView avatar = (ImageView)findViewById(R.id.imageView1);
@@ -118,11 +123,6 @@ public class InGameActivity extends AppCompatActivity {
     public void changeBeenCaughtButton(boolean state) {
         Button beencaughtButton = (Button)findViewById(R.id.beenCaughtButton);
         beencaughtButton.setEnabled(state);
-    }
-
-    public void setPlayerName(String name) {
-        TextView userName = (TextView)findViewById(R.id.playerName);
-        userName.setText(name);
     }
 
     public void setPlayerScore(int score) {
