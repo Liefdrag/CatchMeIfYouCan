@@ -41,6 +41,7 @@ public class ClientInput implements Runnable {
 			while ((read = clientSocket.getInputStream().read(temp, 0, temp.length)) > -1) {
 				byte[] bytes = Arrays.copyOfRange(temp, 0, read);
 				Packet packet = new GenericPacket(bytes);
+				System.out.println(packet.toString() + "\n------------------------\n");
 				//TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
 				packetParser.processPacket(bytes);
 				temp = new byte[512];

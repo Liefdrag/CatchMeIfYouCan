@@ -17,7 +17,7 @@ public class HostPlayer extends Player {
 	}
 
 	@Override
-	public void create(String roomName, double[] address) {
+	public void create(String roomName, String address) {
 		CreateRoomPacket packet = new CreateRoomPacket();
 		packet.putRoomName(roomName);
 		packet.putHostName(playerName);

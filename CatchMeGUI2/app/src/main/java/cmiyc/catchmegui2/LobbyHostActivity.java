@@ -37,6 +37,7 @@ public class LobbyHostActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startGame();
                 Intent i = new Intent(LobbyHostActivity.this, InGameActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });

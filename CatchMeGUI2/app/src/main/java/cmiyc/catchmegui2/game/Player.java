@@ -1,8 +1,13 @@
 package cmiyc.catchmegui2.game;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import cmiyc.catchmegui2.CreateGameActivity;
 import cmiyc.catchmegui2.networking.client.Client;
 import cmiyc.catchmegui2.networking.packets.clientPackets.AbilityUsagePacket;
 import cmiyc.catchmegui2.networking.packets.clientPackets.CapturedPacket;
@@ -24,8 +29,10 @@ public class Player {
 	protected Game game;
 	protected String playerName;
 	private String roomKey;
+    private UpdateRoomKey urk;
+    private JoinSuccessInterface jsi;
 	
-	public Player(String playerName) throws UnknownHostException{
+	public Player(String playerName) throws UnknownHostException {
 		//change to address
 		client = new Client(InetAddress.getLocalHost().toString(), 0, new PacketParser(/*this*/));
 		game = null;
@@ -38,7 +45,7 @@ public class Player {
 		this.playerName = playerName;
 	}
 	
-	public void create(String roomKey, double[] address){
+	public void create(String roomKey, String address){
 		JoinPacket packet = new JoinPacket();
 		packet.putRoomKey(roomKey);
 		packet.putPlayerName(playerName);
@@ -92,11 +99,65 @@ public class Player {
 		return playerName;
 	}
 
-	public void setRoomKey(String key) { roomKey = key; }
+	public void setRoomKey(String key) {
+        roomKey = key;
+        for(int i = 0; i < 10; i++){
+            if (urk != null){
+                urk.updateRK(key);
+                break;
+            } else {
+                try {
+                    Thread.currentThread().sleep(70);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void joinRoom(){
+        for(int i = 0; i < 10; i++){
+            if (jsi != null){
+               jsi.joinSuccess();
+                break;
+            } else {
+                try {
+                    Thread.currentThread().sleep(70);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void joinRoomFail(String reason){
+        for(int i = 0; i < 10; i++){
+            if (jsi != null){
+                jsi.joinFailure(reason);
+                break;
+            } else {
+                try {
+                    Thread.currentThread().sleep(70);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 	public String getRoomKey() { return roomKey; }
+
+    public void setURKInterface(UpdateRoomKey urk){
+        this.urk = urk;
+    }
 
 	public Client getClient() {
 		return client;
 	}
+
+    public void setJSInterface(JoinSuccessInterface jsi){
+        this.jsi = jsi;
+    }
+
 }

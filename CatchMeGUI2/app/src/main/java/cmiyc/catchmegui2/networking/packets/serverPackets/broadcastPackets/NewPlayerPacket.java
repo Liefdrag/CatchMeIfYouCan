@@ -11,6 +11,7 @@ public class NewPlayerPacket extends Packet {
 	
 	public NewPlayerPacket(byte[] data){
 		packet = data;
+        System.out.println(packet.length);
 	}
 
 	public void putPlayerName(String name){

@@ -96,9 +96,13 @@ public class Game {
 	public String getPlayerName() {
 		return playerName;
 	}
+<<<<<<< HEAD
 	
 	public int getPlayerID(String playerName) {
 		// this needs to get from lb
 		return null;
 	}
+=======
+
+>>>>>>> origin/Integration
 }

@@ -9,6 +9,11 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,14 +22,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home"
+            android:name=".SplashActivity"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Home"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".SplashActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmiyc.catchmegui2.SplashActivity" />
         </activity>
         <activity
             android:name=".CaughtActivity"
@@ -62,13 +77,6 @@
                 android:value="cmiyc.catchmegui2.CatchSuccessActivity" />
         </activity>
         <activity
-            android:name=".InvitePlayerActivity"
-            android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.InvitePlayerActivity" />
-        </activity>
-        <activity
             android:name=".JoinGameActivity"
             android:parentActivityName=".CreateGameActivity">
             <meta-data
@@ -78,13 +86,6 @@
         <activity
             android:name=".InGameActivity"
             android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.Home" />
-        </activity>
-        <activity
-            android:name=".PlayerDetailsActivity"
-            android:parentActivityName=".PlayerDetailsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.Home" />
@@ -102,6 +103,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.LobbyLeaderboardActivity" />
+        </activity>
+        <activity
+            android:name=".PlayerDetailsActivity"
+            android:parentActivityName=".PlayerDetailsActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="cmiyc.catchmegui2.Home" />
+        </activity>
+        <activity
+            android:name=".InvitePlayerActivity"
+            android:parentActivityName=".CreateGameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmiyc.catchmegui2.InvitePlayerActivity" />
         </activity>
         <activity
             android:name=".HowToPlayActivity"
@@ -145,6 +160,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.JoinGameActivity" />
         </activity>
+        <activity
+            android:name=".GameEndActivity"
+            android:parentActivityName=".LobbyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmiyc.catchmegui2.LobbyActivity" />
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -156,6 +178,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <activity
             android:name=".MapsActivity"

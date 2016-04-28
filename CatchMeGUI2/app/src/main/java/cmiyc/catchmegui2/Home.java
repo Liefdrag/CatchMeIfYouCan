@@ -3,6 +3,8 @@ package cmiyc.catchmegui2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -46,10 +48,14 @@ public class Home extends AppCompatActivity {
                         getString(R.string.player_name), Context.MODE_PRIVATE);
                 String defaultName = "Player";
                 String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
-                player = new HostPlayer("Bonnie", new Client("192.168.0.12", 10401, pcktparser), null);
+                player = new HostPlayer("Tucker", new Client("192.168.0.12", 10401, pcktparser), null);
+                WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                WifiInfo info = manager.getConnectionInfo();
+                String address = info.getMacAddress();
+                player.setGame(new Game("Tucker", null, true));
+                ((HostPlayer) player).create("Test Room", address);
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);
-
             }
         });
         Button Button2=(Button)findViewById(R.id.joinGameButton);
@@ -59,7 +65,7 @@ public class Home extends AppCompatActivity {
                         getString(R.string.player_name), Context.MODE_PRIVATE);
                 String defaultName = "Player";
                 String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
-                player = new Player("Clyde", new Client("192.168.0.12", 10401, pcktparser), null);
+                player = new Player("Caboose", new Client("192.168.0.12", 10401, pcktparser), null);
                 Intent i = new Intent(Home.this, JoinGameActivity.class);
                 startActivity(i);
             }

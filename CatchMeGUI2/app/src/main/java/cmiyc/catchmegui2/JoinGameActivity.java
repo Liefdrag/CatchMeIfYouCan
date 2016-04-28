@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import cmiyc.catchmegui2.game.JoinSuccessInterface;
 
 /**
  * Created by Liefdrag on 12/04/2016.
  */
-public class JoinGameActivity extends AppCompatActivity {
+public class JoinGameActivity extends AppCompatActivity implements JoinSuccessInterface{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +32,47 @@ public class JoinGameActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Home.player.setJSInterface(this);
     }
 
     public void enterRoom() {
-        //Retrieves the inserted key from editText
-        //Sends the room key to the server
-        //If room key is wrong then needs to be an error screen
-        // else if correct
-        Intent i = new Intent(JoinGameActivity.this, VotingActivity.class);
-        startActivity(i);
+        EditText roomKey = (EditText)findViewById(R.id.enterKey);
+        String key = roomKey.getText().toString();
+        Home.player.create(key, "192.168.0.12");
+    }
+
+    @Override
+    public void joinSuccess() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(JoinGameActivity.this, VotingActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    public void joinFailure(final String reason) {
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+              switch (reason) {
+                  case "KEY":
+                      //invalid key
+                      break;
+                  case "FULL":
+                      //game full
+                      break;
+                  case "INGAME":
+                      //room already in an active game
+                      break;
+                  default:
+                      break;
+              }
+          }
+      });
+
+        //Invalid roomKey/Room full/In game notification
     }
 }

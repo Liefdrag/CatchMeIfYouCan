@@ -85,6 +85,7 @@ public class PacketParser {
 			RoomKeyPacket rkp = new RoomKeyPacket(packet);
 			String roomKey = rkp.getRoomKey();
 			this.setRoomKey(roomKey);
+            Home.player.setRoomKey(roomKey);
 			String playerName = Home.player.getPlayerName();
 			game = new Game(roomKey, playerName, true);
 			Home.player.setGame(game);
@@ -105,6 +106,27 @@ public class PacketParser {
 			break;
 				
 		case Packet.NAK :
+            NAKPacket nak = new NAKPacket(packet);
+            byte nakType = nak.getNAKID();
+            switch (nakType){
+                case Packet.NAK_INVALID_ROOM_KEY:
+                    Home.player.joinRoomFail("KEY");
+                    break;
+                case Packet.NAK_NOT_ENOUGH_PLAYERS:
+                    //host??
+                    break;
+                case Packet.NAK_ROOM_FULL:
+                    Home.player.joinRoomFail("FULL");
+                    break;
+                case Packet.NAK_NO_VALID_TARGETS:
+                    //??
+                    break;
+                case Packet.NAK_ROOM_IN_GAME:
+                    Home.player.joinRoomFail("INGAME");
+                    break;
+                default:
+                    break;
+            }
 			//determine what the NAK is, i.e. wrong key, not enough players, game full/in progress.
 			break;
 			
