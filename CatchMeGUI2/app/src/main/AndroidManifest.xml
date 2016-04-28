@@ -140,13 +140,6 @@
                 android:value="cmiyc.catchmegui2.InGameActivity" />
         </activity>
         <activity
-            android:name=".MapActivity"
-            android:parentActivityName=".InGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.InGameActivity" />
-        </activity>
-        <activity
             android:name=".InGameOptionsActivity"
             android:parentActivityName=".InGameActivity">
             <meta-data
