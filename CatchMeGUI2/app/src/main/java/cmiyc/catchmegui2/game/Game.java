@@ -50,7 +50,7 @@ public class Game {
 	}
 
 	public void playerCaught(String playerName) {
-		if (this.playerName == playerName) {
+		if (this.playerName.equals(playerName)) {
 			// Alert the client they've been caught
 		}
 		// Alert the client player has been caught
