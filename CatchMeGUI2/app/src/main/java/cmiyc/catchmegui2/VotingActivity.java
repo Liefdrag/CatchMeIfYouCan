@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import cmiyc.catchmegui2.networking.packets.Packet;
+import cmiyc.catchmegui2.networking.packets.clientPackets.VotePacket;
+
 /**
  * Created by Liefdrag on 13/04/2016.
  */
@@ -47,7 +50,20 @@ public class VotingActivity extends AppCompatActivity {
         RadioGroup radioGroupVote = (RadioGroup) findViewById(R.id.radioGroupVote);
         int voteId = radioGroupVote.getCheckedRadioButtonId();
         RadioButton votedRButton = (RadioButton) findViewById(voteId);
-        votedRButton.getText(); //This is the game mode picked that needs to be sent to the Server
+        //This is the game mode picked that needs to be sent to the Server
+        VotePacket vp = new VotePacket();
+        switch (votedRButton.getText().toString()){
+            case "INDIVIDUAL":
+                vp.putVote(Packet.GAMETYPE_DEFAULT);
+                break;
+            case "TEAM":
+                vp.putVote(Packet.GAMETYPE_TEAM);
+                break;
+            case "MANHUNT":
+                vp.putVote(Packet.GAMETYPE_MAN_HUNT);
+                break;
+        }
+        Home.player.sendPacket(vp);
     }
 
     public void playerVoteNull() {
@@ -55,6 +71,7 @@ public class VotingActivity extends AppCompatActivity {
     }
 
     public void playerLeft() {
+        Home.player.quit();
         //Functionality for when the player leaves
     }
 }

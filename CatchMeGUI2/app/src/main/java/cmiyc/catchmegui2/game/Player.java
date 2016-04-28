@@ -51,8 +51,8 @@ public class Player {
         host = false;
 		JoinPacket packet = new JoinPacket();
 		packet.putRoomKey(roomKey);
-		packet.putPlayerName(playerName);
 		packet.putMACAddress(address);
+        packet.putPlayerName(playerName);
 		client.sendPacket(packet);
 	}
 	

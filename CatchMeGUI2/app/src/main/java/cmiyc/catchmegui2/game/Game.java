@@ -86,6 +86,7 @@ public class Game {
 				room.getLobby().setScoreLimit((int) data);
                 for(int i = 0; i < 10; i++){
                     if (uli != null){
+                        System.out.println("Score recieved: "+(int) data);
                         uli.ulScore((int) data);
                         break;
                     } else {

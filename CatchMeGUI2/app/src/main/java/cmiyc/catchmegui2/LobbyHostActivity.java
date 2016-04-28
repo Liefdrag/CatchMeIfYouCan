@@ -7,21 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cmiyc.catchmegui2.game.HostPlayer;
+import cmiyc.catchmegui2.game.UpdateLobbyInterface;
+import cmiyc.catchmegui2.networking.packets.Packet;
+
 /**
  * Created by Liefdrag on 13/04/2016.
  */
-public class LobbyHostActivity extends AppCompatActivity {
+public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyInterface {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby_host);
-
-        TextView timeLimit =(TextView)findViewById(R.id.timeLimit);
-        timeLimit.setText(""); //Set the Time Limit Here
-        TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
-        scoreLimit.setText(""); //Set the Time Limit Here
-        TextView gameMode =(TextView)findViewById(R.id.gameMode);
-        gameMode.setText(""); //Set the Time Limit Here
+        Home.player.setULInterface(this);
 
         Button leaveGameHostButton=(Button)findViewById(R.id.quitHostButton);
         leaveGameHostButton.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +67,50 @@ public class LobbyHostActivity extends AppCompatActivity {
     }
 
     public void startGame() {
+        ((HostPlayer)Home.player).start();
         //Functionality to Start the Game
+    }
+
+    @Override
+    public void ulScore(final int score) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
+                scoreLimit.setText(score);
+            }
+        });
+    }
+
+    @Override
+    public void ulTime(final int time) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
+                timeLimit.setText(time);
+            }
+        });
+    }
+
+    @Override
+    public void ulType(final byte type) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView gameMode =(TextView)findViewById(R.id.gameMode);
+                switch (type){
+                    case Packet.GAMETYPE_DEFAULT:
+                        gameMode.setText("Individual");
+                        break;
+                    case Packet.GAMETYPE_MAN_HUNT:
+                        gameMode.setText("Manhunt");
+                        break;
+                    case Packet.GAMETYPE_TEAM:
+                        gameMode.setText("Team");
+                        break;
+                }
+            }
+        });
     }
 }

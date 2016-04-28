@@ -21,40 +21,40 @@ public class LobbyInfoPacketParser {
 		switch (lobbyInfoID) {
 		
 		case Packet.LOBBYINFO_GAMETYPE :
-			GametypePacket gtp = new GametypePacket();
+			GametypePacket gtp = new GametypePacket(data);
 			game.updateLobbyInfo("GAME_TYPE", gtp.getGametype());
 			//Sets the ID of the Game Mode
 			break;
 			
 		case Packet.LOBBYINFO_TIME_LIMIT :
-			TimeLimitPacket tlp = new TimeLimitPacket();
+			TimeLimitPacket tlp = new TimeLimitPacket(data);
 			game.updateLobbyInfo("TIME_LIMIT", tlp.getTimeLimit());
 			break;
 			
 		case Packet.LOBBYINFO_SCORE_LIMIT :
-			ScoreLimitPacket slp = new ScoreLimitPacket();
+			ScoreLimitPacket slp = new ScoreLimitPacket(data);
 			game.updateLobbyInfo("SCORE_LIMIT", slp.getScoreLimit());
 			break;
 			
 		case Packet.LOBBYINFO_BOUNDARIES :
-			BoundariesPacket bp = new BoundariesPacket();
+			BoundariesPacket bp = new BoundariesPacket(data);
 			bp.getBoundariesCentre(); //Sets the centre coordinates of the boundary
 			bp.getBoundariesRadius(); //Sets the radius of the boundary
 			break;
 			
 		case Packet.LOBBYINFO_LEADERBOARD :
-			LeaderboardPacket lp = new LeaderboardPacket();
+			LeaderboardPacket lp = new LeaderboardPacket(data);
 			lp.getLeaderboard(); //Sets the lobby leaderboard
-			
+			//display the leaderboard
 			break;
 			
 		case Packet.LOBBYINFO_ROOM_NAME :
-			RoomNamePacket rnp = new RoomNamePacket();
+			RoomNamePacket rnp = new RoomNamePacket(data);
 			rnp.getRoomName(); //Sets the room name
 			break;
 			
 		case Packet.LOBBYINFO_VOTES :
-			VotesPacket vp = new VotesPacket();
+			VotesPacket vp = new VotesPacket(data);
 			vp.getVotes(); //Sets the vote count
 			break;
 			
