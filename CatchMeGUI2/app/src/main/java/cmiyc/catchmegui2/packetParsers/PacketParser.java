@@ -112,6 +112,8 @@ public class PacketParser {
 			game.setHost();
             Home.player = new HostPlayer(Home.player.getPlayerName(), Home.player.getClient(), game);
 			// will this work?
+            // probably have to switch the gui to the host view (for the host options, not sure
+            // what it's called) and pass a new HostPlayer object to it with the client and game
 			break;
 			
 		case Packet.CAUGHT :

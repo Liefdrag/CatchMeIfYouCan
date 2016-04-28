@@ -96,4 +96,9 @@ public class Game {
 	public String getPlayerName() {
 		return playerName;
 	}
+	
+	public int getPlayerID(String playerName) {
+		// this needs to get from lb
+		return null;
+	}
 }

@@ -55,8 +55,10 @@ public class BroadcastPacketParser {
 			
 		case Packet.BROADCAST_NEW_HOST :
 			NewHostPacket newHostPacket = new NewHostPacket(data);
-			/*if(game.getPlayerName() == newHostPacket.getPlayerID()) // change to ids or names
-				game.setHost();*/
+			int playerID = game.getPlayerID(game.getPlayerName);
+			if(playerID == newHostPacket.getPlayerID()) // change to ids or names
+				game.setHost();
+			//else alert of new host?
 			break;
 			
 		case Packet.BROADCAST_NEW_PLAYER :
@@ -71,6 +73,7 @@ public class BroadcastPacketParser {
 			break;
 			
 		case Packet.BROADCAST_PLAYER_READY :
+			// alerts something in the gui?
 			break;
 			
 		default :
