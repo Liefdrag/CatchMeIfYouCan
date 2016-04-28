@@ -14,14 +14,14 @@ public class SplashActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TextView splashInfo = (TextView) findViewById(R.id.splashInfoTextView);
+        splashInfo.setText("Please make sure that you are aware of your surroundings and other people. \n " +
+                "We recommend that you do not play this game in a busy crowded environment. \n Make sure that you only invite players that you know. \n" +
+                "Players under the age of 13 should play with an adult. \n" +
+                "Player data is not stored after the exit of the game.");
         //Will not show splash again in the lifecycle
         if(loadSplash) {
             setContentView(R.layout.splash_screen);
-            TextView splashInfo = (TextView) findViewById(R.id.splashInfoTextView);
-            splashInfo.setText("Please make sure that you are aware of your surroundings and other people. \n " +
-                    "We recommend that you do not play this game in a busy crowded environment. \n Make sure that you only invite players that you know. \n" +
-                    "Players under the age of 13 should play with an adult. \n" +
-                    "Player data is not stored after the exit of the game.");
             //Runs at a delay
             new Handler().postDelayed(new Runnable() {
                 @Override
