@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -13,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.LocationServices;
@@ -28,6 +30,17 @@ public class InGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
+
+        if(PlayerDetailsActivity.avatarPhoto != null) {
+            ImageView avatar = (ImageView)findViewById(R.id.imageView1);
+            avatar.setImageURI(null);
+            avatar.setImageURI(PlayerDetailsActivity.avatarPhoto);
+        }
+        else {
+            ImageView avatar = (ImageView)findViewById(R.id.imageView1);
+            Drawable iconDrawable = getResources().getDrawable(R.drawable.ic_launcher);
+            avatar.setImageDrawable(iconDrawable);
+        }
 
         AlertDialog.Builder catchBuilder = new AlertDialog.Builder(this);
         catchBuilder.setMessage("Catch Success")

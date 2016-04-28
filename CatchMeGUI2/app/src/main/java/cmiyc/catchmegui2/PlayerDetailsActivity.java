@@ -28,6 +28,7 @@ public class PlayerDetailsActivity extends AppCompatActivity implements View.OnC
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
     EditText userName;
+    public static Uri avatarPhoto;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +128,7 @@ public class PlayerDetailsActivity extends AppCompatActivity implements View.OnC
             String personName = acct.getDisplayName(); //Gets the users name
             String personEmail = acct.getEmail(); //Gets the users email
             String personId = acct.getId(); //Gets the users ID
-            Uri personPhoto = acct.getPhotoUrl(); //Gets the users photo
+            avatarPhoto = acct.getPhotoUrl(); //Gets the users photo
         } else {
             // Signed out, show unauthenticated UI.
         }
