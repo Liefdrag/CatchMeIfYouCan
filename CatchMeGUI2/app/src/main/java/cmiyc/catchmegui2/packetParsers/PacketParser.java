@@ -84,8 +84,9 @@ public class PacketParser {
             Home.player.setRoomKey(roomKey);
 			String playerName = Home.player.getPlayerName();
 			game = new Game(roomKey, playerName, true);
-			Home.player.setGame(game);
-
+			if(!Home.player.isHost()){
+                Home.player.setGame(game);
+            }
 			break;
 		
 		case Packet.LOBBYINFO :
