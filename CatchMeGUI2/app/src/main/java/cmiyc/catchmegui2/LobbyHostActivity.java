@@ -17,11 +17,11 @@ public class LobbyHostActivity extends AppCompatActivity {
         setContentView(R.layout.lobby_host);
 
         TextView timeLimit =(TextView)findViewById(R.id.timeLimit);
-        timeLimit.setText("1:00"); //Set the Time Limit Here
+        timeLimit.setText(""); //Set the Time Limit Here
         TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
-        scoreLimit.setText("1000"); //Set the Time Limit Here
+        scoreLimit.setText(""); //Set the Time Limit Here
         TextView gameMode =(TextView)findViewById(R.id.gameMode);
-        gameMode.setText("Manhunt"); //Set the Time Limit Here
+        gameMode.setText(""); //Set the Time Limit Here
 
         Button leaveGameHostButton=(Button)findViewById(R.id.quitHostButton);
         leaveGameHostButton.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +64,7 @@ public class LobbyHostActivity extends AppCompatActivity {
     }
 
     public void changeHost() {
+        Home.player.quit();
         //functionality to change the host
     }
 

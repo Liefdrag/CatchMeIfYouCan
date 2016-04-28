@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 
 import cmiyc.catchmegui2.CreateGameActivity;
 import cmiyc.catchmegui2.networking.client.Client;
+import cmiyc.catchmegui2.networking.packets.Packet;
 import cmiyc.catchmegui2.networking.packets.clientPackets.AbilityUsagePacket;
 import cmiyc.catchmegui2.networking.packets.clientPackets.CapturedPacket;
 import cmiyc.catchmegui2.networking.packets.clientPackets.CatchPerformedPacket;
@@ -31,6 +32,7 @@ public class Player {
 	private String roomKey;
     private UpdateRoomKey urk;
     private JoinSuccessInterface jsi;
+    protected boolean host;
 	
 	public Player(String playerName) throws UnknownHostException {
 		//change to address
@@ -46,6 +48,7 @@ public class Player {
 	}
 	
 	public void create(String roomKey, String address){
+        host = false;
 		JoinPacket packet = new JoinPacket();
 		packet.putRoomKey(roomKey);
 		packet.putPlayerName(playerName);
@@ -90,6 +93,10 @@ public class Player {
 		packet.report(player);
 		client.sendPacket(packet);
 	}
+
+    public void sendPacket(Packet pckt){
+        client.sendPacket(pckt);
+    }
 	
 	public void setGame(Game game){
 		this.game = game;
@@ -162,6 +169,10 @@ public class Player {
 
     public void setULInterface(UpdateLobbyInterface uli) {
         game.setUIInterface(uli);
+    }
+
+    public boolean isHost(){
+        return host;
     }
 
 }

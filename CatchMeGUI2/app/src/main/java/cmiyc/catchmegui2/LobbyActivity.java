@@ -60,12 +60,13 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
 
     public void playerLeave() {
         //Functionality to get rid of player from game
+        Home.player.quit();
     }
 
 
     @Override
     public void ulScore(final int score) {
-        runOnUiThread(new Runnable() {
+        this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
@@ -76,7 +77,7 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
 
     @Override
     public void ulTime(final int time) {
-        runOnUiThread(new Runnable() {
+        this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
@@ -87,7 +88,7 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
 
     @Override
     public void ulType(final byte type) {
-        runOnUiThread(new Runnable() {
+        this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView gameMode =(TextView)findViewById(R.id.gameMode);

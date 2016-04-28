@@ -14,10 +14,12 @@ public class HostPlayer extends Player {
 	
 	public HostPlayer(String playerName, Client client, Game game){
 		super(playerName, client, game);
+        super.host = true;
 	}
 
 	@Override
 	public void create(String roomName, String address) {
+        super.host = true;
 		CreateRoomPacket packet = new CreateRoomPacket();
 		packet.putRoomName(roomName);
 		packet.putHostName(playerName);
