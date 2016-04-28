@@ -1,5 +1,6 @@
 package cmiyc.catchmegui2.networking.client.threads;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
@@ -46,20 +47,19 @@ public class ClientInput implements Runnable {
 			//	packetParser.processPacket(bytes);
 			//	temp = new byte[512];
 			//}
-			int read;
-			byte[] temp = new byte[512];
+			int length;
+			DataInputStream stream = new DataInputStream(clientSocket.getInputStream());
 			while(true){
-
-				if ((read = clientSocket.getInputStream().read()) != 0){
-					int data = -1;
-					while ((data = clientSocket.getInputStream().read(temp, 0, read)) > -1) {
-						byte[] bytes = Arrays.copyOfRange(temp, 0, data);
-						Packet packet = new GenericPacket(bytes);
-						System.out.println(packet.toString() + "\n------------------------\n");
-						//TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
-						packetParser.processPacket(bytes);
-						temp = new byte[512];
+				if((length = stream.readInt()) > 0){
+					byte[] data = new byte[length];
+					if (length > 0) {
+						stream.readFully(data);
 					}
+					Packet packet = new GenericPacket(bytes);
+					System.out.println(packet.toString() + "\n------------------------\n");
+					//TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
+					packetParser.processPacket(bytes);
+					length = 0;
 				}
 			}
 		} catch (IOException e) {
