@@ -14,6 +14,7 @@ public class HowToPlayActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.how_to_play);
         TextView howToPlay = (TextView)findViewById(R.id.howToPlayText);
         String play = "Main Menu: Press Create Game to create a new lobby where you become the host. \n" +
                 "Main Menu: Press Join Game to go to a page where you can enter a room key to join a game \n" +
@@ -37,7 +38,7 @@ public class HowToPlayActivity extends AppCompatActivity {
                 "Tip: Try to be sneaky and quiet. The quieter you are, the hard it is to spot you \n\n" +
                 "HEALTH AND SAFETY: MAKE SURE YOU ARE AWAKE OF YOUR SURROUNDING ENVIRONMENT AND THE PUBLIC. DO NOT PLAY IF YOU WILL DISTURB PEOPLE WHO AREN'T PLAYING THE GAME";
         howToPlay.setText(play);
-        setContentView(R.layout.how_to_play);
+
         Button backHowToPlayButton =(Button)findViewById(R.id.backHowToPlayButton);
         backHowToPlayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
