@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Liefdrag on 12/04/2016.
@@ -141,9 +142,10 @@ public class InGameActivity extends AppCompatActivity {
 
     /**
      * Method that changes the compass buttons
-     * @param direction - integer that corresponds to direction, 1 for north, 2 for north-east, 3 for east
+     * @param direction - integer that corresponds to direction, 0 for north, 1 for north-east, 2 for east
      */
-    public void changeCompass(int direction) {
+    public void changeCompass(int direction, double distance) {
+        //distance - CAN BE USED FOR CHANGING THE COLOUR OF THE COMPASS
         for (int i = 0; i < 8; i++) {
             if (i == direction) {
                 compassPoints[i].getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
@@ -151,34 +153,78 @@ public class InGameActivity extends AppCompatActivity {
             else {
                 compassPoints[i].getBackground().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY);
             }
-        }/*
-        //Switch statement that changes the direction on the compass
-        switch (direction) {
-            case 1:
-                Button topMiddle = (Button)findViewById(R.id.topMiddle);
-                topMiddle.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 2:
-                Button topRight = (Button)findViewById(R.id.topRight);
-                topRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 3:
-                Button middleRight = (Button)findViewById(R.id.middleRight);
-                middleRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 4:
-                Button bottomRight = (Button)findViewById(R.id.bottomRight);
-                bottomRight.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 5:
-                Button bottomMiddle = (Button)findViewById(R.id.bottomMiddle);
-                bottomMiddle.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 6:
-                Button bottomLeft = (Button)findViewById(R.id.bottomLeft);
-                bottomLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 7:
-                Button middleLeft = (Button)findViewById(R.id.middleLeft);
-                middleLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-            case 8:
-                Button topLeft = (Button)findViewById(R.id.topLeft);
-                topLeft.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        }*/
+        }
+    }
+
+    /**
+     * Works out the bearing and distance
+     * @param coordinates- Coordinates of their target. Position 0 - Latitude, Position 1 - Longitude
+     */
+    public void compassCalibration(double[] coordinates) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Checks if the location permissions have been enabled
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            }
+        }
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location location = locationManager.getLastKnownLocation(provider);
+        double latitude = 0;
+        double longitude = 0;
+        if(location!=null) {
+            //Gets the location
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+        /////// CALCULATES THE BEARING ////////
+        double x = Math.cos(coordinates[0]) * Math.sin(Math.abs(coordinates[1]- longitude));
+        double y = Math.cos(latitude) * (Math.sin(coordinates[0]) - Math.sin(latitude)) * Math.cos(coordinates[0]) * Math.cos(Math.abs(coordinates[1]- longitude));
+
+        double bearing = Math.atan2(x,y)  ;
+        ////// CALCULATES THE DISTANCE ////////
+        double distance = Math.sqrt(Math.pow(latitude - coordinates[0],2) + Math.pow(longitude - coordinates[1],2));
+        ////// CHANGES THE COMPASS TO FIT THESE PARAMETERS
+        changeCompass(calculateDirectionInt(bearing), distance); //Method changes the compass
+    }
+
+    /**
+     * Method returns the direction on the compass as an integer
+     * @param bearing - Degree bearing the target is from the player
+     * @return - Integer direction of the target which will be used for the compass
+     */
+    private int calculateDirectionInt(double bearing) {
+
+        if ((337.5 <= bearing) || (bearing < 22.5)) {
+            return 0; //North
+        }
+        else if ((22.5 <= bearing) && (bearing < 67.5)) {
+            return 1; //North-East
+        }
+        else if ((67.5 <= bearing)&& (bearing < 112.5)) {
+            return 2; //East
+        }
+        else if ((112.5 <= bearing)&& (bearing < 157.5)) {
+            return 3; //South-East
+        }
+        else if (( 157.5 <= bearing)&& (bearing < 202.5)) {
+            return 4; //South
+        }
+        else if (( 202.5 <= bearing)&& (bearing < 247.5)) {
+            return 5; //South-West
+        }
+        else if (( 247.5 <= bearing)&& (bearing < 292.5)) {
+            return 6; //West
+        }
+        else if (( 292.5 <= bearing) && (bearing < 337.5)) {
+            return 7; //North-West
+        }
+        else {
+            return 0; //Shouldnt ever get here
+        }
+
+
     }
 
     public void setTimer(int time) {
