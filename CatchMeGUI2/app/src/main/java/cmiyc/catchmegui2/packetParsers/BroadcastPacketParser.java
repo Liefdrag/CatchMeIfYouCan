@@ -74,11 +74,6 @@ public class BroadcastPacketParser {
 				e.printStackTrace();
 			}
 			break;
-
-		case Packet.BROADCAST_PLAYER_READY :
-			// alerts something in the gui?
-			break;
-
 		default :
 			break;
 		}

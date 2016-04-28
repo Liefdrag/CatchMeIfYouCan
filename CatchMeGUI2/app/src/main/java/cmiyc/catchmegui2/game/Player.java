@@ -34,7 +34,7 @@ public class Player {
 	
 	public Player(String playerName) throws UnknownHostException {
 		//change to address
-		client = new Client(InetAddress.getLocalHost().toString(), 0, new PacketParser(/*this*/));
+		client = new Client("139.59.167.249", 10401, new PacketParser(/*this*/));
 		game = null;
 		this.playerName = playerName;
 	}	

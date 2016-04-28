@@ -156,92 +156,6 @@ public abstract class Packet {// will need to test for construction of packets,
 		System.out.println(toString());
 	}
 
-	// IDs are the same for some packets. These need to be changed.
-	public static Packet parse(byte[] bytes) {
-		switch (bytes[0]) {
-			case LOCATION:
-				return new LocationPacket(); // return packet
-			case PING:
-				return new PingPacket();
-			case BROADCAST:
-				return parseBroadcast(bytes);
-			case TARGET:
-				return new TargetPacket();
-			case SPAWN_REGION:
-				return new SpawnRegionPacket();
-			case ABILITY_ACTION:
-				return new AbilityUsagePacket();
-			case GAME_START:
-				return new GameStartPacket();
-			case GAME_END:
-				return new GameEndPacket();
-			case ROOM_CLOSE:
-				return new RoomClosePacket();
-			case ROOM_KEY:
-				return new RoomKeyPacket();
-			case LOBBYINFO:
-				return parseLobbyInfo(bytes);
-			case KICK:
-				return new KickPacket();
-			case NAK:
-				return new NAKPacket();
-			case HOST:
-				return new HostPacket();
-			default:
-				return null;
-		}
-	}
-
-	// Some LobbyInfo & Broadcast packets are the same, this is a problem
-	// Some packets with IDs don't exist.
-	private static Packet parseBroadcast(byte[] bytes) {
-		switch (bytes[0]) {
-			case BROADCAST_TIME_REMAINING:
-				return new TimeRemainingPacket();
-			case BROADCAST_LEADERBOARD:
-				return new cmiyc.catchmegui2.networking.packets.serverPackets.broadcastPackets.LeaderboardPacket();
-			case BROADCAST_CAPTURE:
-				return new CapturePacket();
-			case BROADCAST_VOTES:
-				return new cmiyc.catchmegui2.networking.packets.serverPackets.broadcastPackets.VotesPacket();
-			case BROADCAST_QUIT:
-				return new DisconnectionPacket();
-			case BROADCAST_BOUNDARY_UPDATE:
-				return new cmiyc.catchmegui2.networking.packets.serverPackets.broadcastPackets.BoundaryUpdatePacket();
-			case BROADCAST_NEW_HOST:
-				return new NewHostPacket();
-			case BROADCAST_NEW_PLAYER:
-				return new NewPlayerPacket();
-//			case BROADCAST_PLAYER_READY:
-//				return new PlayerReadyPacket();
-			default:
-				return null;
-		}
-	}
-
-	private static Packet parseLobbyInfo(byte[] bytes) {
-		switch (bytes[0]) {
-			case LOBBYINFO_GAMETYPE:
-				return new GametypePacket();
-			case LOBBYINFO_TIME_LIMIT:
-				return new TimeLimitPacket();
-			case LOBBYINFO_SCORE_LIMIT:
-				return new ScoreLimitPacket();
-			case LOBBYINFO_BOUNDARIES:
-				return new BoundariesPacket();
-			case LOBBYINFO_LEADERBOARD:
-				return new cmiyc.catchmegui2.networking.packets.serverPackets.lobbyInfoPackets.LeaderboardPacket();
-			case LOBBYINFO_ROOM_NAME:
-				return new RoomNamePacket();
-			case LOBBYINFO_VOTES:
-				return new cmiyc.catchmegui2.networking.packets.serverPackets.lobbyInfoPackets.VotesPacket();
-            case LOBBYINFO_BOUNDARY_UPDATES:
-                return new cmiyc.catchmegui2.networking.packets.serverPackets.lobbyInfoPackets.BoundaryUpdatePacket();
-			default:
-				return null;
-		}
-	}
-
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * PACKET DATA IDs
@@ -346,7 +260,6 @@ public abstract class Packet {// will need to test for construction of packets,
 	public static final byte BROADCAST_BOUNDARY_UPDATE = 0x06;
 	public static final byte BROADCAST_NEW_HOST = 0x07;
 	public static final byte BROADCAST_NEW_PLAYER = 0x08;
-	public static final byte BROADCAST_PLAYER_READY = 0x09;
 
 	// Lobby Information IDs
 	public static final byte LOBBYINFO_GAMETYPE = 0x01;

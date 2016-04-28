@@ -58,10 +58,6 @@ public class PacketParser {
 			game.setTarget(p.getTargetID());
 			//Sets what the ID of the target is (All players locations are broadcast to everyone and so this ID chooses the ID
 			break;
-		
-		//May not be needed anymore
-		case Packet.SPAWN_REGION :
-			break;
 				
 		case Packet.ABILITY_ACTION :
 			AbilityUsagePacket abilityUsage = new AbilityUsagePacket(packet);
