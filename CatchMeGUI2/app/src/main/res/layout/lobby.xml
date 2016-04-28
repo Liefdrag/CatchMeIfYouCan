@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="100"
+                    android:text=""
                     android:id="@+id/timeLimit"
                     android:textStyle="bold"
                     android:textColor="#fff"
@@ -129,7 +129,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="1000"
+                    android:text=""
                     android:id="@+id/scoreLimit"
                     android:textStyle="bold"
                     android:textColor="#fff"
@@ -161,7 +161,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Manhunt"
+                    android:text=""
                     android:id="@+id/gameMode"
                     android:textStyle="bold"
                     android:textColor="#fff"

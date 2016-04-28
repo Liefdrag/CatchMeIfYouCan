@@ -160,4 +160,8 @@ public class Player {
         this.jsi = jsi;
     }
 
+    public void setULInterface(UpdateLobbyInterface uli) {
+        game.setUIInterface(uli);
+    }
+
 }

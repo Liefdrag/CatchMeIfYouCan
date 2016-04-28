@@ -19,7 +19,7 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby);
-
+        Home.player.setULInterface(this);
 
 
 

@@ -64,6 +64,7 @@ public class Game {
 				room.getLobby().setRoomName((String) data);
 				break;
 			case "GAME_TYPE":
+                System.out.println("updating gametype");
 				room.getLobby().setGametype((byte) data);
                 for(int i = 0; i < 10; i++){
                     if (uli != null){
@@ -79,6 +80,7 @@ public class Game {
                 }
 				break;
 			case "SCORE_LIMIT":
+                System.out.println("updating score limit");
 				room.getLobby().setScoreLimit((int) data);
                 for(int i = 0; i < 10; i++){
                     if (uli != null){
@@ -94,6 +96,7 @@ public class Game {
                 }
 				break;
 			case "TIME_LIMIT":
+                System.out.println("updating time limit");
 				room.getLobby().setTimeLimit((int) data);
                 for(int i = 0; i < 10; i++){
                     if (uli != null){
