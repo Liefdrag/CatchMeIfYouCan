@@ -22,10 +22,6 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
         setContentView(R.layout.lobby);
         Home.player.setULInterface(this);
 
-
-
-
-
         Button leaveGameButton=(Button)findViewById(R.id.quitButton);
         leaveGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

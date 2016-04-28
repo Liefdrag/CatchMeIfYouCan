@@ -19,6 +19,7 @@ import android.widget.Button;
 import cmiyc.catchmegui2.game.Game;
 import cmiyc.catchmegui2.game.HostPlayer;
 import cmiyc.catchmegui2.game.Player;
+import cmiyc.catchmegui2.game.UpdateLeaderboardInterface;
 import cmiyc.catchmegui2.networking.client.Client;
 import cmiyc.catchmegui2.packetParsers.PacketParser;
 
@@ -27,6 +28,8 @@ public class Home extends AppCompatActivity {
     public static Player player;
     private PacketParser pcktparser = new PacketParser();
     private Context context = new PlayerDetailsActivity();
+    private UpdateLeaderboardInterface uli;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,7 @@ public class Home extends AppCompatActivity {
                 String address = info.getMacAddress();
                 player.setGame(new Game("Tucker", null, true));
                 ((HostPlayer) player).create("Test Room", address);
+                LobbyLeaderboardActivity.created = false;
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);
             }
