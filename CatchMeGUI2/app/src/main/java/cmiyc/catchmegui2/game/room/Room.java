@@ -50,6 +50,9 @@ public class Room {
 		private int scoreLimit;
 		private int timeLimit;
 
+		private double[] boundaryCentre;
+		private double boundaryRadius;
+
 		private Lobby() {
 		}
 
@@ -84,5 +87,13 @@ public class Room {
 		public void setTimeLimit(int timeLimit) {
 			this.timeLimit = timeLimit;
 		}
+
+		public double[] getBoundaryCentre() { return boundaryCentre; }
+
+		public void setBoundaryCentre(double[] boundaryCentre) { this.boundaryCentre = boundaryCentre; }
+
+		public double getBoundaryRadius() { return boundaryRadius; }
+
+		public void setBoundaryRadius(double boundaryRadius) { this.boundaryRadius = boundaryRadius; }
 	}
 }

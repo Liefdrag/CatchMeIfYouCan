@@ -44,7 +44,11 @@ public class BroadcastPacketParser {
 
 		case Packet.BROADCAST_QUIT :
 			DisconnectionPacket disconnectionPacket = new DisconnectionPacket(data);
-			//game.removePlayer(disconnectionPacket.getPlayerID(), disconnectionPacket.getDisconnectReason());
+			try {
+				game.removePlayer(game.getPlayerNameFromID(disconnectionPacket.getPlayerID()), disconnectionPacket.getDisconnectReason());
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			// also need to convert id to name
 			break;
 
@@ -52,6 +56,7 @@ public class BroadcastPacketParser {
 			BoundaryUpdatePacket boundaryUpdatePacket = new BoundaryUpdatePacket(data);
 			double[] centre = boundaryUpdatePacket.getBoundariesCentre();
 			double radius = boundaryUpdatePacket.getBoundariesRadius();
+			game.updateBoundary(centre, radius);
 			break;
 
 		case Packet.BROADCAST_NEW_HOST :

@@ -118,6 +118,11 @@ public class Game {
 		}
 	}
 
+	public void updateBoundary(double[] centre, double radius) {
+		room.getLobby().setBoundaryCentre(centre);
+		room.getLobby().setBoundaryRadius(radius);
+	}
+
 	public void startGame() {
 		gameState = GameState.GAME;
 	}
@@ -137,6 +142,10 @@ public class Game {
 
 	public String getPlayerName() {
 		return playerName;
+	}
+
+	public String getPlayerNameFromID(int playerID) {
+		return leaderboard.getPlayerNameFromID(playerID);
 	}
 
 	public void setUIInterface(UpdateLobbyInterface uli){

@@ -46,7 +46,8 @@ public class Leaderboard {
 	public int getPlayerID(int playerID){
 		return lb.get(playerID).getPlayerID();
 	}
-	
+
+	public String getPlayerNameFromID(int playerID) { return lb.get(playerID).getPlayerName(); }
 	public String getPlayerName(int playerID){
 		return lb.get(playerID).getPlayerName();
 	}
