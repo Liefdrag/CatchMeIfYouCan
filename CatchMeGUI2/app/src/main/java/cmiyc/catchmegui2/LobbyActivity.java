@@ -8,21 +8,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import cmiyc.catchmegui2.game.UpdateLobbyInterface;
+import cmiyc.catchmegui2.networking.packets.Packet;
+
 /**
  * Created by Liefdrag on 13/04/2016.
  */
-public class LobbyActivity extends AppCompatActivity {
+public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInterface{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby);
 
-        TextView timeLimit =(TextView)findViewById(R.id.timeLimit);
-        timeLimit.setText("1:00"); //Set the Time Limit Here
-        TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
-        scoreLimit.setText("1000"); //Set the Time Limit Here
-        TextView gameMode =(TextView)findViewById(R.id.gameMode);
-        gameMode.setText("Manhunt"); //Set the Time Limit Here
+
+
+
 
 
         Button leaveGameButton=(Button)findViewById(R.id.quitButton);
@@ -63,4 +63,46 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void ulScore(final int score) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
+                scoreLimit.setText(score);
+            }
+        });
+    }
+
+    @Override
+    public void ulTime(final int time) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
+                timeLimit.setText(time);
+            }
+        });
+    }
+
+    @Override
+    public void ulType(final byte type) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView gameMode =(TextView)findViewById(R.id.gameMode);
+                switch (type){
+                    case Packet.GAMETYPE_DEFAULT:
+                        gameMode.setText("Individual");
+                        break;
+                    case Packet.GAMETYPE_MAN_HUNT:
+                        gameMode.setText("Manhunt");
+                        break;
+                    case Packet.GAMETYPE_TEAM:
+                        gameMode.setText("Team");
+                        break;
+                }
+            }
+        });
+    }
 }

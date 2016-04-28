@@ -55,7 +55,7 @@ public class BroadcastPacketParser {
 			
 		case Packet.BROADCAST_NEW_HOST :
 			NewHostPacket newHostPacket = new NewHostPacket(data);
-			int playerID = game.getPlayerID(game.getPlayerName);
+			int playerID = game.getPlayerID(game.getPlayerName());
 			if(playerID == newHostPacket.getPlayerID()) // change to ids or names
 				game.setHost();
 			//else alert of new host?

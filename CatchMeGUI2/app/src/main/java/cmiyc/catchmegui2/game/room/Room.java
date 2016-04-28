@@ -45,7 +45,7 @@ public class Room {
 
 	public final class Lobby {
 
-		private String gametype;
+		private byte gametype;
 		private String RoomName;
 		private int scoreLimit;
 		private int timeLimit;
@@ -53,11 +53,11 @@ public class Room {
 		private Lobby() {
 		}
 
-		public String getGametype() {
+		public byte getGametype() {
 			return gametype;
 		}
 
-		public void setGametype(String gametype) {
+		public void setGametype(byte gametype) {
 			this.gametype = gametype;
 		}
 

@@ -19,6 +19,7 @@ public class Game {
 	private Room room;
 	private GameState gameState;
 	private Leaderboard leaderboard;
+    private UpdateLobbyInterface uli;
 
 	public Game(String playerName, String roomKey, boolean host) {
 		this.playerName = playerName;
@@ -63,13 +64,49 @@ public class Game {
 				room.getLobby().setRoomName((String) data);
 				break;
 			case "GAME_TYPE":
-				room.getLobby().setGametype((String) data);
+				room.getLobby().setGametype((byte) data);
+                for(int i = 0; i < 10; i++){
+                    if (uli != null){
+                        uli.ulType((byte) data);
+                        break;
+                    } else {
+                        try {
+                            Thread.currentThread().sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 				break;
 			case "SCORE_LIMIT":
 				room.getLobby().setScoreLimit((int) data);
+                for(int i = 0; i < 10; i++){
+                    if (uli != null){
+                        uli.ulScore((int) data);
+                        break;
+                    } else {
+                        try {
+                            Thread.currentThread().sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 				break;
 			case "TIME_LIMIT":
 				room.getLobby().setTimeLimit((int) data);
+                for(int i = 0; i < 10; i++){
+                    if (uli != null){
+                        uli.ulTime((int) data);
+                        break;
+                    } else {
+                        try {
+                            Thread.currentThread().sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 				break;
 			default:
 				break;
@@ -96,13 +133,13 @@ public class Game {
 	public String getPlayerName() {
 		return playerName;
 	}
-<<<<<<< HEAD
 	
 	public int getPlayerID(String playerName) {
 		// this needs to get from lb
-		return null;
+		return 0;
 	}
-=======
 
->>>>>>> origin/Integration
+    public void setUIInterface(UpdateLobbyInterface uli){
+        this.uli = uli;
+    }
 }
