@@ -29,7 +29,6 @@ public class InGameActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.in_game);
 
         if(PlayerDetailsActivity.avatarPhoto != null) {
             ImageView avatar = (ImageView)findViewById(R.id.imageView1);
@@ -41,6 +40,7 @@ public class InGameActivity extends AppCompatActivity {
             Drawable iconDrawable = getResources().getDrawable(R.drawable.ic_launcher);
             avatar.setImageDrawable(iconDrawable);
         }
+        setContentView(R.layout.in_game);
 
         AlertDialog.Builder catchBuilder = new AlertDialog.Builder(this);
         catchBuilder.setMessage("Catch Success")
