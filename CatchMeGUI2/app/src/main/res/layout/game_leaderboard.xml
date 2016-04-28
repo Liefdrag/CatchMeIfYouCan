@@ -42,18 +42,507 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LEADERBOARD OF PLAYERS"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:textAlignment="center"
-                android:textSize="30dp"
-                android:height="200dp"
-                android:background="@android:color/black"
-                android:layout_weight="0.19" />
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scrollbars="none"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@drawable/button_border"
+                    android:gravity="center_vertical"
+                    android:layout_weight="0.23"
+                    android:layout_marginBottom="20dp">
+                    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TableRow
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                            <TextView
+                                android:text="Rank"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="22dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="Name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="22dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="Score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="22dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:text="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:id="@+id/leaderboardName1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:id="@+id/leaderboardScore1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:text="2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName2"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore2"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:text="3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName3"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore3"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:text="4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName4"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore4"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName5"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore5"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName6"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore6"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName7"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore7"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName8"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore8"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName9"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore9"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName10"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore10"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName11"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore11"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName12"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore12"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName13"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore13"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName14"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore14"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName15"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore15"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:text="16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="1" />
+                            <TextView
+                                android:text="name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardName16"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="2" />
+                            <TextView
+                                android:text="30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/leaderboardScore16"
+                                android:layout_weight=".33"
+                                android:textSize="18dp"
+                                android:textColor="#fff"
+                                android:layout_column="3" />
+                        </TableRow>
+
+                    </TableLayout>
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 
