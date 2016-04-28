@@ -20,6 +20,24 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby_host);
         Home.player.setULInterface(this);
+        TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
+        String time = Integer.toString(Home.player.getGame().getRoom().getLobby().getTimeLimit()) + " seconds";
+        timeLimit.setText(time);
+        TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
+        String score = Integer.toString(Home.player.getGame().getRoom().getLobby().getScoreLimit()) + " points";
+        scoreLimit.setText(score);
+        TextView gameMode =(TextView)findViewById(R.id.gameMode);
+        switch (Home.player.getGame().getRoom().getLobby().getGametype()){
+            case Packet.GAMETYPE_DEFAULT:
+                gameMode.setText("Individual");
+                break;
+            case Packet.GAMETYPE_MAN_HUNT:
+                gameMode.setText("Manhunt");
+                break;
+            case Packet.GAMETYPE_TEAM:
+                gameMode.setText("Team");
+                break;
+        }
 
         Button leaveGameHostButton=(Button)findViewById(R.id.quitHostButton);
         leaveGameHostButton.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +95,8 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
             @Override
             public void run() {
                 TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
-                scoreLimit.setText(score);
+                scoreLimit.setText(score + " points");
+                System.out.println("Score limit: "+score);
             }
         });
     }
@@ -88,7 +107,7 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
             @Override
             public void run() {
                 TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
-                timeLimit.setText(time);
+                timeLimit.setText(time + " seconds");
             }
         });
     }

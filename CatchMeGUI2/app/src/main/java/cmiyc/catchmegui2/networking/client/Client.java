@@ -32,6 +32,7 @@ public class Client {
 	}
 	
 	public synchronized void sendPacket(Packet clientPacket) {
+        clientPacket.appendlength();
 		clientOutput.addPacketToQueue(clientPacket);
 	}
 	

@@ -25,7 +25,7 @@ import cmiyc.catchmegui2.packetParsers.PacketParser;
 public class Home extends AppCompatActivity {
 
     public static Player player;
-    private PacketParser pcktparser = new PacketParser();
+    public static PacketParser pcktparser = new PacketParser();
     private Context context = new PlayerDetailsActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class Home extends AppCompatActivity {
                 WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                 WifiInfo info = manager.getConnectionInfo();
                 String address = info.getMacAddress();
-                player.setGame(new Game("Tucker", null, true));
                 ((HostPlayer) player).create("Test Room", address);
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);

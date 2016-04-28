@@ -67,16 +67,28 @@ public class BroadcastPacketParser {
 			break;
 
 		case Packet.BROADCAST_NEW_PLAYER :
+            if(game == null){
+                System.out.println("Game null after add player");
+            }
 			NewPlayerPacket packet = new NewPlayerPacket(data);
 			try {
-				game.addPlayer(packet.getPlayerName());
+                String name = packet.getPlayerName();
+                System.out.println(name);
+				game.addPlayer(name);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+            if(game == null){
+                System.out.println("Game null after add player");
+            }
 			break;
 		default :
 			break;
 		}
 	}
+
+    public void setGame(Game game){
+        this.game = game;
+    }
 
 }

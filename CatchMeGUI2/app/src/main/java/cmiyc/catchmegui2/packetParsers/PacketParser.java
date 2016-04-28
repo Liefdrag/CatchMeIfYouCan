@@ -67,6 +67,7 @@ public class PacketParser {
 				
 		case Packet.GAME_START :
 			game.startGame();
+            //GameLeaderboardActivity.current = false;
 			break;
 			
 		case Packet.GAME_END :
@@ -84,9 +85,9 @@ public class PacketParser {
             Home.player.setRoomKey(roomKey);
 			String playerName = Home.player.getPlayerName();
 			game = new Game(roomKey, playerName, true);
-			if(!Home.player.isHost()){
-                Home.player.setGame(game);
-            }
+            Home.player.setGame(game);
+            broadcastParser.setGame(game);
+            lobbyInfoParser.setGame(game);
 			break;
 		
 		case Packet.LOBBYINFO :
@@ -140,9 +141,11 @@ public class PacketParser {
 			break;
 		
 		case Packet.JOIN_SUCCESS :
+            JoinSuccessPacket jsp = new JoinSuccessPacket(packet);
 			String name = Home.player.getPlayerName();
-			game = new Game(this.roomKey, name, false);
+            Home.player.setID(jsp.getPlayerID());
             if(!Home.player.isHost()) {
+			    game = new Game(this.roomKey, name, false);
                 Home.player.joinRoom();
             }
 			break;
@@ -166,5 +169,9 @@ public class PacketParser {
 	public void setRoomKey(String key) {
 		roomKey = key;
 	}
+
+    public void setGame(Game game){
+        this.game = game;
+    }
 
 }

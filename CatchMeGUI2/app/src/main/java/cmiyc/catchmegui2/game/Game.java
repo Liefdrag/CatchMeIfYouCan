@@ -26,16 +26,26 @@ public class Game {
 	public Game(String playerName, String roomKey, boolean host) {
 		this.playerName = playerName;
 		room = new Room(roomKey, host);
+        if (room == null){
+            System.out.println("room is null");
+        }
 		leaderboard = new Leaderboard();
 	}
 
 	public void updateLeaderboard(Leaderboard newLeaderboard) {
 		leaderboard = newLeaderboard;
+        //LobbyLeaderboardActivity.created = false;
+
 		//Refresh GUI Leaderboard
 	}
 
 	public void addPlayer(String playerName) throws Exception {
-		room.addPlayer(playerName);
+        if (room != null){
+            room.addPlayer(playerName);
+        } else{
+            System.out.println("room is null");
+        }
+
 	}
 
 	public void removePlayer(String playerName, byte kickReason) throws Exception {
@@ -99,10 +109,11 @@ public class Game {
                 }
 				break;
 			case "TIME_LIMIT":
-                System.out.println("updating time limit");
+
 				room.getLobby().setTimeLimit((int) data);
                 for(int i = 0; i < 10; i++){
                     if (uli != null){
+                        System.out.println("updating time limit");
                         uli.ulTime((int) data);
                         break;
                     } else {
@@ -152,4 +163,12 @@ public class Game {
 	public void setUIInterface(UpdateLobbyInterface uli){
     this.uli = uli;
   }
+
+    public void setID(int id){
+        playerID = id;
+    }
+
+    public Room getRoom(){
+        return room;
+    }
 }

@@ -168,11 +168,20 @@ public class Player {
     }
 
     public void setULInterface(UpdateLobbyInterface uli) {
+        System.out.println("setting interface");
         game.setUIInterface(uli);
     }
 
     public boolean isHost(){
         return host;
+    }
+
+    public void setID(int id){
+        game.setID(id);
+    }
+
+    public Game getGame(){
+        return game;
     }
 
 }

@@ -1,6 +1,9 @@
 package cmiyc.catchmegui2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +21,7 @@ public class JoinGameActivity extends AppCompatActivity implements JoinSuccessIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_game);
+        Home.player.setJSInterface(this);
         Button Button1 = (Button)findViewById(R.id.joinGameLobbyButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -32,14 +36,15 @@ public class JoinGameActivity extends AppCompatActivity implements JoinSuccessIn
                 finish();
             }
         });
-        Home.player.setJSInterface(this);
     }
 
     public void enterRoom() {
         Button Button1 = (Button)findViewById(R.id.joinGameLobbyButton);
         EditText roomKey = (EditText)findViewById(R.id.enterKey);
         String key = roomKey.getText().toString();
-        Home.player.create(key, "192.168.0.12");
+        WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = manager.getConnectionInfo();
+        Home.player.create(key, info.getMacAddress());
         Button1.setEnabled(false);
     }
 
