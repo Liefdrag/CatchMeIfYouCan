@@ -23,7 +23,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="HEALTH AND SAFETY WARNING"
             android:textStyle="bold"
-            android:textColor="#fff"
             android:id="@+id/slashTextView"
             android:textSize="30dp"
             android:layout_alignParentTop="true"
@@ -41,12 +40,88 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Information"
+            android:text="BE AWARE of your surroundings and other people"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/white"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="DO NOT play this game in a busy crowded environment"
+            android:gravity="center"
             android:textStyle="bold"
             android:textColor="#fff"
             android:id="@+id/splashInfoTextView"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/white"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Invite only people you know"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/white"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="If under 13, you MUST play\n with an 18+ adult"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/white"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Player Data will be deleted after exit"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/white"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="HAVE FUN!"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
     </LinearLayout>
 </RelativeLayout>
