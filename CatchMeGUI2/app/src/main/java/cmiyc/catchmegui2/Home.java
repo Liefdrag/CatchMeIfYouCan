@@ -28,7 +28,6 @@ public class Home extends AppCompatActivity {
     public static Player player;
     public static PacketParser pcktparser = new PacketParser();
     private Context context = new PlayerDetailsActivity();
-    private UpdateLeaderboardInterface uli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class Home extends AppCompatActivity {
                 WifiInfo info = manager.getConnectionInfo();
                 String address = info.getMacAddress();
                 ((HostPlayer) player).create("Test Room", address);
-                LobbyLeaderboardActivity.created = false;
+                //LobbyLeaderboardActivity.created = false;
                 Intent i = new Intent(Home.this, CreateGameActivity.class);
                 startActivity(i);
             }

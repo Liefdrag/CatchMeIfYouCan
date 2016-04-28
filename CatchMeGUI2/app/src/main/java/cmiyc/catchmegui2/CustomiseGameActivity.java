@@ -101,15 +101,15 @@ public class CustomiseGameActivity extends AppCompatActivity {
         RadioGroup modeRGroup = (RadioGroup)findViewById(R.id.modeRGroup);
         GametypePacket gtp = new GametypePacket();
         switch (modeRGroup.getCheckedRadioButtonId()) {
-            case 0:
+            case R.id.individualRadioButton:
                 //Game mode is individual
                 gtp.putGameType(Packet.GAMETYPE_DEFAULT);
                 break;
-            case 1:
+            case R.id.teamRadioButton:
                 gtp.putGameType(Packet.GAMETYPE_TEAM);
                 //Game mode is team
                 break;
-            case 2:
+            case R.id.manhuntRadioButton:
                 gtp.putGameType(Packet.GAMETYPE_MAN_HUNT);
                 //Game mode is manhunt
                 break;
@@ -128,5 +128,6 @@ public class CustomiseGameActivity extends AppCompatActivity {
         } else { //This returns boolean if on or off
             vp.putVote(Packet.VOTES_DISABLED);
         }
+        Home.player.sendPacket(vp);
     }
 }

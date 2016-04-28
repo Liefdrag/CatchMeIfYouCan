@@ -68,6 +68,7 @@ public class PacketParser {
 		case Packet.GAME_START :
 			game.startGame();
             //GameLeaderboardActivity.current = false;
+
 			break;
 			
 		case Packet.GAME_END :
