@@ -39,49 +39,47 @@
                 android:background="@android:color/white"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"/>
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="none"
-            android:layout_weight="1">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/button_border"
-            android:gravity="center_vertical"
-            android:layout_weight="0.23"
-            android:layout_marginBottom="20dp">
-            <TextView
-                android:layout_width="match_parent"
+            <ScrollView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/howToPlayText"
-                android:text="information"
+                android:scrollbars="none"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@drawable/button_border"
+                    android:gravity="center_vertical"
+                    android:layout_weight="0.23"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/howToPlayText"
+                        android:text="information"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:textSize="17dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </ScrollView>
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:id="@+id/backHowToPlayButton"
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:textSize="20dp"
-                android:gravity="center"/>
+                android:nestedScrollingEnabled="true"
+                android:clickable="false"
+                android:singleLine="false"
+                android:background="@drawable/button_border"
+                android:textSize="20sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
         </LinearLayout>
-        </ScrollView>
-        </LinearLayout>
-
-
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="BACK"
-            android:id="@+id/backHowToPlayButton"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:nestedScrollingEnabled="true"
-            android:clickable="false"
-            android:singleLine="false"
-            android:background="@drawable/button_border"
-            android:textSize="20sp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
