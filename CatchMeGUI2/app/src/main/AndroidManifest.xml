@@ -42,13 +42,6 @@
                 android:value="cmiyc.catchmegui2.SplashActivity" />
         </activity>
         <activity
-            android:name=".CaughtActivity"
-            android:parentActivityName=".Home">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.Home" />
-        </activity>
-        <activity
             android:name=".CreateGameActivity"
             android:parentActivityName=".Home">
             <meta-data
@@ -68,13 +61,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmiyc.catchmegui2.GameOverActivity" />
-        </activity>
-        <activity
-            android:name=".CatchSuccessActivity"
-            android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.CatchSuccessActivity" />
         </activity>
         <activity
             android:name=".JoinGameActivity"
