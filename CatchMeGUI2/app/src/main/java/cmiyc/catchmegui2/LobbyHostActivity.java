@@ -52,6 +52,7 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
         startGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startGame();
+                GameLeaderboardActivity.created = false;
                 Intent i = new Intent(LobbyHostActivity.this, InGameActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);

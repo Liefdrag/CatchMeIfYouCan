@@ -172,18 +172,97 @@
                     android:gravity="center_vertical"
                     android:id="@+id/linearLayout4">
 
-                    <TextView
+                    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="COMPASS"
-                        android:textStyle="bold"
-                        android:textColor="#fff"
-                        android:textAlignment="center"
-                        android:textSize="30dp"
-                        android:height="200dp"
-                        android:background="@android:color/holo_red_dark"
-                        android:layout_weight="0.19" />
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true">
+
+                        <TableRow>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/topLeft"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="1"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/topMiddle"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="2"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/topRight"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="3"/>
+                        </TableRow>
+
+                        <TableRow>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/middleLeft"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="1"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/middleMiddle"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="2"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/middleRight"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="3"/>
+                        </TableRow>
+
+                        <TableRow>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/bottomLeft"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="1"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/bottomMiddle"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="2"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/bottomRight"
+                                android:clickable="false"
+                                android:backgroundTint="#fff"
+                                android:layout_weight=".33"
+                                android:layout_column="3"/>
+                        </TableRow>
+
+                    </TableLayout>
                 </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
