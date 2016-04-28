@@ -52,9 +52,7 @@ public class ClientInput implements Runnable {
 			while(true){
 				if((length = stream.readInt()) > 0){
 					byte[] data = new byte[length];
-					if (length > 0) {
-						stream.readFully(data);
-					}
+                    stream.readFully(data);
 					Packet packet = new GenericPacket(data);
 					System.out.println(packet.toString() + "\n------------------------\n");
 					//TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
