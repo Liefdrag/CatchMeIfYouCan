@@ -45,7 +45,7 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
-
+        Home.player.setIGInterface(this);
         compassPoints = new Button[] {
                 (Button)findViewById(R.id.topMiddle),
                 (Button)findViewById(R.id.topRight),
