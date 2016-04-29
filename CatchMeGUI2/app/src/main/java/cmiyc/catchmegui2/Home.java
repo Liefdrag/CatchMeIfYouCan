@@ -40,8 +40,6 @@ public class Home extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            //your codes here
-
         }
         Button Button1=(Button)findViewById(R.id.createGameButton);
         Button1.setOnClickListener(new View.OnClickListener() {

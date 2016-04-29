@@ -22,6 +22,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import cmiyc.catchmegui2.game.room.MapsInterface;
 
+/**
+ * Class uses Google Maps. Code from this class is inspired by the code on the Google Developer website
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, MapsInterface {
 
     private GoogleMap mMap;

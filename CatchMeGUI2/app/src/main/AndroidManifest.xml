@@ -56,13 +56,6 @@
                 android:value="cmiyc.catchmegui2.CreateGameActivity" />
         </activity>
         <activity
-            android:name=".GameOverActivity"
-            android:parentActivityName=".CreateGameActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmiyc.catchmegui2.GameOverActivity" />
-        </activity>
-        <activity
             android:name=".JoinGameActivity"
             android:parentActivityName=".CreateGameActivity">
             <meta-data
