@@ -58,7 +58,7 @@ public class InvitePlayerActivity extends AppCompatActivity implements
     private void shareGooglePlus() {
         Intent shareIntent = new PlusShare.Builder(this)
                 .setType("text/plain")
-                .setText("ROOM KEY: " + "INSERT KEY HERE")
+                .setText("ROOM KEY: " + Home.player.getRoomKey())
                 .getIntent();
         startActivityForResult(shareIntent, 0);
     }
@@ -68,7 +68,7 @@ public class InvitePlayerActivity extends AppCompatActivity implements
      */
     private void onInviteClicked() {
         Intent intent = new AppInviteInvitation.IntentBuilder("Room Key")
-                .setMessage("ROOM KEY INSERTED HERE")
+                .setMessage(Home.player.getRoomKey())
                 //.setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
                 //.setCustomImage(Uri.parse(R.mipmap.ic_launcher))
                 .setCallToActionText("Test")
