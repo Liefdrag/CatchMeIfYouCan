@@ -52,10 +52,9 @@ public class GameLeaderboardActivity extends AppCompatActivity {
                 (TextView) findViewById(R.id.leaderboardScore16),
         };
 
-        if(!created) {
             buildLeaderboard();
-            created = true;
-        }
+
+        updateLeaderboard(0, PlayerDetailsActivity.playerName, InGameActivity.playerScore);
 
         findViewById(android.R.id.content).setOnTouchListener(new OnSwipeTouchListener(GameLeaderboardActivity.this) {
             public void onSwipeTop() {
@@ -78,8 +77,8 @@ public class GameLeaderboardActivity extends AppCompatActivity {
     }
 
     public void updateLeaderboard(int place, String name, int score) {
-        leaderboardArray[(place*2)-1].setText(name);
-        leaderboardArray[(place*2)].setText(score);
+        leaderboardArray[(place*2)].setText(name);
+        leaderboardArray[(place*2)+1].setText(Integer.toString(score));
     }
 
 }

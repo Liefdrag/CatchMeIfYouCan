@@ -41,6 +41,7 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
     AlertDialog beingCaughtDialog;
     Timer t;
     private Button[] compassPoints;
+    public static int playerScore;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +187,7 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
         int currentScore = Integer.parseInt(score.getText().toString());
         currentScore = currentScore + 100;
         score.setText(Integer.toString(currentScore));
+        playerScore = currentScore;
     }
 
     public void catchSuccess(final boolean success){
@@ -203,8 +205,8 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
     }
 
     public void beenCaughtButtonClicked() {
-        t.cancel();
-        Home.player.playerCaptured();
+        //t.cancel();
+        //Home.player.playerCaptured();
         caughtDialog.show();
     }
 
