@@ -55,8 +55,9 @@ public class BroadcastPacketParser {
 		case Packet.BROADCAST_BOUNDARY_UPDATE :
 			BoundaryUpdatePacket boundaryUpdatePacket = new BoundaryUpdatePacket(data);
 			double[] centre = boundaryUpdatePacket.getBoundariesCentre();
-			double radius = boundaryUpdatePacket.getBoundariesRadius();
+			int radius = boundaryUpdatePacket.getBoundariesRadius();
 			game.updateBoundary(centre, radius);
+
 			break;
 
 		case Packet.BROADCAST_NEW_HOST :
@@ -67,20 +68,13 @@ public class BroadcastPacketParser {
 			break;
 
 		case Packet.BROADCAST_NEW_PLAYER :
-            if(game == null){
-                System.out.println("Game null after add player");
-            }
 			NewPlayerPacket packet = new NewPlayerPacket(data);
 			try {
                 String name = packet.getPlayerName();
-                System.out.println(name);
 				game.addPlayer(name);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-            if(game == null){
-                System.out.println("Game null after add player");
-            }
 			break;
 		default :
 			break;

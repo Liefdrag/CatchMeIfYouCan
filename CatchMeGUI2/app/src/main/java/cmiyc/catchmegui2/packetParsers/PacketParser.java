@@ -38,13 +38,13 @@ public class PacketParser {
 		//Location of the Client
 		case Packet.LOCATION :
 			LocationPacket locationPacket = new LocationPacket(packet);
+            Home.player.getGame().setTargetLocation(locationPacket.getLocation());
 			//Gets the Location as Coordinates and the Client ID (If its single player then the ID would correspond to target ID
 			//If its a team mode, then the client would be able to choose which ID is his target
 			break;
 		
 		case Packet.PING :
 			PingPacket pp = new PingPacket();
-			//player.getClient().sendPacket(pp);
 			Home.player.getClient().sendPacket(pp);
 			//Sends the packet back to the Server
 			break;
@@ -55,7 +55,7 @@ public class PacketParser {
 		
 		case Packet.TARGET :
 			TargetPacket p = new TargetPacket(packet);
-			game.setTarget(p.getTargetID());
+            Home.player.getGame().setTarget(p.getTargetID());
 			//Sets what the ID of the target is (All players locations are broadcast to everyone and so this ID chooses the ID
 			break;
 				
@@ -66,17 +66,17 @@ public class PacketParser {
 			break;
 				
 		case Packet.GAME_START :
-			game.startGame();
+            Home.player.getGame().startGame();
             //GameLeaderboardActivity.current = false;
 
 			break;
 			
 		case Packet.GAME_END :
-			game.endGame();
+            Home.player.getGame().endGame();
 			break;
 			
 		case Packet.ROOM_CLOSE :
-			game.closeRoom();
+            Home.player.getGame().closeRoom();
 			break;
 		
 		case Packet.ROOM_KEY :
@@ -97,11 +97,8 @@ public class PacketParser {
 			
 		case Packet.KICK :
 			KickPacket kickPacket = new KickPacket(packet);
-			kickPacket.getKickReason(); //Do something with this reason
-			try {
-				game.removePlayer(game.getPlayerName(), kickPacket.getKickReason());
-			} catch (Exception e) {
-			}
+			kickPacket.getKickReason(); //Dialog box on Home screen (return to screen)
+			Home.player = null;
 			break;
 				
 		case Packet.NAK :
@@ -130,7 +127,7 @@ public class PacketParser {
 			break;
 			
 		case Packet.HOST :
-			game.setHost();
+			Home.player.getGame().setHost();
             Home.player = new HostPlayer(Home.player.getPlayerName(), Home.player.getClient(), game);
 			// will this work?
             // probably have to switch the gui to the host view (for the host options, not sure
@@ -138,7 +135,7 @@ public class PacketParser {
 			break;
 			
 		case Packet.CAUGHT :
-			game.playerCaught(game.getPlayerName());
+            Home.player.catchAttempt();
 			break;
 		
 		case Packet.JOIN_SUCCESS :
@@ -150,6 +147,17 @@ public class PacketParser {
                 Home.player.joinRoom();
             }
 			break;
+
+            case Packet.CATCH_SUCCESS :
+               CatchSuccessPacket csp = new CatchSuccessPacket(packet);
+                byte success = csp.getSuccess();
+                if(success == (byte) 0x00){
+                    Home.player.catchSuccess(false);
+                } else {
+                    Home.player.catchSuccess(true);
+                }
+
+                break;
 			
 		default : 
 			String bytes = dataID + " | ";

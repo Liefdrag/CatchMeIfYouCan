@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import cmiyc.catchmegui2.CreateGameActivity;
+import cmiyc.catchmegui2.game.room.MapsInterface;
 import cmiyc.catchmegui2.networking.client.Client;
 import cmiyc.catchmegui2.networking.packets.Packet;
 import cmiyc.catchmegui2.networking.packets.clientPackets.AbilityUsagePacket;
@@ -32,6 +33,8 @@ public class Player {
 	private String roomKey;
     private UpdateRoomKey urk;
     private JoinSuccessInterface jsi;
+    private InGameInterface igi;
+    private MapsInterface mi;
     protected boolean host;
 	
 	public Player(String playerName) throws UnknownHostException {
@@ -68,13 +71,7 @@ public class Player {
 	}
 	
 	public void playerCaptured() {
-		CapturedPacket packet = new CapturedPacket();
-		client.sendPacket(packet);
-	}
-	
-	public void ready() {
-		PlayerReadyPacket packet = new PlayerReadyPacket();
-		client.sendPacket(packet);
+		game.playerCaught(game.getPlayerName());
 	}
 	
 	public void quit() {
@@ -114,7 +111,7 @@ public class Player {
                 break;
             } else {
                 try {
-                    Thread.currentThread().sleep(70);
+                    Thread.currentThread().sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -129,7 +126,7 @@ public class Player {
                 break;
             } else {
                 try {
-                    Thread.currentThread().sleep(70);
+                    Thread.currentThread().sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -144,7 +141,7 @@ public class Player {
                 break;
             } else {
                 try {
-                    Thread.currentThread().sleep(70);
+                    Thread.currentThread().sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -152,6 +149,15 @@ public class Player {
         }
     }
 
+    public void updateCompass(){
+        if(igi != null){
+            double[] location = new double[]{game.getTargetLocation()[1], game.getTargetLocation()[0]};
+            //checking location has been obtained (1000 is default and greater than max long/lat)
+            if(location[0] != 1000 && location[1] != 1000){
+                igi.compassCalibration(game.getTargetLocation());
+            }
+        }
+    }
 
 	public String getRoomKey() { return roomKey; }
 
@@ -182,6 +188,48 @@ public class Player {
 
     public Game getGame(){
         return game;
+    }
+
+    public void setIGInterface(InGameInterface igi){
+        this.igi = igi;
+    }
+
+    public void catchSuccess(boolean success){
+        for(int i = 0; i < 10; i++){
+            if(igi != null){
+                igi.catchSuccess(success);
+            } else {
+                try {
+                    Thread.currentThread().sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public void catchAttempt(){
+        for(int i = 0; i < 10; i++){
+            if(igi != null){
+                igi.caught();
+            } else {
+                try {
+                    Thread.currentThread().sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void setMInterface(MapsInterface mi){
+        this.mi = mi;
+    }
+
+    public void updateMapBoundary(double[] coords, int radius){
+        double[] coordinates = new double[]{coords[1], coords[0]};
+        if(mi != null){
+            mi.setBoundary(radius, coordinates);
+        }
     }
 
 }

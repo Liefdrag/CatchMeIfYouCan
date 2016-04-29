@@ -33,9 +33,6 @@ public class LobbyInfoPacketParser {
 			
 		case Packet.LOBBYINFO_SCORE_LIMIT :
 			ScoreLimitPacket slp = new ScoreLimitPacket(data);
-            if (game == null){
-                System.out.println("game is null");
-            }
 			game.updateLobbyInfo("SCORE_LIMIT", slp.getScoreLimit());
 			break;
 			

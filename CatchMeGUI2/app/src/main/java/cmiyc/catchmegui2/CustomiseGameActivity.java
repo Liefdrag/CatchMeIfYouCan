@@ -54,27 +54,47 @@ public class CustomiseGameActivity extends AppCompatActivity {
             //Checks if the location permissions have been enabled
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            }
-        }
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
-        double latitude = 0;
-        double longitude = 0;
-        if(location!=null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
-        SetBoundariesPacket sbp = new SetBoundariesPacket();
-        sbp.putBoundaries(longitude, latitude, size);
-        Home.player.sendPacket(sbp);
+                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                Criteria criteria = new Criteria();
+                String provider = locationManager.getBestProvider(criteria, true);
+                Location location = locationManager.getLastKnownLocation(provider);
+                double latitude = 0;
+                double longitude = 0;
+                if(location!=null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+                SetBoundariesPacket sbp = new SetBoundariesPacket();
+                sbp.putBoundaries(longitude, latitude, size);
+                Home.player.sendPacket(sbp);
 
-        Switch shrinkingBoundarySwitch =(Switch)findViewById(R.id.shrinkingBoundarySwitch);
-        boolean shrink = shrinkingBoundarySwitch.isChecked(); //This returns boolean if on or off
-        BoundaryUpdatesPacket bup = new BoundaryUpdatesPacket();
-        bup.putBoundaryUpdates(60, 20);
-        Home.player.sendPacket(bup);
+                Switch shrinkingBoundarySwitch =(Switch)findViewById(R.id.shrinkingBoundarySwitch);
+                boolean shrink = shrinkingBoundarySwitch.isChecked(); //This returns boolean if on or off
+                BoundaryUpdatesPacket bup = new BoundaryUpdatesPacket();
+                bup.putBoundaryUpdates(60, 20);
+                Home.player.sendPacket(bup);
+            }
+        } else {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            String provider = locationManager.getBestProvider(criteria, true);
+            Location location = locationManager.getLastKnownLocation(provider);
+            double latitude = 0;
+            double longitude = 0;
+            if(location!=null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+            SetBoundariesPacket sbp = new SetBoundariesPacket();
+            sbp.putBoundaries(longitude, latitude, size);
+            Home.player.sendPacket(sbp);
+
+            Switch shrinkingBoundarySwitch =(Switch)findViewById(R.id.shrinkingBoundarySwitch);
+            boolean shrink = shrinkingBoundarySwitch.isChecked(); //This returns boolean if on or off
+            BoundaryUpdatesPacket bup = new BoundaryUpdatesPacket();
+            bup.putBoundaryUpdates(60, 20);
+            Home.player.sendPacket(bup);
+        }
 
         EditText timeLimit =(EditText)findViewById(R.id.timeLimit);
         try{

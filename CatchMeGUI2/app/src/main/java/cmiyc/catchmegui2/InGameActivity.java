@@ -22,7 +22,13 @@ import android.widget.TextView;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cmiyc.catchmegui2.game.InGameInterface;
+import cmiyc.catchmegui2.game.LocationTimerTask;
+import cmiyc.catchmegui2.networking.packets.clientPackets.CapturedPacket;
+import cmiyc.catchmegui2.networking.packets.clientPackets.CatchPerformedPacket;
 
 /**
  * Created by Liefdrag on 12/04/2016.
@@ -31,6 +37,9 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
 
     AlertDialog caughtDialog;
     AlertDialog catchDialog;
+    AlertDialog catchFailDialog;
+    AlertDialog beingCaughtDialog;
+    Timer t;
     private final Button[] compassPoints = {
             (Button)findViewById(R.id.topMiddle),
             (Button)findViewById(R.id.topRight),
@@ -48,6 +57,8 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
 
         TextView userName = (TextView)findViewById(R.id.playerName);
         userName.setText(Home.player.getPlayerName());
+        Home.player.getGame().setltt(new LocationTimerTask(this));
+        Home.player.getGame().startTimer();
 
         AlertDialog.Builder catchBuilder = new AlertDialog.Builder(this);
         catchBuilder.setMessage("Catch Success")
@@ -60,14 +71,38 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
         catchDialog = catchBuilder.create();
 
         AlertDialog.Builder caughtBuilder = new AlertDialog.Builder(this);
-        caughtBuilder.setMessage("You have been unfortunately caught")
+        caughtBuilder.setMessage("You have been caught :(")
                 .setCancelable(false)
-                .setPositiveButton("OK :(", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //Do Nothing
                     }
                 });
         caughtDialog = caughtBuilder.create();
+        AlertDialog.Builder beingCaughtBuilder = new AlertDialog.Builder(this);
+        caughtBuilder.setMessage("You have been unfortunately caught\nDo you accept?\nYou have 5 seconds")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        beenCaughtButtonClicked();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do nothing
+                    }
+                });
+        beingCaughtDialog = beingCaughtBuilder.create();
+
+        AlertDialog.Builder catchFailBuilder = new AlertDialog.Builder(this);
+        caughtBuilder.setMessage("Catch Fail :(\nHave you actually caught them?\nIf so try to catch again")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Do Nothing
+                    }
+                });
+        catchFailDialog = catchFailBuilder.create();
 
         Button gameOptionsButton = (Button)findViewById(R.id.gameOptionsButton);
         gameOptionsButton.setOnClickListener(new View.OnClickListener() {
@@ -109,24 +144,67 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
         });
     }
 
-    public void changeBeenCaughtButton(boolean state) {
-        Button beencaughtButton = (Button)findViewById(R.id.beenCaughtButton);
-        beencaughtButton.setEnabled(state);
+    public class DismissTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            beingCaughtDialog.dismiss();
+        }
     }
 
-    public void setPlayerScore(int score) {
-        TextView playerScore = (TextView)findViewById(R.id.playerScore);
-        playerScore.setText(score);
+    public void changeBeenCaughtButton(final boolean state) {
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Button beencaughtButton = (Button) findViewById(R.id.beenCaughtButton);
+                beencaughtButton.setEnabled(state);
+            }
+        });
+    }
+
+    public void setPlayerScore(final int score) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView playerScore = (TextView) findViewById(R.id.playerScore);
+                playerScore.setText(score);
+            }
+        });
     }
 
     public void caughtButtonClicked() {
-        catchDialog.show();
-        //Sends Packet To Server
+        Home.player.captureTarget();
+    }
+
+    public void catchSuccess(final boolean success){
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (success) {
+                    catchDialog.show();
+                } else {
+                    catchFailDialog.show();
+                }
+            }
+        });
     }
 
     public void beenCaughtButtonClicked() {
+        t.cancel();
+        Home.player.playerCaptured();
         caughtDialog.show();
-        //Sends Packet To Server
+    }
+
+    public void caught(){
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                beingCaughtDialog.show();
+                t = new Timer();
+                t.schedule(new DismissTimerTask(), (long) 5000);
+            }});
     }
 
     /**
@@ -149,34 +227,40 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
      * Works out the bearing and distance
      * @param coordinates- Coordinates of their target. Position 0 - Latitude, Position 1 - Longitude
      */
-    public void compassCalibration(double[] coordinates) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //Checks if the location permissions have been enabled
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            }
-        }
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
-        double latitude = 0;
-        double longitude = 0;
-        if(location!=null) {
-            //Gets the location
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
-        /////// CALCULATES THE BEARING ////////
-        double x = Math.cos(coordinates[0]) * Math.sin(Math.abs(coordinates[1]- longitude));
-        double y = Math.cos(latitude) * (Math.sin(coordinates[0]) - Math.sin(latitude)) * Math.cos(coordinates[0]) * Math.cos(Math.abs(coordinates[1]- longitude));
+    public void compassCalibration(final double[] coordinates) {
+        this.runOnUiThread(new Runnable() {
+               @Override
+               public void run() {
+                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                       //Checks if the location permissions have been enabled
+                       if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                               || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                       }
+                   }
+                   LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                   Criteria criteria = new Criteria();
+                   String provider = locationManager.getBestProvider(criteria, true);
+                   Location location = locationManager.getLastKnownLocation(provider);
+                   double latitude = 0;
+                   double longitude = 0;
+                   if (location != null) {
+                       //Gets the location
+                       latitude = location.getLatitude();
+                       longitude = location.getLongitude();
+                   }
+                   /////// CALCULATES THE BEARING ////////
+                   double x = Math.cos(coordinates[0]) * Math.sin(Math.abs(coordinates[1] - longitude));
+                   double y = Math.cos(latitude) * (Math.sin(coordinates[0]) - Math.sin(latitude)) * Math.cos(coordinates[0]) * Math.cos(Math.abs(coordinates[1] - longitude));
 
-        double bearing = Math.atan2(x,y)  ;
-        ////// CALCULATES THE DISTANCE ////////
-        double distance = Math.sqrt(Math.pow(latitude - coordinates[0],2) + Math.pow(longitude - coordinates[1],2));
-        ////// CHANGES THE COMPASS TO FIT THESE PARAMETERS
-        changeCompass(calculateDirectionInt(bearing), distance); //Method changes the compass
+                   double bearing = Math.atan2(x, y);
+                   ////// CALCULATES THE DISTANCE ////////
+                   double distance = Math.sqrt(Math.pow(latitude - coordinates[0], 2) + Math.pow(longitude - coordinates[1], 2));
+                   ////// CHANGES THE COMPASS TO FIT THESE PARAMETERS
+                   changeCompass(calculateDirectionInt(bearing), distance); //Method changes the compass
+               }
+        });
     }
+
 
     /**
      * Method returns the direction on the compass as an integer
@@ -216,9 +300,14 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
 
     }
 
-    public void setTimer(int time) {
-        TextView timer = (TextView)findViewById(R.id.gameTimer);
-        timer.setText(time);
+    public void setTimer(final int time) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView timer = (TextView) findViewById(R.id.gameTimer);
+                timer.setText(time);
+            }
+        });
     }
 
     /**

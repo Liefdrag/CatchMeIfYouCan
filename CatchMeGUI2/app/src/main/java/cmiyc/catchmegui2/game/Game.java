@@ -1,8 +1,21 @@
 package cmiyc.catchmegui2.game;
 
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cmiyc.catchmegui2.Home;
 import cmiyc.catchmegui2.game.room.Leaderboard;
 import cmiyc.catchmegui2.game.room.Room;
+import cmiyc.catchmegui2.networking.packets.LocationPacket;
 
 /**
  * This class contains methods that are called when packets are received.
@@ -17,11 +30,14 @@ public class Game {
 	public int playerID;
 
 	private final String playerName;
+    private LocationTimerTask ltt;
 	private int targetID;
+    private double[] targetLocation = new double[]{1000, 1000};
 	private Room room;
 	private GameState gameState;
 	private Leaderboard leaderboard;
     private UpdateLobbyInterface uli;
+    private Timer gameTimer;
 
 	public Game(String playerName, String roomKey, boolean host) {
 		this.playerName = playerName;
@@ -59,11 +75,13 @@ public class Game {
 		room.setHost(true);
 	}
 
+    public void catchPerformed(){
+        targetLocation = new double[]{1000, 1000};
+    }
+
 	public void playerCaught(String playerName) {
-		if (this.playerName.equals(playerName)) {
-			// Alert the client they've been caught
-		}
-		// Alert the client player has been caught
+        targetLocation = new double[]{1000, 1000};
+
 	}
 
 	public void setTarget(int[] targetID) {
@@ -130,17 +148,25 @@ public class Game {
 		}
 	}
 
-	public void updateBoundary(double[] centre, double radius) {
+	public void updateBoundary(double[] centre, int radius) {
 		room.getLobby().setBoundaryCentre(centre);
 		room.getLobby().setBoundaryRadius(radius);
+        Home.player.updateMapBoundary(centre, radius);
 	}
 
 	public void startGame() {
 		gameState = GameState.GAME;
 	}
 
+    public void startTimer(){
+        gameTimer = new Timer();
+        //Sets off the timer after 10 seconds, perhaps set to 30
+        gameTimer.schedule(ltt, (long) 10000, (long) 10);
+    }
+
 	public void endGame() {
 		gameState = GameState.END;
+        gameTimer.cancel();
 		closeRoom();
 	}
 
@@ -170,5 +196,17 @@ public class Game {
 
     public Room getRoom(){
         return room;
+    }
+
+    public void setTargetLocation(double[] location){
+        targetLocation = location;
+    }
+
+    public double[] getTargetLocation(){
+        return targetLocation;
+    }
+
+    public void setltt(LocationTimerTask ltt){
+        this.ltt = ltt;
     }
 }

@@ -1,5 +1,6 @@
 package cmiyc.catchmegui2.game.room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
@@ -13,6 +14,7 @@ public class Room {
 		this.lobby = new Lobby();
 		this.roomKey = roomKey;
 		this.setHost(host);
+        players = new ArrayList<String>();
 	}
 
 	public void addPlayer(String playerName) {

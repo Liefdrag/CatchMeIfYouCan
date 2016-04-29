@@ -20,7 +20,9 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import cmiyc.catchmegui2.game.room.MapsInterface;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, MapsInterface {
 
     private GoogleMap mMap;
     private Circle boundary;
@@ -28,6 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Home.player.setMInterface(this);
         setContentView(R.layout.map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -60,15 +63,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param radius - Radius of the boundary
      * @param centerCoordinates - The center coordinates of the boundary
      */
-    public void setBoundary(int radius, double[] centerCoordinates) {
-        LatLng bPosition = new LatLng(centerCoordinates[0], centerCoordinates[1]);
-        CircleOptions circleOptions = new CircleOptions()
-                .center(bPosition)
-                .radius(radius) // In meters
-                .strokeColor(Color.RED)
-                .fillColor(Color.TRANSPARENT); //Can change this at a later date
+    public void setBoundary(final int radius, final double[] centerCoordinates) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LatLng bPosition = new LatLng(centerCoordinates[0], centerCoordinates[1]);
 
-        boundary = mMap.addCircle(circleOptions);
+                CircleOptions circleOptions = new CircleOptions()
+                        .center(bPosition)
+                        .radius(radius) // In meters
+                        .strokeColor(Color.RED)
+                        .fillColor(Color.TRANSPARENT); //Can change this at a later date
+
+                boundary = mMap.addCircle(circleOptions);
+            }});
     }
 
 
@@ -84,29 +92,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(51.22471, -2.19354);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Bath"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        //Checks if the API is above 23
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //Checks if the location permissions have been enabled
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true); //Allows maps to track location
-            }
-        }
-        mMap.setMyLocationEnabled(true); //Allows maps to track location
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
-        if(location!=null){
-            //Gets the location
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-            LatLng myPosition = new LatLng(latitude, longitude);
+            double lat = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[1];
+            double lng = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[0];
+            LatLng myPosition = new LatLng(lat, lng);
             //Makes the coordinate the user's location
             CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
             mMap.moveCamera(yourLocation);
@@ -121,7 +109,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .fillColor(Color.TRANSPARENT); //Can change this at a later date
 
             boundary = mMap.addCircle(circleOptions);
-        }
 
 
     }

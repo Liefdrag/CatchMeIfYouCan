@@ -22,6 +22,7 @@ import cmiyc.catchmegui2.game.Player;
 import cmiyc.catchmegui2.game.UpdateLeaderboardInterface;
 import cmiyc.catchmegui2.networking.client.Client;
 import cmiyc.catchmegui2.packetParsers.PacketParser;
+import cmiyc.catchmegui2.game.LocationTimerTask;
 
 public class Home extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class Home extends AppCompatActivity {
                         getString(R.string.player_name), Context.MODE_PRIVATE);
                 String defaultName = "Player";
                 String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
-                player = new HostPlayer("Tucker", new Client("192.168.0.12", 10401, pcktparser), null);
+                player = new HostPlayer("Tucker", new Client("192.168.0.2", 10401, pcktparser), null);
                 WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                 WifiInfo info = manager.getConnectionInfo();
                 String address = info.getMacAddress();
@@ -67,7 +68,7 @@ public class Home extends AppCompatActivity {
                         getString(R.string.player_name), Context.MODE_PRIVATE);
                 String defaultName = "Player";
                 String playerName = sharedPref.getString(getString(R.string.saved_name), defaultName);*/
-                player = new Player("Caboose", new Client("192.168.0.12", 10401, pcktparser), null);
+                player = new Player("Caboose", new Client("192.168.0.2", 10401, pcktparser), null);
                 Intent i = new Intent(Home.this, JoinGameActivity.class);
                 startActivity(i);
             }
