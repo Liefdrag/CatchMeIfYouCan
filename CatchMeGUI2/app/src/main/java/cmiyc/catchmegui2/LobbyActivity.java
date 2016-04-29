@@ -82,6 +82,7 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
     }
 
 
+
     @Override
     public void ulScore(final int score) {
         this.runOnUiThread(new Runnable() {
@@ -124,5 +125,19 @@ public class LobbyActivity extends AppCompatActivity implements UpdateLobbyInter
                 }
             }
         });
+    }
+
+    @Override
+    public void enterGame() {
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                GameLeaderboardActivity.created = false;
+
+                Intent i = new Intent(LobbyActivity.this, InGameActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }});
     }
 }

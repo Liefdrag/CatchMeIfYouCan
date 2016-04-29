@@ -139,4 +139,9 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
             }
         });
     }
+
+    @Override
+    public void enterGame() {
+        //not needed for host
+    }
 }

@@ -11,4 +11,6 @@ public interface UpdateLobbyInterface {
 
     public void ulType(byte type);
 
+    public void enterGame();
+
 }

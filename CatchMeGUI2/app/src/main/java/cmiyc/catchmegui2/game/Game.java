@@ -156,6 +156,12 @@ public class Game {
 
 	public void startGame() {
 		gameState = GameState.GAME;
+        for(int i = 0; i < 10; i++) {
+            if (uli != null) {
+                uli.enterGame();
+            }
+        }
+
 	}
 
     public void startTimer(){
