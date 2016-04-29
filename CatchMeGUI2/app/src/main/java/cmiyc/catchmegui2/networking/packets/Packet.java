@@ -146,7 +146,7 @@ public abstract class Packet {// will need to test for construction of packets,
     public void appendlength(){
         int length = packet.length;
         byte[] oldPacket = packet;
-        packet = new byte[4];
+        packet = new byte[0];
         putInt(length);
         byte[] newPacket = new byte[packet.length + oldPacket.length];
         System.arraycopy(packet, 0, newPacket, 0, packet.length);

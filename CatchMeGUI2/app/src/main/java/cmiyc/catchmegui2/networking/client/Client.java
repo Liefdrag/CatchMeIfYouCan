@@ -38,7 +38,11 @@ public class Client {
 	
 	public void connectToServer(String serverAddress, int serverPort) throws UnknownHostException, IOException{
 
+        System.out.println("Attempting to connect to server: "+ serverAddress + ", " + serverPort);
 		Socket socket = new Socket(InetAddress.getByName(serverAddress), serverPort);
+        if(socket == null){
+            System.out.println("Socket is null");
+        }
 		// Creating the client input thread and starting it
 		clientInput = new ClientInput(socket, packetParser);
 		new Thread(clientInput).start();
