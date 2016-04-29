@@ -52,8 +52,8 @@ public class Room {
 		private int scoreLimit;
 		private int timeLimit;
 
-		private double[] boundaryCentre;
-		private double boundaryRadius;
+		private double[] boundaryCentre = new double[] {1.1, 1.1};
+		private double boundaryRadius = 1.1;
 
 		private Lobby() {
 		}

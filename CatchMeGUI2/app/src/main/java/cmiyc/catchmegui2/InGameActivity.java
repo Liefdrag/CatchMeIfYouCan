@@ -40,20 +40,23 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
     AlertDialog catchFailDialog;
     AlertDialog beingCaughtDialog;
     Timer t;
-    private final Button[] compassPoints = {
-            (Button)findViewById(R.id.topMiddle),
-            (Button)findViewById(R.id.topRight),
-            (Button)findViewById( R.id.middleRight),
-            (Button)findViewById(R.id.bottomRight),
-            (Button)findViewById(R.id.bottomMiddle),
-            (Button)findViewById(R.id.bottomLeft),
-            (Button)findViewById(R.id.middleLeft),
-            (Button)findViewById(R.id.topLeft),
-    };
+    private Button[] compassPoints;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
+
+        compassPoints = new Button[] {
+                (Button)findViewById(R.id.topMiddle),
+                (Button)findViewById(R.id.topRight),
+                (Button)findViewById( R.id.middleRight),
+                (Button)findViewById(R.id.bottomRight),
+                (Button)findViewById(R.id.bottomMiddle),
+                (Button)findViewById(R.id.bottomLeft),
+                (Button)findViewById(R.id.middleLeft),
+                (Button)findViewById(R.id.topLeft),
+        };
+
 
         TextView userName = (TextView)findViewById(R.id.playerName);
         userName.setText(Home.player.getPlayerName());
