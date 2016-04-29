@@ -23,19 +23,25 @@ public class LobbyHostActivity extends AppCompatActivity implements UpdateLobbyI
         TextView timeLimit = (TextView) findViewById(R.id.timeLimit);
         String time = Integer.toString(Home.player.getGame().getRoom().getLobby().getTimeLimit()) + " seconds";
         timeLimit.setText(time);
+        //timeLimit.setText(CustomiseGameActivity.timeLimitC);
         TextView scoreLimit =(TextView)findViewById(R.id.scoreLimit);
         String score = Integer.toString(Home.player.getGame().getRoom().getLobby().getScoreLimit()) + " points";
         scoreLimit.setText(score);
+        //scoreLimit.setText(CustomiseGameActivity.scoreLimitC);
         TextView gameMode =(TextView)findViewById(R.id.gameMode);
+        //gameMode.setText(CustomiseGameActivity.gameModeC);
         switch (Home.player.getGame().getRoom().getLobby().getGametype()){
             case Packet.GAMETYPE_DEFAULT:
                 gameMode.setText("Individual");
+                //gameMode.setText(CustomiseGameActivity.gameModeC);
                 break;
             case Packet.GAMETYPE_MAN_HUNT:
                 gameMode.setText("Manhunt");
+                //gameMode.setText(CustomiseGameActivity.gameModeC);
                 break;
             case Packet.GAMETYPE_TEAM:
                 gameMode.setText("Team");
+                //gameMode.setText(CustomiseGameActivity.gameModeC);
                 break;
         }
 

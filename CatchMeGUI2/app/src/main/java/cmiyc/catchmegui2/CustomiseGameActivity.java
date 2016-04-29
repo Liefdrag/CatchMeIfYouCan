@@ -29,6 +29,10 @@ import cmiyc.catchmegui2.networking.packets.clientPackets.hostPackets.TimeLimitP
  * Location code inspired by guide on Google Developer website
  */
 public class CustomiseGameActivity extends AppCompatActivity {
+    public static int scoreLimitC;
+    public static int timeLimitC;
+    public static String gameModeC;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +107,7 @@ public class CustomiseGameActivity extends AppCompatActivity {
             TimeLimitPacket tlp = new TimeLimitPacket();
             tlp.putTimeLimit(time);
             Home.player.sendPacket(tlp);
+            timeLimitC = time;
         } catch (NumberFormatException nfe){
             //
         }
@@ -114,6 +119,7 @@ public class CustomiseGameActivity extends AppCompatActivity {
             ScoreLimitPacket slp = new ScoreLimitPacket();
             slp.putScoreLimit(score);
             Home.player.sendPacket(slp);
+            scoreLimitC = score;
         } catch (NumberFormatException nfe){
             //
         }
@@ -124,14 +130,17 @@ public class CustomiseGameActivity extends AppCompatActivity {
         switch (modeRGroup.getCheckedRadioButtonId()) {
             case R.id.individualRadioButton:
                 //Game mode is individual
+                gameModeC = "Individual";
                 gtp.putGameType(Packet.GAMETYPE_DEFAULT);
                 break;
             case R.id.teamRadioButton:
                 gtp.putGameType(Packet.GAMETYPE_TEAM);
+                gameModeC = "Team";
                 //Game mode is team
                 break;
             case R.id.manhuntRadioButton:
                 gtp.putGameType(Packet.GAMETYPE_MAN_HUNT);
+                gameModeC = "ManHunt";
                 //Game mode is manhunt
                 break;
             default:

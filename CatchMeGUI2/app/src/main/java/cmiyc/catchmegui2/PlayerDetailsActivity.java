@@ -29,6 +29,7 @@ public class PlayerDetailsActivity extends AppCompatActivity implements View.OnC
     private static final int RC_SIGN_IN = 9001;
     EditText userName;
     public static Uri avatarPhoto;
+    public static String playerName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +88,7 @@ public class PlayerDetailsActivity extends AppCompatActivity implements View.OnC
 
     //Method to get the User's name
     public void updatePlayerDetails() {
-        String playerName = userName.getText().toString();
+        playerName = userName.getText().toString();
         //Set playerName to something
     }
 
