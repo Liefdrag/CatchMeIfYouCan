@@ -38,7 +38,10 @@ public class PacketParser {
 		//Location of the Client
 		case Packet.LOCATION :
 			LocationPacket locationPacket = new LocationPacket(packet);
-            if(locationPacket.getID() == Home.player.getGame().getTargetID()){
+            int id = locationPacket.getID();
+            System.out.println("Location ID: " + id + ", target ID: "+Home.player.getGame().getTargetID());
+            if(id == Home.player.getGame().getTargetID()){
+                System.out.println("Saving target location");
                 Home.player.getGame().setTargetLocation(locationPacket.getLocation());
             }
 			//Gets the Location as Coordinates and the Client ID (If its single player then the ID would correspond to target ID
