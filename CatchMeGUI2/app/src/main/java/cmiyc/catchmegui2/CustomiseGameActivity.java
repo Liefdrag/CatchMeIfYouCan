@@ -26,6 +26,7 @@ import cmiyc.catchmegui2.networking.packets.clientPackets.hostPackets.TimeLimitP
 
 /**
  * Created by Liefdrag on 11/04/2016.
+ * Location code inspired by guide on Google Developer website
  */
 public class CustomiseGameActivity extends AppCompatActivity {
 

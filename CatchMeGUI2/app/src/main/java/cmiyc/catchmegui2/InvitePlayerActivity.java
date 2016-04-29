@@ -13,6 +13,7 @@ import com.google.android.gms.plus.PlusShare;
 
 /**
  * Created by Liefdrag on 11/04/2016.
+ * Code is inspired by guide on Google Developer website
  */
 public class InvitePlayerActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
