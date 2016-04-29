@@ -60,6 +60,9 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
 
         TextView userName = (TextView)findViewById(R.id.playerName);
         userName.setText(Home.player.getPlayerName());
+        TextView score = (TextView)findViewById(R.id.playerScore);
+        score.setText("0");
+        userName.setText(Home.player.getPlayerName());
         Home.player.getGame().setltt(new LocationTimerTask(this));
         Home.player.getGame().startTimer();
 
@@ -177,7 +180,12 @@ public class InGameActivity extends AppCompatActivity implements InGameInterface
     }
 
     public void caughtButtonClicked() {
-        Home.player.captureTarget();
+        //Home.player.captureTarget();
+        catchDialog.show();
+        TextView score = (TextView)findViewById(R.id.playerScore);
+        int currentScore = Integer.parseInt(score.getText().toString());
+        currentScore = currentScore + 100;
+        score.setText(Integer.toString(currentScore));
     }
 
     public void catchSuccess(final boolean success){

@@ -95,9 +95,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-            double lat = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[1];
-            double lng = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[0];
-            LatLng boundaryCentre = new LatLng(lat, lng);
+            //double lat = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[1];
+            //double lng = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[0];
+           //LatLng boundaryCentre = new LatLng(lat, lng);
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(51.22471, -2.19354);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Bath"));
@@ -121,13 +121,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double longitude = location.getLongitude();
             LatLng myPosition = new LatLng(latitude, longitude);
             //Makes the coordinate the user's location
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(boundaryCentre, 5);
+            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
             mMap.moveCamera(yourLocation);
             //Zooms into the map into the user's location
             CameraUpdate zoomIn = CameraUpdateFactory.zoomTo(14.0f);
             mMap.animateCamera(zoomIn);
             CircleOptions circleOptions = new CircleOptions()
-                    .center(boundaryCentre)
+                    .center(myPosition)
                     .radius(1000) // In meters
                     .strokeColor(Color.RED)
                     .fillColor(Color.TRANSPARENT); //Can change this at a later date
