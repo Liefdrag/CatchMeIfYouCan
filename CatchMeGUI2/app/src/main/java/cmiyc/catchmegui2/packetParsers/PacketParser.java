@@ -38,7 +38,9 @@ public class PacketParser {
 		//Location of the Client
 		case Packet.LOCATION :
 			LocationPacket locationPacket = new LocationPacket(packet);
-            Home.player.getGame().setTargetLocation(locationPacket.getLocation());
+            if(locationPacket.getID() == Home.player.getGame().getTargetID()){
+                Home.player.getGame().setTargetLocation(locationPacket.getLocation());
+            }
 			//Gets the Location as Coordinates and the Client ID (If its single player then the ID would correspond to target ID
 			//If its a team mode, then the client would be able to choose which ID is his target
 			break;

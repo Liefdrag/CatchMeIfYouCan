@@ -209,4 +209,8 @@ public class Game {
     public void setltt(LocationTimerTask ltt){
         this.ltt = ltt;
     }
+
+    public int getTargetID(){
+        return targetID;
+    }
 }

@@ -94,16 +94,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
             double lat = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[1];
             double lng = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[0];
-            LatLng myPosition = new LatLng(lat, lng);
+            LatLng boundaryCentre = new LatLng(lat, lng);
             //Makes the coordinate the user's location
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
+            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(boundaryCentre, 5);
             mMap.moveCamera(yourLocation);
             //Zooms into the map into the user's location
             CameraUpdate zoomIn = CameraUpdateFactory.zoomTo(14.0f);
             mMap.animateCamera(zoomIn);
 
             CircleOptions circleOptions = new CircleOptions()
-                    .center(myPosition)
+                    .center(boundaryCentre)
                     .radius(1000) // In meters
                     .strokeColor(Color.RED)
                     .fillColor(Color.TRANSPARENT); //Can change this at a later date

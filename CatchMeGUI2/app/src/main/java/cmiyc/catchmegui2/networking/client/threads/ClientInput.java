@@ -54,11 +54,12 @@ public class ClientInput implements Runnable {
 					byte[] data = new byte[length];
                     stream.readFully(data);
 					Packet packet = new GenericPacket(data);
-					System.out.println(packet.toString() + "\n------------------------\n");
-					//TestingInterface.ta.append(packet.toString() + "\n------------------------\n");
+					System.out.println("Packet size: "+length + " Packet["+packet.toString() + "]\n------------------------\n");
 					packetParser.processPacket(data);
 					length = 0;
-				}
+				} else if(length == 0){
+                System.err.println("0 length packet???");
+                }
 			}
 		} catch (IOException e) {
 			System.err.print(e.toString());
