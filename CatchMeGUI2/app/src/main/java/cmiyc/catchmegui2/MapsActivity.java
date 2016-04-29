@@ -92,16 +92,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-            double lat = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[1];
-            double lng = Home.player.getGame().getRoom().getLobby().getBoundaryCentre()[0];
-            LatLng myPosition = new LatLng(lat, lng);
+        // Add a marker in Sydney and move the camera
+        //LatLng sydney = new LatLng(51.22471, -2.19354);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Bath"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //Checks if the API is above 23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Checks if the location permissions have been enabled
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true); //Allows maps to track location
+            }
+        }
+        mMap.setMyLocationEnabled(true); //Allows maps to track location
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location location = locationManager.getLastKnownLocation(provider);
+        if (location != null) {
+            //Gets the location
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            LatLng myPosition = new LatLng(latitude, longitude);
             //Makes the coordinate the user's location
             CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
             mMap.moveCamera(yourLocation);
             //Zooms into the map into the user's location
             CameraUpdate zoomIn = CameraUpdateFactory.zoomTo(14.0f);
             mMap.animateCamera(zoomIn);
-
             CircleOptions circleOptions = new CircleOptions()
                     .center(myPosition)
                     .radius(1000) // In meters
@@ -109,7 +127,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .fillColor(Color.TRANSPARENT); //Can change this at a later date
 
             boundary = mMap.addCircle(circleOptions);
-
-
+        }
     }
 }
